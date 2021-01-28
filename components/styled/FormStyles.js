@@ -13,6 +13,7 @@ export const Title = styled.Text`
   color: #f2ea0d;
   font-size: 48px;
   margin: 0 auto;
+  margin-bottom: 30px;
 `;
 
 export const CustomInput = styled.TextInput`
