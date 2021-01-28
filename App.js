@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { SignUp } from './components/formSignUp';
-import { SignIn } from './components/formSignIn';
+import { SignUp } from './components/SignUp';
+import { SignIn } from './components/SignIn';
 
 const Stack = createStackNavigator()
 
