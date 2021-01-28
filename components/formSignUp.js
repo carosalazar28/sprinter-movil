@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, TextInput, Text } from 'react-native'
+import { Button, TextInput, Text, View, StyleSheet } from 'react-native'
 
 export function FormSignUp() {
   const [userName, setUserName] = useState('')
@@ -12,8 +12,8 @@ export function FormSignUp() {
   }
 
   return (
-    <>
-      <Text>Bienvenid@</Text>
+    <View>
+      <Text style={styles.principalText}>Bienvenid@</Text>
       <Text>Registro</Text>
       <TextInput
         placeholder="Nombre de usuario"
@@ -41,6 +41,18 @@ export function FormSignUp() {
         title="Enviar"
         onPress={handleSubmit}
       />
-    </>
-  )
-}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 50,
+    marginRight: 15,
+    marginLeft: 15,
+  },
+  principalText: {
+    color: '#f2ea0d',
+    fontSize: 48,
+  }
+})
