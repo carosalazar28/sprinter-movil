@@ -2,8 +2,9 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { FormSignUp } from './components/formSignUp'
+import { StyleSheet, View } from 'react-native';
 
-const stack = createStackNavigator()
+const Stack = createStackNavigator()
 
 export default function App() {
   return (
