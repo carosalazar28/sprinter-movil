@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Button, TextInput, Text, View, StyleSheet } from 'react-native'
+import React, { useState } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { Input, Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export function FormSignUp() {
   const [userName, setUserName] = useState('')
@@ -12,26 +14,33 @@ export function FormSignUp() {
   }
 
   return (
-    <View>
+    <View styles={styles.container}>
       <Text style={styles.principalText}>Bienvenid@</Text>
       <Text>Registro</Text>
-      <TextInput
+      <Input
         placeholder="Nombre de usuario"
         onChangeText={text => setUserName(text)}
         value={userName}
+        leftIcon={
+          <Icon
+            name="user"
+            size={15}
+            color="#F2F2F2"
+          />
+        }
       />
-      <TextInput
+      <Input
         placeholder="Correo electronico"
         onChangeText={text => setEmail(text)}
         value={email}
       />
-      <TextInput
+      <Input
         placeholder="Contraseña"
         onChangeText={text => setPassword(text)}
         value={password}
         secureTextEntry
       />
-      <TextInput
+      <Input
         placeholder="Confirme contraseña"
         onChangeText={text => setPasswordConfirm(text)}
         value={passwordConfirm}
@@ -39,6 +48,7 @@ export function FormSignUp() {
       />
       <Button
         title="Enviar"
+        type="outline"
         onPress={handleSubmit}
       />
     </View>
@@ -50,6 +60,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginRight: 15,
     marginLeft: 15,
+    backgroundColor: '#2F2A3E'
   },
   principalText: {
     color: '#f2ea0d',
