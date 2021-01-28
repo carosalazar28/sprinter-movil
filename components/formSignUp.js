@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Input, Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {
+  Button, 
+  KeyboardAvoidingView, 
+  StyleSheet, 
+  Keyboard, 
+} from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import {
+  Container,
+  Title,
+  CustomInput,
+  SecundaryTitle,
+} from './styled/FormStyles';
 
-export function FormSignUp() {
-  const [userName, setUserName] = useState('')
+export function SignUp() {
+  const [username, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
@@ -14,56 +24,53 @@ export function FormSignUp() {
   }
 
   return (
-    <View styles={styles.container}>
-      <Text style={styles.principalText}>Bienvenid@</Text>
-      <Text>Registro</Text>
-      <Input
-        placeholder="Nombre de usuario"
-        onChangeText={text => setUserName(text)}
-        value={userName}
-        leftIcon={
-          <Icon
-            name="user"
-            size={15}
-            color="#F2F2F2"
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <Title>Bienvenid@!</Title>
+          <SecundaryTitle>Registro</SecundaryTitle>
+          <CustomInput
+            placeholder="Nombre de usuario"
+            placeholderTextColor = "#f2f2f2"
+            onChangeText={text => setUserName(text)}
+            value={username}
           />
-        }
-      />
-      <Input
-        placeholder="Correo electronico"
-        onChangeText={text => setEmail(text)}
-        value={email}
-      />
-      <Input
-        placeholder="Contraseña"
-        onChangeText={text => setPassword(text)}
-        value={password}
-        secureTextEntry
-      />
-      <Input
-        placeholder="Confirme contraseña"
-        onChangeText={text => setPasswordConfirm(text)}
-        value={passwordConfirm}
-        secureTextEntry
-      />
-      <Button
-        title="Enviar"
-        type="outline"
-        onPress={handleSubmit}
-      />
-    </View>
+          <CustomInput
+            placeholder="Correo electronico"
+            placeholderTextColor = "#f2f2f2"
+            onChangeText={text => setEmail(text)}
+            value={email}
+          />
+          <CustomInput
+            placeholder="Contraseña"
+            placeholderTextColor = "#f2f2f2"
+            onChangeText={text => setPassword(text)}
+            value={password}
+            secureTextEntry
+          />
+          <CustomInput
+            placeholder="Confirme contraseña"
+            placeholderTextColor = "#f2f2f2"
+            onChangeText={text => setPasswordConfirm(text)}
+            value={passwordConfirm}
+            secureTextEntry
+          />
+          <Button
+            title="Enviar"
+            color="#f2ea0d"
+            onPress={handleSubmit}
+          />
+        </Container>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
-    marginRight: 15,
-    marginLeft: 15,
-    backgroundColor: '#2F2A3E'
+    flex: 1
   },
-  principalText: {
-    color: '#f2ea0d',
-    fontSize: 48,
-  }
 })
