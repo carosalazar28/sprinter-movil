@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SignUp } from './components/formSignUp';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SignUp } from './components/formSignUp';
+import { SignIn } from './components/formSignIn';
 
 const Stack = createStackNavigator()
 
@@ -16,6 +17,7 @@ export default function App() {
           }}
         >
           <Stack.Screen name="Registro" component={SignUp} />
+          <Stack.Screen name="Iniciar sesión" component={SignIn} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
