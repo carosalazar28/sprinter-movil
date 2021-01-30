@@ -12,6 +12,7 @@ import {
   CustomInput,
   SecundaryTitle,
 } from './styled/FormStyles';
+import { Platform } from 'react-native';
 
 export function SignUp() {
   const [username, setUserName] = useState('')

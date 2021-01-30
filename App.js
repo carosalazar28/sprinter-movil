@@ -16,8 +16,8 @@ export default function App() {
             cardStyle: { backgroundColor: '#2f2a3e'}
           }}
         >
-          <Stack.Screen name="Registro" component={SignUp} />
           <Stack.Screen name="Iniciar sesión" component={SignIn} />
+          <Stack.Screen name="Registro" component={SignUp} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

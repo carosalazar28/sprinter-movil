@@ -12,8 +12,9 @@ import {
   Title,
   CustomInput,
 } from './styled/FormStyles';
+import { Platform } from 'react-native';
 
-export function SignIn() {
+export function SignIn({ navigation }) {
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
 
@@ -28,7 +29,7 @@ export function SignIn() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
-          <Title>Bienvenid@!</Title>
+          <Title>Sprinter!</Title>
           <CustomInput
             placeholder="Nombre de usuario"
             placeholderTextColor = "#f2f2f2"
@@ -49,6 +50,7 @@ export function SignIn() {
           />
           <Text style={styles.text}>Olvidé mi constraseña</Text>
           <Button title="Crear una cuenta"     
+            onPress={() => navigation.navigate('Registro')}
           />
         </Container>
       </TouchableWithoutFeedback>
