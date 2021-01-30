@@ -13,6 +13,8 @@ import {
   CustomInput,
 } from './styled/FormStyles';
 import { Platform } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 export function SignIn({ navigation }) {
   const [username, setUserName] = useState('')
