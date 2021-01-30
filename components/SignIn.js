@@ -13,8 +13,7 @@ import {
   CustomInput,
 } from './styled/FormStyles';
 import { Platform } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar } from 'expo-status-bar';
 
 export function SignIn({ navigation }) {
   const [username, setUserName] = useState('')
@@ -54,6 +53,7 @@ export function SignIn({ navigation }) {
           <Button title="Crear una cuenta"     
             onPress={() => navigation.navigate('Registro')}
           />
+          <StatusBar style="auto"/> 
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
