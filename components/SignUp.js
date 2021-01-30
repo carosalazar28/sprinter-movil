@@ -21,7 +21,7 @@ export function SignUp() {
   const [passwordConfirm, setPasswordConfirm] = useState('')
 
   function handleSubmit() {
-    console.log(username, email, password, passwordConfirm)
+    console.log('here')
   }
 
   return (
