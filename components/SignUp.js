@@ -20,7 +20,7 @@ export function SignUp() {
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
 
-  function handleSubmit() {
+  function submit() {
     console.log('here')
   }
 
@@ -65,7 +65,7 @@ export function SignUp() {
           <Button
             title="Enviar"
             color="#f2ea0d"
-            onPress={handleSubmit}
+            onPress={submit}
           />
         </Container>
       </TouchableWithoutFeedback>
