@@ -12,7 +12,6 @@ import {
   Title,
   CustomInput,
 } from './styled/FormStyles';
-import { Platform } from 'react-native';
 
 
 export function SignIn({ navigation }) {
