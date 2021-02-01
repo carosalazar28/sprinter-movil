@@ -4,7 +4,8 @@ import {
   KeyboardAvoidingView, 
   StyleSheet, 
   Keyboard,
-  Text, 
+  Text,
+  Platform, 
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import {
@@ -12,6 +13,7 @@ import {
   Title,
   CustomInput,
 } from './styled/FormStyles';
+
 
 
 export function SignIn({ navigation }) {
@@ -50,7 +52,7 @@ export function SignIn({ navigation }) {
           />
           <Text style={styles.text}>Olvidé mi constraseña</Text>
           <Button title="Crear una cuenta"     
-            onPress={() => navigation.navigate('Registro')}
+            onPress={() => navigation.navigate('Signup')}
           />
         </Container>
       </TouchableWithoutFeedback>
