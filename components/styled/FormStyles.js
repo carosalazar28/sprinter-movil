@@ -4,18 +4,18 @@ import { Text,
   TextInput,
 } from 'react-native';
 
-export const Container = styled.View`
+export const Container = styled(View)`
   padding: 30px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(Text)`
   color: #f2ea0d;
   font-size: 48px;
   margin: 0 auto;
   margin-bottom: 30px;
 `;
 
-export const CustomInput = styled.TextInput`
+export const CustomInput = styled(TextInput)`
   background-color: #525666;
   font-size: 18px;
   padding: 15px;
@@ -24,7 +24,7 @@ export const CustomInput = styled.TextInput`
   color: #f2f2f2;
 `;
 
-export const SecundaryTitle = styled.Text`
+export const SecundaryTitle = styled(Text) `
   color: #f2ea0d;
   font-size: 18px;
   margin: 20px auto;
