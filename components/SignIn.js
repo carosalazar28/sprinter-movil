@@ -22,20 +22,22 @@ export function SignIn({ navigation }) {
   const [error, setError] = useState('')
 
   const handleSubmit = async () => {
+    console.log(username, password)
     try {
       const token = await axios ({
         method: 'POST',
-        baseURL: process.env.REACT_SERVER_URL,
+        baseURL: 'http://localhost:8080',
         url: '/user/sign-in',
         data: { username, password }
       });
+      console.log(token)
       AsyncStorage.setItem('token', token)
       navigation.navigate('Home')
     }
     catch(err) {
       AsyncStorage.removeItem('token')
       setError('Usuario o contraseña invalidos')
-      console.log(error)
+      console.log(err)
     }
   }
 
