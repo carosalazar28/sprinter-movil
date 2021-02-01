@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Text, 
   View, 
   TextInput,
+  Button,
 } from 'react-native';
 
 export const Container = styled(View)`
