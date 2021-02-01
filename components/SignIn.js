@@ -1,73 +1,87 @@
 import React, { useState } from 'react';
-import {
-  Button, 
-  KeyboardAvoidingView, 
+import { 
   StyleSheet, 
-  Keyboard,
   Text,
-  Platform, 
+  Button,
+  StatusBar,
+  View,
 } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import {
   Container,
   Title,
   CustomInput,
+  SecundaryTitle,
 } from './styled/FormStyles';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 
 export function SignIn({ navigation }) {
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-  function handleSubmit() {
-    console.log(username, password)
+  const handleSubmit = async () => {
+    try {
+      const token = await axios ({
+        method: 'POST',
+        baseURL: process.env.REACT_SERVER_URL,
+        url: '/user/sign-in',
+        data: { username, password }
+      });
+      AsyncStorage.setItem('token', token)
+      navigation.navigate('Home')
+    }
+    catch(err) {
+      AsyncStorage.removeItem('token')
+      setError('Usuario o contraseña invalidos')
+      console.log(error)
+    }
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Container>
-          <Title>Sprinter!</Title>
-          <CustomInput
-            placeholder="Nombre de usuario"
-            placeholderTextColor = "#f2f2f2"
-            onChangeText={text => setUserName(text)}
-            value={username}
-          />
-          <CustomInput
-            placeholder="Contraseña"
-            placeholderTextColor = "#f2f2f2"
-            onChangeText={text => setPassword(text)}
-            value={password}
-            secureTextEntry
-          />
-          <Button
-            title="Enviar"
-            color="#f2ea0d"
-            onPress={handleSubmit}
-          />
-          <Text style={styles.text}>Olvidé mi constraseña</Text>
-          <Button title="Crear una cuenta"     
-            onPress={() => navigation.navigate('Signup')}
-          />
-        </Container>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    <Container style={styles.container}>
+      <Title>Sprinter!</Title>
+      <CustomInput
+        placeholder="Nombre de usuario"
+        placeholderTextColor = "#f2f2f2"
+        onChangeText={text => setUserName(text)}
+        value={username}
+      />
+      <CustomInput
+        placeholder="Contraseña"
+        placeholderTextColor = "#f2f2f2"
+        onChangeText={text => setPassword(text)}
+        value={password}
+        secureTextEntry
+      />
+      <View style={styles.containerButton}>
+        <Button
+          title="Enviar"
+          style={styles.button}
+          textStyle={{ color: "#f2f2f2", }}
+          onPress={handleSubmit}
+        />
+      </View>
+      <Text style={styles.text}>Olvidé mi constraseña</Text>
+      <SecundaryTitle     
+        onPress={() => navigation.navigate('SignUp')}
+      >
+        Crear una cuenta
+      </SecundaryTitle>
+      <StatusBar style="auto"/>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
   text : {
     textDecorationLine: 'underline',
     color: '#f2f2f2',
     textAlign: 'center',
-    margin: 10,
+    margin: 15,
+  },
+  containerButton: {
+    alignItems: 'center'
   },
 })
