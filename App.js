@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { SignUp } from './components/SignUp';
 import { SignIn } from './components/SignIn';
+import { Home } from './components/Home';
 
 const Stack = createStackNavigator()
 
@@ -16,8 +17,9 @@ export default function App() {
             cardStyle: { backgroundColor: '#2f2a3e'}
           }}
         >
-          <Stack.Screen name="Signin" component={SignIn} />
-          <Stack.Screen name="Signup" component={SignUp} />
+          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
