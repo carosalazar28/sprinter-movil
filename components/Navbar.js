@@ -1,18 +1,57 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import styled from 'styled-components';
+
+const ViewContainer = styled(View)`
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 8px 28px;
+  height: 40px;
+`;
 
 
 export function Navbar() {
   return(
-    <View>
-      <Text>nAVBAR</Text>
+    <ViewContainer style={styles.container}>
       <Icon
         name="home"
-        type="outlined"
+        type="ant-design"
+        size={35}
         color="#fff"
-        size= "34"
       />
-    </View>
+      <Icon
+        name="post-add"
+        type="material"
+        size={35}
+        color="#fff"
+      />
+      <Icon
+        name="paperclip"
+        type="ant-design"
+        size={35}
+        color="#fff"
+      />
+      <Icon
+        name="ios-person-circle-outline"
+        type="ionicon"
+        size={35}
+        color="#fff"
+      />
+    </ViewContainer>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+})
