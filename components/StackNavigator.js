@@ -4,6 +4,8 @@ import { SignUp } from '../screens/SignUp';
 import { SignIn } from '../screens/SignIn';
 import { Home } from '../screens/Home';
 import { Workspace } from '../screens/Workspace';
+import { Task } from '../screens/Task';
+import { Profile } from '../screens/Profile';
 
 const Stack = createStackNavigator();
 
@@ -26,10 +28,26 @@ export const MainStackNavigator = () => {
   );
 }
 
+export const TaskStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Task" component={Task} />
+    </Stack.Navigator>
+  )
+}
+
 export const WorkspaceStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Workspace" component={Workspace} />
+    </Stack.Navigator>
+  )
+}
+
+export const ProfileStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   )
 }
