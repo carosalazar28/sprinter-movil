@@ -11,15 +11,35 @@ import {
   CustomInput,
   SecundaryTitle,
 } from './styled/FormStyles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 export function SignUp() {
   const [username, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
+  const [error, setError] = useState('')
 
-  function submit() {
-    console.log('here')
+  const handleSubmit = async () => {
+    console.log(username, password)
+    try {
+      const { data: { token }} = await axios ({
+        method: 'POST',
+        baseURL: 'http://192.168.0.6:8080',
+        url: '/user/sign-up',
+        data: { username, email, password }
+      });
+      console.log(token)
+      AsyncStorage.setItem('token', token)
+      navigation.navigate('Home')
+    }
+    catch(err) {
+      console.log('here error')
+      AsyncStorage.removeItem('token')
+      setError('Usuario o contraseña invalidos')
+      console.log(err)
+    }
   }
 
   return (
@@ -58,7 +78,7 @@ export function SignUp() {
       <View style={styles.containerButton}>
         <Button
           title="Enviar"
-          onPress={submit}
+          onPress={handleSubmit}
         />
       </View>
     </Container>

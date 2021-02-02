@@ -24,9 +24,9 @@ export function SignIn({ navigation }) {
   const handleSubmit = async () => {
     console.log(username, password)
     try {
-      const token = await axios ({
+      const { data: { token }} = await axios ({
         method: 'POST',
-        baseURL: 'http://localhost:8080',
+        baseURL: 'http://192.168.0.6:8080',
         url: '/user/sign-in',
         data: { username, password }
       });
@@ -35,6 +35,7 @@ export function SignIn({ navigation }) {
       navigation.navigate('Home')
     }
     catch(err) {
+      console.log('here error')
       AsyncStorage.removeItem('token')
       setError('Usuario o contraseña invalidos')
       console.log(err)
