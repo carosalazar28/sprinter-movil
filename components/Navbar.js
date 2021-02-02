@@ -11,7 +11,16 @@ const ViewContainer = styled(View)`
 `;
 
 
-export function Navbar() {
+export function Navbar({ navigation }) {
+
+  function navigationHome() {
+    navigation.navigate('Home')
+  }
+
+  function navigationWorkspace() {
+    navigation.navigate('Workspace')
+  }
+
   return(
     <ViewContainer style={styles.container}>
       <Icon
@@ -19,6 +28,7 @@ export function Navbar() {
         type="ant-design"
         size={35}
         color="#fff"
+        onPress={navigationHome}
       />
       <Icon
         name="post-add"
@@ -31,6 +41,7 @@ export function Navbar() {
         type="ant-design"
         size={35}
         color="#fff"
+        onPress={navigationWorkspace}
       />
       <Icon
         name="ios-person-circle-outline"

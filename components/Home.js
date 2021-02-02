@@ -19,7 +19,9 @@ export function Home({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Navbar/>
+      <Navbar
+        navigation={navigation}
+      />
       <View style={{ alignItems: "center", marginBottom: 37, paddingRight: 28 }}>
         <Image
           source={{ uri: "https://res.cloudinary.com/dkcbxnhg0/image/upload/v1612275065/sprinter/ui/Contenido_hwcrdd.png" }}
