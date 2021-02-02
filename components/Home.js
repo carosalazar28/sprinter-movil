@@ -40,6 +40,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingLeft: 28,
-    paddingTop: 28,
   },
 })
