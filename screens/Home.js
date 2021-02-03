@@ -3,18 +3,20 @@ import {
   View,
   ScrollView,
   StyleSheet,
+  Button,
 } from 'react-native';
 import { Image } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Home({ navigation }) {
 
-  // useEffect(() => {
-  //   const token = AsyncStorage.getItem('token')
-  //     if(!token) {
-  //       navigation.navigate('SignIn')
-  //     }
-  // }, [token])
+  useEffect(() => {
+    const token = AsyncStorage.getItem('token')
+    console.log(token)
+      if(!token) {
+        navigation.navigate('SignIn')
+      }
+  }, [token])
 
   return (
     <ScrollView style={styles.container}>
@@ -30,6 +32,9 @@ export function Home({ navigation }) {
           style={{ width: 939, height: 467 }}
         />
       </ScrollView>
+      <Button
+        title="SignIn"
+      />
     </ScrollView>
   );
 }

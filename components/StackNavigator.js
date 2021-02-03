@@ -21,9 +21,9 @@ const screenOptionStyle = {
 export const MainStackNavigator = () => {
   return(
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );
 }
