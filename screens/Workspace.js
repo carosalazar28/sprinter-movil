@@ -21,21 +21,38 @@ const TextAbout = styled(Text)`
   font-size: 14px;
 `;
 
-export function Workspace() {
+export function Workspace({ navigation }) {
 
+  const [token, setToken] = useState('')
   const [workspace, setWorkspace] = useState(null)
 
+  async function getToken() {
+    const tokenAwait = await AsyncStorage.getItem('token')
+    
+    await setToken(tokenAwait)
+    
+    if(!token) {
+      navigation.navigate('SignIn')
+    }
+    console.log('HERE HOME', token)
+  } 
+
   useEffect(() => {
-    const token = AsyncStorage.getItem('token');
-    console.log('here token', token)
+    getToken()
     axios({
       method: 'GET',
       baseURL: 'http://192.168.0.6:8080',
       url: '/workspaces/workspace',
-      headers: `Bearer ${token}`
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     })
-    .then(( { data } ) => setWorkspace(data))
+      .then(( { data } ) => setWorkspace(data))
+    console.log('here token', token)
+    
   }, [])
+
+  const result = workspace ? workspace : null
 
   return (
     <ViewContainer>

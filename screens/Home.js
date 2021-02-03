@@ -11,11 +11,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export function Home({ navigation }) {
 
   async function getToken() {
-    const token = AsyncStorage.getItem('token')
+    const token = await AsyncStorage.getItem('token')
     if(!token) {
       navigation.navigate('SignIn')
     }
-    console.log(token)
+    console.log('HERE HOME', token)
   } 
 
   useEffect(() => {
