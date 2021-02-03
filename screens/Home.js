@@ -10,13 +10,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Home({ navigation }) {
 
-  useEffect(() => {
+  async function getToken() {
     const token = AsyncStorage.getItem('token')
+    if(!token) {
+      navigation.navigate('SignIn')
+    }
     console.log(token)
-      if(!token) {
-        navigation.navigate('SignIn')
-      }
-  }, [token])
+  } 
+
+  useEffect(() => {
+    getToken()
+  }, [])
 
   return (
     <ScrollView style={styles.container}>
