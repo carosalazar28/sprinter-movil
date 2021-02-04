@@ -21,54 +21,64 @@ const TextAbout = styled(Text)`
   font-size: 14px;
 `;
 
+const TextWorkpace = styled(Text)`
+  color: black;
+`;
+
 export function Workspace({ navigation }) {
 
-  const [token, setToken] = useState('')
-  const [workspace, setWorkspace] = useState(null)
+  const [token, setToken] = useState(null)
+  const [workspace, setWorkspace] = useState({})
 
   async function getToken() {
-    const tokenAwait = await AsyncStorage.getItem('token')
-    
-    await setToken(tokenAwait)
-    
+    const token = await AsyncStorage.getItem('token')
     if(!token) {
       navigation.navigate('SignIn')
     }
-    console.log('HERE HOME', token)
+    setToken(token)
+    console.log('HERE worspace', token)
   } 
 
   useEffect(() => {
     getToken()
-    axios({
-      method: 'GET',
-      baseURL: 'http://192.168.0.6:8080',
-      url: '/workspaces/workspace',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(( { data } ) => setWorkspace(data))
-    console.log('here token', token)
+    console.log('here get', token)
+    if(token) {
+      axios({
+        method: 'GET',
+        baseURL: 'http://192.168.0.6:8080',
+        url: '/workspaces/workspace',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(( { data: { data } } ) => setWorkspace(data))
+      
+      console.log('here data', data)
+    }
     
-  }, [])
+  }, [token])
 
   const result = workspace ? workspace : null
 
   return (
-    <ViewContainer>
-      <View style={{width: 330, height: 107 }}>
-        <Title h3>Workspace</Title>
-        <TextAbout>El espacio de trabajo tiene el backlog con las tareas que se han creado, acá podrás interactuar con los sprints.</TextAbout>
-      </View>
-      <ScrollView style={{backgroundColor: 'white'}}>
-        {workspace && (
-          <>
-            <Text>{workspace.name}</Text>
-            <Text>{workspace.weeks}</Text>
-            <Text>{workspace.sprint}</Text>
-          </>
-        )}
-      </ScrollView>
-    </ViewContainer>
+    <>
+      {result && (
+        <ViewContainer>
+        <View style={{width: 330, height: 107 }}>
+          <Title h3>Workspace</Title>
+          <TextAbout>El espacio de trabajo tiene el backlog con las tareas que se han creado, acá podrás interactuar con los sprints.</TextAbout>
+        </View>
+        <ScrollView style={{backgroundColor: 'white', marginTop: 10 }}>
+          {workspace && (
+            <>
+              <TextWorkpace>{workspace.name}</TextWorkpace>
+              <TextWorkpace>{workspace.weeks}</TextWorkpace>
+              <TextWorkpace>{workspace.sprint}</TextWorkpace>
+            </>
+          )}
+        </ScrollView>
+        </ViewContainer>
+      )}
+    </>
   )
 }
