@@ -43,6 +43,7 @@ export function Workspace({ navigation }) {
     getToken()
     console.log('here get', token)
     if(token) {
+      console.log('here get data')
       axios({
         method: 'GET',
         baseURL: 'http://192.168.0.6:8080',
@@ -51,7 +52,7 @@ export function Workspace({ navigation }) {
           'Authorization': `Bearer ${token}`
         }
       })
-        .then(( { data: { data } } ) => setWorkspace(data))
+        .then(( { data } ) => setWorkspace(data))
       
       console.log('here data', data)
     }
