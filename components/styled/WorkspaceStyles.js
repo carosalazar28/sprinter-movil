@@ -19,14 +19,14 @@ export const TextAbout = styled(Text)`
 `; 
 
 export const ContainerAbout = styled(View)`
-  padding: 17px;
-  width: 330px; 
+  padding: 17px 25px; 
   height: 107px;
   margin-bottom: 17px;
+  align-items: flex-start;
 `;
 
 export const ViewContainerWorkspaces = styled(View)`
   background-color: #fff;
-  margin-top: 10px;
+  margin-top: 17px;
   padding: 23px 0;
 `;
