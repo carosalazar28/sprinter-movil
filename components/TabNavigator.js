@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MainStackNavigator, WorkspaceStackNavigator, TaskStackNavigator, ProfileStackNavigator } from './StackNavigator';
+import { MainStackNavigator, WorkspaceStackNavigator, TaskStackNavigator, ProfileStackNavigator, HomeStackNavigator } from './StackNavigator';
 import { Icon } from 'react-native-elements';
 
 const Tab = createBottomTabNavigator();
@@ -12,7 +12,7 @@ export function BottomTabNavigator() {
         activeTintColor: '#69c8d4'
       }}
     >
-      <Tab.Screen name="Home" component={MainStackNavigator}
+      <Tab.Screen name="Home" component={HomeStackNavigator}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
