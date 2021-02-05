@@ -49,7 +49,7 @@ export function Workspace({ navigation }) {
       })
       return setWorkspace(data)
       console.log('here 2 works', workspace)
-      console.log('here 3 dat', data)
+      console.log('here 3 data', data)
     } catch (err) {
       console.log('error')
     } finally {
@@ -62,17 +62,20 @@ export function Workspace({ navigation }) {
     console.log('here useeffect', workspace)
   }, [])
 
+  const result = workspace ? workspace : null
+
   return (
     <>
+    {result && (
       <ViewContainer>
         <View style={{width: 330, height: 107 }}>
           <Title h3>Workspace</Title>
           <TextAbout>El espacio de trabajo tiene el backlog con las tareas que se han creado, acá podrás interactuar con los sprints.</TextAbout>
         </View>
         <View>
-          {workspace && workspace.length > 0 && (
+          {result && result.length > 0 && (
             <FlatList
-              data={workspace}
+              data={result}
               renderItem={({ item }) => {
                 <View style={{backgroundColor: 'white', marginTop: 10 }}>
                   <TextWorkpace>{item.name}</TextWorkpace>
@@ -83,6 +86,7 @@ export function Workspace({ navigation }) {
           )}
         </View>
       </ViewContainer>
+    )}
     </>
   )
 }
