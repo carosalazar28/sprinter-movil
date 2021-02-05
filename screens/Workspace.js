@@ -1,30 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { View, FlatList } from 'react-native';
-import { Text } from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
-import styled from 'styled-components';
+import { FlatList } from 'react-native';
+import { ListItem } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SERVER_URL } from '@env';
+import {
+  ViewContainer,
+  Title,
+  TextAbout,
+  ContainerAbout,
+  ViewContainerWorkspaces,
+} from '../components/styled/WorkspaceStyles';
 
-const ViewContainer = styled(View)`
-  padding: 17px;
-  margin: 10px auto;
-`;
 
-const Title = styled(Text)`
-  color: #f2ea0d;
-  margin: 10px 0;
-`;
-
-const TextAbout = styled(Text)`
-  color: #fff;
-  font-size: 14px;
-`;
-
-const TextWorkpace = styled(Text)`
-  color: black;
-`;
 
 export function Workspace({ navigation }) {
 
@@ -37,7 +25,6 @@ export function Workspace({ navigation }) {
       if(!token) {
         navigation.navigate('SignIn')
       }
-      console.log('here token 1', token)
       setLoading(true)
       const {data: {data}} = await axios({
         method: 'GET',
@@ -48,8 +35,6 @@ export function Workspace({ navigation }) {
         }
       })
       return setWorkspace(data)
-      console.log('here 2 works', workspace)
-      console.log('here 3 data', data)
     } catch (err) {
       console.log('error')
     } finally {
@@ -59,32 +44,38 @@ export function Workspace({ navigation }) {
 
   useEffect(() => {
     getToken()
-    console.log('here useeffect', workspace)
   }, [])
-
-  const result = workspace ? workspace : null
 
   return (
     <>
-    {result && (
+    {workspace ? (
       <ViewContainer>
-        <View style={{width: 330, height: 107 }}>
+        <ContainerAbout>
           <Title h3>Workspace</Title>
           <TextAbout>El espacio de trabajo tiene el backlog con las tareas que se han creado, acá podrás interactuar con los sprints.</TextAbout>
-        </View>
-        <View>
-          {result && result.length > 0 && (
-            <FlatList
-              data={result}
-              renderItem={({ item }) => {
-                <View style={{backgroundColor: 'white', marginTop: 10 }}>
-                  <TextWorkpace>{item.name}</TextWorkpace>
-                </View>
-              }}
-              keyExtractor={(item) => `${item._id}`}
-            />
-          )}
-        </View>
+        </ContainerAbout>
+        <ViewContainerWorkspaces>
+          <FlatList
+            data={workspace}
+            renderItem={({ item }) => {
+              return (
+                <ListItem bottomDivider>
+                  <ListItem.Content>
+                    <ListItem.Title>{item.name}</ListItem.Title>
+                    <ListItem.Subtitle>{item.weeks} weeks</ListItem.Subtitle>
+                    <ListItem.Subtitle>{item.sprints}</ListItem.Subtitle>
+                  </ListItem.Content>
+                  <ListItem.Chevron/>
+                </ListItem>
+              )
+            }}
+            keyExtractor={(item) => `${item._id}`}
+          />
+        </ViewContainerWorkspaces>
+      </ViewContainer>
+    ) : (
+      <ViewContainer>
+        <Title>loading</Title>
       </ViewContainer>
     )}
     </>
