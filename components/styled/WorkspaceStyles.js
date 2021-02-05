@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { Text } from 'react-native-elements';
 import { 
-  View, 
+  View,
+  ScrollView 
 } from 'react-native';
 
 export const ViewContainer = styled(View)`
@@ -29,4 +30,13 @@ export const ViewContainerWorkspaces = styled(View)`
   background-color: #fff;
   margin-top: 17px;
   padding: 23px 0;
+`;
+
+export const ViewContainerWorkspace = styled(ScrollView)`
+  background-color: white;
+  padding: 9px 37px;
+`;
+
+export const ViewContainerSprint = styled(View)`
+  flex: 1;
 `;
