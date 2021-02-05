@@ -14,6 +14,7 @@ import {
 } from '../components/styled/FormStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { SERVER_URL } from '@env';
 
 
 export function SignIn({ navigation }) {
@@ -26,7 +27,7 @@ export function SignIn({ navigation }) {
     try {
       const { data: { token }} = await axios ({
         method: 'POST',
-        baseURL: 'http://192.168.0.6:8080',
+        baseURL: SERVER_URL,
         url: '/user/sign-in',
         data: { username, password }
       });
