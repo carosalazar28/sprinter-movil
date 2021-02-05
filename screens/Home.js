@@ -36,9 +36,6 @@ export function Home({ navigation }) {
           style={{ width: 939, height: 467 }}
         />
       </ScrollView>
-      <Button
-        title="SignIn"
-      />
     </ScrollView>
   );
 }
