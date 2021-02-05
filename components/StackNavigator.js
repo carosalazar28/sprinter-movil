@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SignUp } from '../screens/SignUp';
 import { SignIn } from '../screens/SignIn';
 import { Home } from '../screens/Home';
+import { Workspaces } from '../screens/Workspaces';
 import { Workspace } from '../screens/Workspace';
 import { Task } from '../screens/Task';
 import { Profile } from '../screens/Profile';
@@ -46,7 +47,8 @@ export const TaskStackNavigator = () => {
 export const WorkspaceStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Workspace" component={Workspace} />
+      <Stack.Screen name="Workspaces" component={Workspaces} />
+      <Stack.Screen name="Workspace" component={Workspace}/>
     </Stack.Navigator>
   )
 }

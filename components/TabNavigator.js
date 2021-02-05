@@ -25,9 +25,9 @@ export function BottomTabNavigator() {
           ),
         }}
       />
-      <Tab.Screen name="Workspace" component={WorkspaceStackNavigator}
+      <Tab.Screen name="Workspaces" component={WorkspaceStackNavigator}
         options={{
-          tabBarLabel: 'Workspace',
+          tabBarLabel: 'Workspaces',
           tabBarIcon: ({ color }) => (
             <Icon
               name="paperclip"
