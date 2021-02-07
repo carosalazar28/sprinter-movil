@@ -36,7 +36,7 @@ export function Workspaces({ navigation }) {
       })
       return setWorkspace(data)
     } catch (err) {
-      console.log('error')
+      console.log('error', err)
     } finally {
       setLoading(false)
     }
