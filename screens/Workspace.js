@@ -5,13 +5,22 @@ import { Picker } from '@react-native-picker/picker';
 import {
   ViewContainerWorkspace,
   ViewContainerSprint,
+  CustomInput,
+  TextSprint,
+  TextDescription,
+  TextWeeks,
+  CustomInputWeeks,
+  ContainerRow,
+  CustomInputTeammates,
+  ContainerBacklog
 } from '../components/styled/WorkspaceStyles.js';
 
-export function Workspace({ navigation, route }) {
+export function Workspace({ navigation }) {
 
+  const [name, setName] = useState('');
   const [sprint, setSprint] = useState(1);
   const [description, setDescription] = useState('');
-  const [teammates, setTeammates] = useState([]);
+  const [teammates, setTeammates] = useState('');
   const [weeks, setWeeks] = useState('');
 
   useEffect(() => {
@@ -20,16 +29,22 @@ export function Workspace({ navigation, route }) {
 
   return (
     <ViewContainerWorkspace>
-      <Text>Workspace name</Text>
-      <ViewContainerSprint>
-        <Text>
+      <CustomInput
+          placeholder="Workspace name"
+          placeholderTextColor ="#828282"
+          onChangeText={text => setName(text)}
+          value={description}
+        />
+      <ViewContainerSprint style={styles.borderLine}>
+        <TextSprint>
           Escoge la duración del sprint
-        </Text>
+        </TextSprint>
         <View>
           <Picker
             style={styles.picker}
             itemStyle={styles.onePickerItem}
             selectedValue={sprint}
+            mode="dropdowm"
             onValueChange={(itemValue, itemIndex) => 
               setSprint(itemValue)
             }
@@ -39,45 +54,51 @@ export function Workspace({ navigation, route }) {
           </Picker>  
         </View>
       </ViewContainerSprint>
-      <View>
-        <TextInput
-          placeholder="Cual es la descripción del espacio de trabajo"
-          placeholderTextColor ="rgba(45, 42, 54, 1)"
+      <View style={styles.borderLine}>
+        <TextDescription
+          multiline
+          placeholder="¿Cuál es la descripción del espacio de trabajo?"
+          placeholderTextColor ="#828282"
           onChangeText={text => setDescription(text)}
           value={description}
         />
       </View>
-      <View>
-        <Text>Cuantas semanas dura el proyecto</Text>
-        <TextInput
-          placeholderTextColor ="rgba(45, 42, 54, 1)"
-          onChangeText={text => setweeks(text)}
+      <View style={styles.borderLine}>
+        <TextWeeks>¿Cuántas semanas dura el proyecto?</TextWeeks>
+        <CustomInputWeeks
+          placeholder= "12"
+          placeholderTextColor ="#828282"
+          onChangeText={text => setWeeks(text)}
           value={weeks}  
         />
       </View>
-      <View>
-        <Text>Colaboradores</Text>
-        <TextInput
-          placeholderTextColor ="rgba(45, 42, 54, 1)"
-          onChangeText={text => setTeammates(text)}
-          value={teammates}
-        />
-        <Icon
-            name="adduser"
-            type="ant-design"
-            color="#525666"
+      <View style={styles.borderLine}>
+        <ContainerRow>
+          <CustomInputTeammates
+            placeholder="Colaboradores"
+            placeholderTextColor ="#828282"
+            onChangeText={text => setTeammates(text)}
+            value={teammates}
           />
+          <Icon
+              name="adduser"
+              type="ant-design"
+              color="#525666"
+            />
+        </ContainerRow>
+        <Text>{teammates}</Text>
       </View>
-      <View>
+      <ContainerBacklog>
         <Icon
           name="plus"
           type="ant-design"
           color="#69c8d4"
+          style={{ marginRight: 13 }}
           onPress={() => navigation.navigate('Workspace')}
         />
         <Text h3>Agregar backlog</Text>
-      </View>
-      <View>
+      </ContainerBacklog>
+      <ContainerRow>
         <Button
           title="Guardar"
           color="#f2ea0d"
@@ -86,21 +107,32 @@ export function Workspace({ navigation, route }) {
           title="Cancel"
           color="#bdbdbb"
         />
-      </View>
+      </ContainerRow>
     </ViewContainerWorkspace>
   )
 }
 
 const styles = StyleSheet.create({
   picker: {
-    width: 200,
-    height: 30,
-    backgroundColor: '#FFF0E0',
-    borderColor: 'black',
+    width: 120,
+    height: 80,
+    backgroundColor: '#f2ea0d',
+    borderColor: '#828282',
     borderWidth: 1,
     borderRadius: 10,
   },
   onePickerItem: {
-    height: 30,
+    height: 80,
+    fontSize: 14,
+    width: 120,
+    borderRadius: 10,
+    transform: [
+      { scaleX: 0.9 }, 
+      { scaleY: 0.9 },
+    ],
+  },
+  borderLine: {
+    borderBottomColor: '#f2f2f2', 
+    borderBottomWidth: 2,
   },
 })
