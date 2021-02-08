@@ -46,6 +46,7 @@ export function SignIn({ navigation }) {
   return (
     <Container style={styles.container}>
       <Title>Sprinter!</Title>
+      <Text>{error}</Text>
       <CustomInput
         placeholder="Nombre de usuario"
         placeholderTextColor = "#f2f2f2"
