@@ -1,24 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Button, TextInput } from 'react-native';
-import { Text, Icon } from 'react-native-elements';
-import { Picker } from '@react-native-picker/picker';
-import {
-  ViewContainerWorkspace,
-  ViewContainerSprint,
-  CustomInput,
-  TextSprint,
-  TextDescription,
-  TextWeeks,
-  CustomInputWeeks,
-  ContainerRow,
-  CustomInputTeammates,
-  ContainerBacklog
-} from '../components/styled/WorkspaceStyles.js';
+components/styled/WorkspaceStyles.js;
 import axios from 'axios';
 import { SERVER_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect } from 'react';
 
-export function Workspace({ navigation }) {
+export function WorkspaceEdit({ navigation, route }) {
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -28,6 +14,28 @@ export function Workspace({ navigation }) {
   const [teammates, setTeammates] = useState([]);
   const [error, setError] = useState('');
 
+  async function getData() {
+    const token = await AsyncStorage.getItem('token');
+    console.log(token)
+    try {
+      const { data } = await axios({
+        method: 'GET',
+        baseURL: SERVER_URL,
+        url: `/workspaces/route.params.id`,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+      console.log('here ok', data)
+    } catch(err) {
+      setError('Lo sentimos, en este momento no pudimos conectarnos, vuelve a intentarlo')
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, [])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,9 +43,9 @@ export function Workspace({ navigation }) {
     console.log(token)
     try {
       await axios({
-        method: 'POST',
+        method: 'PUT',
         baseURL: SERVER_URL,
-        url: '/workspaces',
+        url: `/workspaces/${route.params.id}`,
         headers: {
           'Authorization': `Bearer ${token}`
         },
@@ -45,7 +53,7 @@ export function Workspace({ navigation }) {
       })
       navigation.navigate('Workspaces')
     } catch(err) {
-      setError('Lo sentimos, no pudimos crear tu workspace, vuelve a intentarlo mas tarde')
+      setError('Lo sentimos, no pudimos actualizar tu workspace, vuelve a intentarlo mas tarde')
     }
   }
 
