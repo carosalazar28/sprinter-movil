@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Button, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Button } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import {
@@ -126,7 +126,7 @@ export function Workspace({ navigation }) {
         />
         <Text h3>Agregar backlog</Text>
       </ContainerBacklog>
-      <Text>{error}</Text>
+      <Text style={styles.textError}>{error}</Text>
       <ContainerRow>
         <Button
           title="Guardar"
@@ -165,5 +165,9 @@ const styles = StyleSheet.create({
   borderLine: {
     borderBottomColor: '#f2f2f2', 
     borderBottomWidth: 2,
+  },
+  textError: {
+    color: 'red',
+    fontWeight: 'bold'
   },
 })

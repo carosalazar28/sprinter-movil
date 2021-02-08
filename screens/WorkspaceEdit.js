@@ -1,14 +1,28 @@
-components/styled/WorkspaceStyles.js;
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Button } from 'react-native';
+import { Text, Icon } from 'react-native-elements';
+import { Picker } from '@react-native-picker/picker';
+import {
+  ViewContainerWorkspace,
+  ViewContainerSprint,
+  CustomInput,
+  TextSprint,
+  TextDescription,
+  TextWeeks,
+  CustomInputWeeks,
+  ContainerRow,
+  CustomInputTeammates,
+  ContainerBacklog
+} from '../components/styled/WorkspaceStyles.js';
 import axios from 'axios';
 import { SERVER_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect } from 'react';
 
 export function WorkspaceEdit({ navigation, route }) {
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [weeks, setWeeks] = useState('');
+  const [weeks, setWeeks] = useState();
   const [sprint, setSprint] = useState(1);
   const [teammate, setTeammate] = useState('');
   const [teammates, setTeammates] = useState([]);
@@ -16,17 +30,20 @@ export function WorkspaceEdit({ navigation, route }) {
 
   async function getData() {
     const token = await AsyncStorage.getItem('token');
-    console.log(token)
     try {
       const { data } = await axios({
         method: 'GET',
         baseURL: SERVER_URL,
-        url: `/workspaces/route.params.id`,
+        url: `/workspaces/${route.params.id}`,
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       })
-      console.log('here ok', data)
+      setName(data.name)
+      setDescription(data.description)
+      setWeeks(data.weeks)
+      setSprint(data.sprint)
+      setTeammates([ ...teammates, data.teammates])
     } catch(err) {
       setError('Lo sentimos, en este momento no pudimos conectarnos, vuelve a intentarlo')
     }
@@ -54,6 +71,26 @@ export function WorkspaceEdit({ navigation, route }) {
       navigation.navigate('Workspaces')
     } catch(err) {
       setError('Lo sentimos, no pudimos actualizar tu workspace, vuelve a intentarlo mas tarde')
+    }
+  }
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    const token = await AsyncStorage.getItem('token');
+    console.log(token)
+    try {
+      await axios({
+        method: 'DELETE',
+        baseURL: SERVER_URL,
+        url: `/workspaces/${route.params.id}`,
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      })
+      navigation.navigate('Workspaces')
+    } catch(err) {
+      setError('Lo sentimos, no pudimos borrar tu workspace, vuelve a intentarlo mas tarde')
     }
   }
 
@@ -134,7 +171,7 @@ export function WorkspaceEdit({ navigation, route }) {
         />
         <Text h3>Agregar backlog</Text>
       </ContainerBacklog>
-      <Text>{error}</Text>
+      <Text style={styles.textError}>{error}</Text>
       <ContainerRow>
         <Button
           title="Guardar"
@@ -142,9 +179,9 @@ export function WorkspaceEdit({ navigation, route }) {
           onPress={handleSubmit}
         />
         <Button
-          title="Cancel"
+          title="Borrar"
           color="#bdbdbb"
-          onPress={() => navigation.navigate('Workspaces')}
+          onPress={handleDelete}
         />
       </ContainerRow>
     </ViewContainerWorkspace>
@@ -174,4 +211,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f2f2f2', 
     borderBottomWidth: 2,
   },
+  textError: {
+    color: 'red',
+    fontWeight: 'bold'
+  }
 })

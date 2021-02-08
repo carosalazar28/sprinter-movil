@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SERVER_URL } from '@env';
@@ -16,8 +16,9 @@ import {
 
 export function Workspaces({ navigation }) {
 
-  const [loading, setLoading] = useState(false)
-  const [workspace, setWorkspace] = useState([])
+  const [loading, setLoading] = useState(false);
+  const [workspace, setWorkspace] = useState([]);
+  const [error, setError] = useState('');
 
   async function getToken() {
     try {
@@ -36,7 +37,7 @@ export function Workspaces({ navigation }) {
       })
       return setWorkspace(data)
     } catch (err) {
-      console.log('error', err)
+      setError('Lo sentimos, pero no nos pudimos conectar con el servidor, intente mas tarde')
     } finally {
       setLoading(false)
     }
@@ -46,6 +47,8 @@ export function Workspaces({ navigation }) {
     getToken()
   }, [])
 
+  if(loading) <Text>Loading...</Text>
+
   return (
     <>
     {workspace ? (
@@ -54,6 +57,7 @@ export function Workspaces({ navigation }) {
           <Title h3>Workspace</Title>
           <TextAbout>El espacio de trabajo tiene el backlog con las tareas que se han creado, acá podrás interactuar con los sprints.</TextAbout>
         </ContainerAbout>
+        <Text style={styles.textError}>{error}</Text>
         <View style={{ alignItems: 'flex-end', paddingRight: 25 }}>
           <Icon
             name="plus"
@@ -92,3 +96,10 @@ export function Workspaces({ navigation }) {
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  textError: {
+    color: 'red',
+    fontWeight: 'bold'
+  }
+})
