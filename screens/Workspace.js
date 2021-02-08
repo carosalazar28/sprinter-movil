@@ -31,8 +31,8 @@ export function Workspace({ navigation }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = AsyncStorage.getItem('token');
-
+    const token = await AsyncStorage.getItem('token');
+    console.log(token)
     try {
       await axios({
         method: 'POST',
@@ -45,13 +45,14 @@ export function Workspace({ navigation }) {
       })
       console.log('here ok')
     } catch(err) {
-      console.log('here error')
+      console.log('here error', err)
       setError('Lo sentimos, no pudimos crear tu workspace, vuelve a intentarlo mas tarde')
     }
   }
 
   const onAddTeammate = () => {
     setTeammates([ ...teammates, teammate]);
+    console.log(teammates)
   }
 
   return (
