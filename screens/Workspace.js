@@ -43,9 +43,8 @@ export function Workspace({ navigation }) {
         },
         data: { name, description, weeks, sprint, teammates }
       })
-      console.log('here ok')
+      navigation.navigate('Workspaces')
     } catch(err) {
-      console.log('here error', err)
       setError('Lo sentimos, no pudimos crear tu workspace, vuelve a intentarlo mas tarde')
     }
   }
