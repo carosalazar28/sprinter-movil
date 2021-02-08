@@ -14,18 +14,45 @@ import {
   CustomInputTeammates,
   ContainerBacklog
 } from '../components/styled/WorkspaceStyles.js';
+import axios from 'axios';
+import { SERVER_URL } from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Workspace({ navigation }) {
 
   const [name, setName] = useState('');
-  const [sprint, setSprint] = useState(1);
   const [description, setDescription] = useState('');
-  const [teammates, setTeammates] = useState('');
   const [weeks, setWeeks] = useState('');
+  const [sprint, setSprint] = useState(1);
+  const [teammate, setTeammate] = useState('');
+  const [teammates, setTeammates] = useState([]);
+  const [error, setError] = useState('');
 
-  useEffect(() => {
-    
-  })
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const token = AsyncStorage.getItem('token');
+
+    try {
+      await axios({
+        method: 'POST',
+        baseURL: SERVER_URL,
+        url: '/workspaces',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        data: { name, description, weeks, sprint, teammates }
+      })
+      console.log('here ok')
+    } catch(err) {
+      console.log('here error')
+      setError('Lo sentimos, no pudimos crear tu workspace, vuelve a intentarlo mas tarde')
+    }
+  }
+
+  const onAddTeammate = () => {
+    setTeammates([ ...teammates, teammate]);
+  }
 
   return (
     <ViewContainerWorkspace>
@@ -33,7 +60,7 @@ export function Workspace({ navigation }) {
           placeholder="Workspace name"
           placeholderTextColor ="#828282"
           onChangeText={text => setName(text)}
-          value={description}
+          value={name}
         />
       <ViewContainerSprint style={styles.borderLine}>
         <TextSprint>
@@ -77,13 +104,14 @@ export function Workspace({ navigation }) {
           <CustomInputTeammates
             placeholder="Colaboradores"
             placeholderTextColor ="#828282"
-            onChangeText={text => setTeammates(text)}
-            value={teammates}
+            onChangeText={text => setTeammate(text)}
+            value={teammate}
           />
           <Icon
               name="adduser"
               type="ant-design"
               color="#525666"
+              onPress={onAddTeammate}
             />
         </ContainerRow>
         <Text>{teammates}</Text>
@@ -102,10 +130,12 @@ export function Workspace({ navigation }) {
         <Button
           title="Guardar"
           color="#f2ea0d"
+          onPress={handleSubmit}
         />
         <Button
           title="Cancel"
           color="#bdbdbb"
+          onPress={() => navigation.navigate('Workspaces')}
         />
       </ContainerRow>
     </ViewContainerWorkspace>
