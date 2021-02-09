@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, View, StyleSheet } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SERVER_URL } from '@env';
 import {
   ViewContainer,
   Title,
@@ -11,47 +10,23 @@ import {
   ContainerAbout,
   ViewContainerWorkspaces,
 } from '../components/styled/WorkspaceStyles';
-
-
+import { getData } from '../store/actions/workspace.action';
 
 export function Workspaces({ navigation }) {
 
-  const [loading, setLoading] = useState(false);
-  const [workspace, setWorkspace] = useState([]);
-  const [error, setError] = useState('');
-
-  async function getToken() {
-    try {
-      const token = await AsyncStorage.getItem('token')
-      if(!token) {
-        navigation.navigate('SignIn')
-      }
-      setLoading(true)
-      const {data: {data}} = await axios({
-        method: 'GET',
-        baseURL: SERVER_URL,
-        url: '/workspaces/workspace',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-      return setWorkspace(data)
-    } catch (err) {
-      setError('Lo sentimos, pero no nos pudimos conectar con el servidor, intente mas tarde')
-    } finally {
-      setLoading(false)
-    }
-  } 
-
+  const dispatch = useDispatch();
+  
+  const { workspacesList, loading, error } = useSelector(({ workspaceReducer: { workspacesList, loading, error }}) => ({ workspacesList, loading, error }))
+  
   useEffect(() => {
-    getToken()
+    getData()
   }, [])
 
   if(loading) <Text>Loading...</Text>
 
   return (
     <>
-    {workspace ? (
+    {workspacesList ? (
       <ViewContainer>
         <ContainerAbout>
           <Title h3>Workspace</Title>
@@ -68,7 +43,7 @@ export function Workspaces({ navigation }) {
         </View>
         <ViewContainerWorkspaces>
           <FlatList
-            data={workspace}
+            data={workspacesList}
             renderItem={({ item }) => {
               return (
                 <ListItem 
@@ -88,11 +63,7 @@ export function Workspaces({ navigation }) {
           />
         </ViewContainerWorkspaces>
       </ViewContainer>
-    ) : (
-      <ViewContainer>
-        <Title>loading</Title>
-      </ViewContainer>
-    )}
+    ) : (null)}
     </>
   )
 }
