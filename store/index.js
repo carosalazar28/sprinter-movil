@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { WorkspaceReducer } from './reducer/workspace.reducer';
+import { workspaceReducer } from './reducers/workspace.reducer';
 
 const rootReducer = combineReducers({
   workspaceReducer,

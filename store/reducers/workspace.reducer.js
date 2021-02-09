@@ -43,7 +43,7 @@ function removeItemSplice(array, action) {
   return newArray
 };
 
-export function WorkspaceReducer( state = initialState, action ) {
+export function workspaceReducer( state = initialState, action ) {
   switch (action.type) {
     case LOADING:
       return {
@@ -111,7 +111,7 @@ export function WorkspaceReducer( state = initialState, action ) {
         ...state,
         sprint: 1,
       }
-    case CANCEL_TEAMMMATES:
+    case CANCEL_TEAMMATES:
       return {
         ...state,
         teammates: [],

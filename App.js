@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { BottomTabNavigator } from './components/TabNavigator';
 import { MainStackNavigator } from './components/StackNavigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 export default function App() {
 
@@ -18,12 +20,14 @@ export default function App() {
   }, [])
 
   return (
-    <NavigationContainer>
-      {token ? (
-        <BottomTabNavigator/>
-      ) : (
-        <MainStackNavigator/>
-      )}
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        {token ? (
+          <BottomTabNavigator/>
+        ) : (
+          <MainStackNavigator/>
+        )}
+      </NavigationContainer>
+    </Provider>
   );
 }
