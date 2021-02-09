@@ -1,7 +1,5 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SignUp } from '../screens/SignUp';
-import { SignIn } from '../screens/SignIn';
 import { Home } from '../screens/Home';
 import { Workspaces } from '../screens/Workspaces';
 import { Workspace } from '../screens/Workspace';
@@ -24,15 +22,6 @@ export const HomeStackNavigator = () => {
   return(
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
-  );
-}
-
-export const MainStackNavigator = () => {
-  return(
-    <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
     </Stack.Navigator>
   );
 }

@@ -33,7 +33,7 @@ export function SignIn({ navigation }) {
       });
       console.log(token)
       AsyncStorage.setItem('token', token)
-      navigation.navigate('Home')
+      navigation.replace('BottomTab', { screen: 'Home' })
     }
     catch(err) {
       console.log('here error')

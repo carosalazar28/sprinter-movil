@@ -20,6 +20,7 @@ export function Workspaces({ navigation }) {
   
   useEffect(() => {
     getData()
+    console.log(workspacesList)
   }, [])
 
   if(loading) <Text>Loading...</Text>

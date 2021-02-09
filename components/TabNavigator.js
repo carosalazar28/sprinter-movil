@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MainStackNavigator, WorkspaceStackNavigator, TaskStackNavigator, ProfileStackNavigator, HomeStackNavigator } from './StackNavigator';
+import { WorkspaceStackNavigator, TaskStackNavigator, ProfileStackNavigator, HomeStackNavigator } from './StackNavigator';
 import { Icon } from 'react-native-elements';
 
 const Tab = createBottomTabNavigator();

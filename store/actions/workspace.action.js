@@ -63,8 +63,9 @@ export function cleanForm() {
 export function getData() {
   return async function( dispatch ) {
     dispatch({ type: LOADING })
+    const token = await AsyncStorage.getItem('token')
+    console.log('here action', token)
     try {
-      const token = await AsyncStorage.getItem('token')
       if(!token) {
         navigation.navigate('SignIn')
       }
