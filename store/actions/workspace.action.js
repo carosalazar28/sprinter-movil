@@ -31,7 +31,7 @@ export function setName( payload ) {
 
 export function setDescription( payload ) {
   return function( dispatch ) {
-    dispatch({ type: SET_DESCRIPTION, payload })
+    dispatch({ type: SET_DECRIPTION, payload })
   }
 };
 
@@ -50,6 +50,12 @@ export function setSprint( payload ) {
 export function setTeammates( payload ) {
   return function( dispatch ) {
     dispatch({ type: SET_TEAMMATES, payload })
+  }
+};
+
+export function setTeammate( payload ) {
+  return function( dispatch ) {
+    dispatch({ type: SET_TEAMMATE, payload })
   }
 };
 

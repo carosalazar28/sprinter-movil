@@ -18,7 +18,17 @@ import {
 import axios from 'axios';
 import { SERVER_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getDataWorkspace, updateWorkspace, onAddTeammate } from '../store/actions/workspace.action';
+import { 
+  getDataWorkspace, 
+  updateWorkspace, 
+  onAddTeammate,
+  setName,
+  setDescription,
+  setWeeks,
+  setSprint,
+  setTeammate,
+  setTeammates,
+} from '../store/actions/workspace.action';
 
 export function WorkspaceEdit({ navigation, route, index }) {
 
@@ -64,7 +74,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
     }
   }
 
-  const onAddTeammate = () => {
+  const onAddTeammates = () => {
     dispatch(onAddTeammate(teammate))
   }
 
@@ -73,7 +83,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
       <CustomInput
           placeholder="Workspace name"
           placeholderTextColor ="#828282"
-          onChangeText={text => setName(text)}
+          onChangeText={text => dispatch(setName(text))}
           value={name}
         />
       <ViewContainerSprint style={styles.borderLine}>
@@ -87,7 +97,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
             selectedValue={sprint}
             mode="dropdowm"
             onValueChange={(itemValue, itemIndex) => 
-              setSprint(itemValue)
+              dispatch(setSprint(itemValue))
             }
           >
             <Picker.Item label="1 semana" value="1" />
@@ -100,7 +110,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           multiline
           placeholder="¿Cuál es la descripción del espacio de trabajo?"
           placeholderTextColor ="#828282"
-          onChangeText={text => setDescription(text)}
+          onChangeText={text => dispatch(setDescription(text))}
           value={description}
         />
       </View>
@@ -110,7 +120,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           placeholder= "12"
           placeholderTextColor ="#828282"
           keyboardType="numeric"
-          onChangeText={text => setWeeks(text)}
+          onChangeText={text => dispatch(setWeeks(text))}
           value={weeks}  
         />
       </View>
@@ -119,14 +129,14 @@ export function WorkspaceEdit({ navigation, route, index }) {
           <CustomInputTeammates
             placeholder="Colaboradores"
             placeholderTextColor ="#828282"
-            onChangeText={text => setTeammate(text)}
+            onChangeText={text => dispatch(setTeammate(text))}
             value={teammate}
           />
           <Icon
               name="adduser"
               type="ant-design"
               color="#525666"
-              onPress={onAddTeammate}
+              onPress={onAddTeammates}
             />
         </ContainerRow>
         <Text>{teammates}</Text>
