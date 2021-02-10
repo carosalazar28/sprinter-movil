@@ -17,6 +17,7 @@ import {
   CANCEL_SPRINT,
   CANCEL_TEAMMATES,
   SET_DESCRIPTION,
+  ADD_TEAMMATE,
 } from '../reducers/workspace.reducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SERVER_URL } from '@env';
@@ -49,6 +50,12 @@ export function setSprint( payload ) {
 export function setTeammates( payload ) {
   return function( dispatch ) {
     dispatch({ type: SET_TEAMMATES, payload })
+  }
+};
+
+export function onAddTeammate( payload ) {
+  return function( dispatch ) {
+    dispatch({ type: ADD_TEAMMATE, payload })
   }
 };
 

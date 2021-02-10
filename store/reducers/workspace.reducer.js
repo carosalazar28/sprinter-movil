@@ -6,24 +6,28 @@ export const FAILURED_WORKSPACE = 'FAILURED_WORKSPACE';
 export const UPDATE_WORKSPACE = 'UPDATE_WORKSPACE';
 export const GET_WORKSPACE = 'GET_WORKSPACE';
 export const DELETE_WORKSPACE = 'DELETE_WORKSPACE';
+export const ADD_TEAMMATE = 'ADD_TEAMMATE';
 
 export const SET_NAME = 'SET_NAME';
 export const SET_DESCRIPTION = 'SET_DESCRIPTION';
 export const SET_WEEKS = 'SET_WEEKS';
 export const SET_SPRINT = 'SET_SPRINT';
 export const SET_TEAMMATES = 'SET_TEAMMATES';
+export const SET_TEAMMATE = 'SET_TEAMMATE';
 
 export const CANCEL_NAME = 'CANCEL_NAME';
 export const CANCEL_DESCRIPTION = 'CANCEL_DESCRIPTION';
 export const CANCEL_WEEKS = 'CANCEL_WEEKS';
 export const CANCEL_SPRINT = 'CANCEL_SPRINT';
 export const CANCEL_TEAMMATES = 'CANCEL_TEAMMATES';
+export const CANCEL_TEAMMATE = 'CANCEL_TEAMMATE';
 
 export const initialState = {
   name: '',
   description: '',
-  weeks: '',
+  weeks: 0,
   sprint: 1,
+  teammate: '',
   teammates: [],
   error: '',
   loading: false,
@@ -91,6 +95,11 @@ export function workspaceReducer( state = initialState, action ) {
         ...state,
         teammates: state.teammates.concat(action.payload),
       }
+    case SET_TEAMMATE:
+      return {
+        ...state,
+        teammate: action.payload,
+      }
     case CANCEL_NAME: 
       return {
         ...state,
@@ -116,6 +125,11 @@ export function workspaceReducer( state = initialState, action ) {
         ...state,
         teammates: [],
       }
+    case CANCEL_TEAMMATE:
+      return {
+        ...state,
+        teammate: '',
+      }
     case GET_WORKSPACE:
       return {
         ...state,
@@ -130,6 +144,11 @@ export function workspaceReducer( state = initialState, action ) {
       return {
         ...state,
         workspacesList: removeItemSplice(state.workspacesList, action.index, action.payload)
+      }
+    case ADD_TEAMMATE:
+      return {
+        ...state,
+        teammates: [ ...state.teammates, payload ]
       }
     default:
       return state;

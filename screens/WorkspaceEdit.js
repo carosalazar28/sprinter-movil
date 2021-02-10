@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
@@ -18,13 +18,11 @@ import {
 import axios from 'axios';
 import { SERVER_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getDataWorkspace, updateWorkspace } from '../store/actions/workspace.action';
+import { getDataWorkspace, updateWorkspace, onAddTeammate } from '../store/actions/workspace.action';
 
 export function WorkspaceEdit({ navigation, route, index }) {
 
   const dispatch = useDispatch();
-
-  const [teammates, setTeammates] = useState([]);
 
   const dataWorkspace = useSelector((
     { workspaceReducer: {
@@ -33,10 +31,11 @@ export function WorkspaceEdit({ navigation, route, index }) {
       return { ...state }
   });
 
-  const { name, description, weeks, sprint, teammates } = dataWorkspace;
+  const { name, description, weeks, sprint, teammates, teammate, error } = dataWorkspace
 
   useEffect(() => {
     dispatch(getDataWorkspace(route.params.id));
+    console.log(weeks)
   }, [])
 
   const handleSubmit = async (e) => {
@@ -66,8 +65,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
   }
 
   const onAddTeammate = () => {
-    setTeammates([ ...teammates, teammate]);
-    console.log(teammates)
+    dispatch(onAddTeammate(teammate))
   }
 
   return (
@@ -111,6 +109,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
         <CustomInputWeeks
           placeholder= "12"
           placeholderTextColor ="#828282"
+          keyboardType="numeric"
           onChangeText={text => setWeeks(text)}
           value={weeks}  
         />
