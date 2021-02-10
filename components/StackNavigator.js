@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 const screenOptionStyle = {
   cardStyle: { backgroundColor: '#2f2a3e'},
   headerStyle: {
-    backgroundColor: "#2f2a3e",
+    backgroundColor: "#f2f2f2",
   },
   headerTintColor: "#69c8d4",
   headerBackTitle: "Back",

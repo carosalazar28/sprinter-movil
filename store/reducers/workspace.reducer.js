@@ -58,7 +58,7 @@ export function workspaceReducer( state = initialState, action ) {
     case CREATE_WORKSPACE:
       return {
         ...state,
-        message: action.payload,
+        message: 'El workspace se ha creado con exito',
         workspacesList: state.workspacesList.concat(action.payload)
       }
     case FAILURED_WORKSPACE: 

@@ -19,6 +19,7 @@ import {
 } from '../reducers/workspace.reducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SERVER_URL } from '@env';
+import axios from 'axios';
 
 export function setName( payload ) {
   return function( dispatch ) {
@@ -63,18 +64,14 @@ export function cleanForm() {
 export function getData() {
   return async function( dispatch ) {
     dispatch({ type: LOADING })
-    const token = await AsyncStorage.getItem('token')
-    console.log('here action', token)
     try {
-      if(!token) {
-        navigation.navigate('SignIn')
-      }
-      const {data: {data}} = await axios({
+      const token = await AsyncStorage.getItem('token')
+      const { data: {data} } = await axios({
         method: 'GET',
         baseURL: SERVER_URL,
         url: '/workspaces/workspace',
         headers: {
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         },
       })
       dispatch({ type: GET_WORKSPACE, payload: data })

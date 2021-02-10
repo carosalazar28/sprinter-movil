@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FlatList, View, StyleSheet, Text } from 'react-native';
+import { FlatList, View, StyleSheet, Text, RefreshControl } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements'
 import {
   ViewContainer,
@@ -14,13 +14,19 @@ import { getData } from '../store/actions/workspace.action';
 
 export function Workspaces({ navigation }) {
 
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   const dispatch = useDispatch();
   
   const { workspacesList, loading, error } = useSelector(({ workspaceReducer: { workspacesList, loading, error }}) => ({ workspacesList, loading, error }))
   
   useEffect(() => {
-    getData()
-    console.log(workspacesList)
+    dispatch(getData())
   }, [])
 
   if(loading) <Text>Loading...</Text>
@@ -29,6 +35,10 @@ export function Workspaces({ navigation }) {
     <>
     {workspacesList ? (
       <ViewContainer>
+        <RefreshControl 
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
         <ContainerAbout>
           <Title h3>Workspace</Title>
           <TextAbout>El espacio de trabajo tiene el backlog con las tareas que se han creado, acá podrás interactuar con los sprints.</TextAbout>

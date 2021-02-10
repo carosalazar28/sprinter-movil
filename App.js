@@ -19,9 +19,6 @@ export default function App() {
           screenOptions={{
             headerShown: false,
             cardStyle: { backgroundColor: '#2f2a3e'},
-            headerStyle: {
-              backgroundColor: "#2f2a3e",
-            },
             headerTintColor: "#69c8d4",
             headerBackTitle: "Back",
           }}
