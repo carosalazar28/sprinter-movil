@@ -43,7 +43,6 @@ export function WorkspaceEdit({ navigation, route, index }) {
 
   useEffect(() => {
     dispatch(getDataWorkspace(route.params.id));
-    console.log(weeks)
   }, [])
 
   const handleSubmit = (e) => {

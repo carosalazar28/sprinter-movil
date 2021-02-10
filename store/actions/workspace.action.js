@@ -189,7 +189,6 @@ export function createWorkspace( data ) {
     const { name, description, weeks, sprint, teammates } = data
     const token = await AsyncStorage.getItem('token');
     dispatch({ type: LOADING })
-    console.log(token)
     try {
       await axios({
         method: 'POST',

@@ -23,7 +23,6 @@ export function SignUp({ navigation }) {
   const [error, setError] = useState('')
 
   const handleSubmit = async () => {
-    console.log(username, password)
     try {
       const { data: { token }} = await axios ({
         method: 'POST',
@@ -31,15 +30,12 @@ export function SignUp({ navigation }) {
         url: '/user/sign-up',
         data: { username, email, password }
       });
-      console.log(token)
       AsyncStorage.setItem('token', token)
       navigation.navigate('Home')
     }
     catch(err) {
-      console.log('here error')
       AsyncStorage.removeItem('token')
       setError('Usuario o contraseña invalidos')
-      console.log(err)
     }
   }
 

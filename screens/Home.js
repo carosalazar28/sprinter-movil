@@ -15,7 +15,6 @@ export function Home({ navigation }) {
     if(!token) {
       navigation.navigate('SignIn')
     }
-    console.log('HERE HOME T', token)
   } 
 
   useEffect(() => {

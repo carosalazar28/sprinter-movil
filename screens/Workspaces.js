@@ -41,7 +41,6 @@ export function Workspaces({ navigation }) {
       <SafeAreaView style={{ flex: 1 }}>
         <ViewContainer>
           <ScrollView>
-
             <RefreshControl 
               refreshing={refreshing}
               onRefresh={onRefresh}
