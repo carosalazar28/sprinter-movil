@@ -15,9 +15,6 @@ import {
   CustomInputTeammates,
   ContainerBacklog
 } from '../components/styled/WorkspaceStyles.js';
-import axios from 'axios';
-import { SERVER_URL } from '@env';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
   getDataWorkspace, 
   updateWorkspace, 
@@ -28,6 +25,7 @@ import {
   setSprint,
   setTeammate,
   setTeammates,
+  deleteWorkspace
 } from '../store/actions/workspace.action';
 
 export function WorkspaceEdit({ navigation, route, index }) {
@@ -48,30 +46,16 @@ export function WorkspaceEdit({ navigation, route, index }) {
     console.log(weeks)
   }, [])
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
     dispatch(updateWorkspace(dataWorkspace, route.params.id, index))
+    navigation.navigate('Workspaces')
   }
 
-  const handleDelete = async (e) => {
+  const handleDelete = (e) => {
     e.preventDefault();
-
-    const token = await AsyncStorage.getItem('token');
-    console.log(token)
-    try {
-      await axios({
-        method: 'DELETE',
-        baseURL: SERVER_URL,
-        url: `/workspaces/${route.params.id}`,
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-      })
-      navigation.navigate('Workspaces')
-    } catch(err) {
-      setError('Lo sentimos, no pudimos borrar tu workspace, vuelve a intentarlo mas tarde')
-    }
+    dispatch(deleteWorkspace(route.params.id, index))
+    navigation.navigate('Workspaces')
   }
 
   const onAddTeammates = () => {
@@ -121,7 +105,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           placeholderTextColor ="#828282"
           keyboardType="numeric"
           onChangeText={text => dispatch(setWeeks(text))}
-          value={weeks}  
+          value={weeks.toString()}  
         />
       </View>
       <View style={styles.borderLine}>

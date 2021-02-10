@@ -7,16 +7,17 @@ import {
   UPDATE_WORKSPACE,
   DELETE_WORKSPACE,
   SET_NAME,
-  SET_DECRIPTION,
+  SET_DESCRIPTION,
   SET_WEEKS,
   SET_SPRINT,
   SET_TEAMMATES,
+  SET_TEAMMATE,
   CANCEL_NAME,
   CANCEL_DESCRIPTION,
   CANCEL_WEEKS,
   CANCEL_SPRINT,
   CANCEL_TEAMMATES,
-  SET_DESCRIPTION,
+  CANCEL_TEAMMATE,
   ADD_TEAMMATE,
 } from '../reducers/workspace.reducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -31,7 +32,7 @@ export function setName( payload ) {
 
 export function setDescription( payload ) {
   return function( dispatch ) {
-    dispatch({ type: SET_DECRIPTION, payload })
+    dispatch({ type: SET_DESCRIPTION, payload })
   }
 };
 
@@ -62,6 +63,7 @@ export function setTeammate( payload ) {
 export function onAddTeammate( payload ) {
   return function( dispatch ) {
     dispatch({ type: ADD_TEAMMATE, payload })
+    dispatch({ type: CANCEL_TEAMMATE })
   }
 };
 
@@ -72,6 +74,7 @@ export function cleanForm() {
     dispatch({ type: CANCEL_WEEKS })
     dispatch({ type: CANCEL_SPRINT })
     dispatch({ type: CANCEL_TEAMMATES })
+    dispatch({ type: CANCEL_TEAMMATE })
   }
 };
 
@@ -135,7 +138,7 @@ export function updateWorkspace( data, id, index ) {
     dispatch({ type: LOADING })
     try {
       const token = await AsyncStorage.getItem('token');
-      const { data } = await axios({
+      const { data: { data } } = await axios({
         method: 'PUT',
         baseURL: SERVER_URL,
         url: `/workspaces/${id}`,
@@ -145,7 +148,6 @@ export function updateWorkspace( data, id, index ) {
         data: { name, description, weeks, sprint, teammates }
       })
       dispatch({ type: UPDATE_WORKSPACE, index: index, payload: data })
-      navigation.navigate('Workspaces')
     } catch(err) {
       dispatch({
         type: FAILURED_WORKSPACE,
@@ -156,3 +158,57 @@ export function updateWorkspace( data, id, index ) {
     }
   }
 };
+
+export function deleteWorkspace(id, index) {
+  return async function( dispatch ) {
+    const token = await AsyncStorage.getItem('token');
+    dispatch({ type: LOADING })
+    try {
+      await axios({
+        method: 'DELETE',
+        baseURL: SERVER_URL,
+        url: `/workspaces/${id}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      })
+      dispatch({ type: DELETE_WORKSPACE, payload: index })
+    } catch(err) {
+      dispatch({
+        type: FAILURED_WORKSPACE,
+        payload: 'Lo sentimos, en este momento no podemos conectarnos con el servidor',
+      })
+    } finally {
+      dispatch({ type: FINISHED_LOADING})
+    }
+  }
+};
+
+export function createWorkspace( data ) {
+  return async function( dispatch ) {
+    const { name, description, weeks, sprint, teammates } = data
+    const token = await AsyncStorage.getItem('token');
+    dispatch({ type: LOADING })
+    console.log(token)
+    try {
+      await axios({
+        method: 'POST',
+        baseURL: SERVER_URL,
+        url: '/workspaces',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        data: { name, description, weeks, sprint, teammates }
+      })
+      dispatch({ type: CREATE_WORKSPACE, payload: data})
+    } catch(err) {
+      dispatch({
+        type: FAILURED_WORKSPACE,
+        payload: 'Lo sentimos, en este momento no podemos conectarnos con el servidor',
+      })
+    } finally {
+      dispatch({ type: FINISHED_LOADING })
+    }
+  }
+}
+

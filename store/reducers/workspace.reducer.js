@@ -25,7 +25,7 @@ export const CANCEL_TEAMMATE = 'CANCEL_TEAMMATE';
 export const initialState = {
   name: '',
   description: '',
-  weeks: 0,
+  weeks: '',
   sprint: 1,
   teammate: '',
   teammates: [],
@@ -143,12 +143,12 @@ export function workspaceReducer( state = initialState, action ) {
     case DELETE_WORKSPACE:
       return {
         ...state,
-        workspacesList: removeItemSplice(state.workspacesList, action.index, action.payload)
+        workspacesList: removeItemSplice(state.workspacesList, action.payload)
       }
     case ADD_TEAMMATE:
       return {
         ...state,
-        teammates: [ ...state.teammates, payload ]
+        teammates: [ ...state.teammates, action.payload ]
       }
     default:
       return state;

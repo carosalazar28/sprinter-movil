@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   ViewContainerWorkspace,
   ViewContainerSprint,
@@ -14,52 +15,55 @@ import {
   CustomInputTeammates,
   ContainerBacklog
 } from '../components/styled/WorkspaceStyles.js';
-import axios from 'axios';
-import { SERVER_URL } from '@env';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { 
+  createWorkspace,
+  onAddTeammate,
+  cleanForm,
+  setName,
+  setDescription,
+  setWeeks,
+  setSprint,
+  setTeammate,
+  setTeammates,
+} from '../store/actions/workspace.action';
 
 export function Workspace({ navigation }) {
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [weeks, setWeeks] = useState('');
-  const [sprint, setSprint] = useState(1);
-  const [teammate, setTeammate] = useState('');
-  const [teammates, setTeammates] = useState([]);
-  const [error, setError] = useState('');
+  const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
+  const dataWorkspace = useSelector((
+    { workspaceReducer: {
+      ...state
+    }}) => {
+      return { ...state }
+  });
+
+  const { name, description, weeks, sprint, teammates, teammate, error } = dataWorkspace
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const token = await AsyncStorage.getItem('token');
-    console.log(token)
-    try {
-      await axios({
-        method: 'POST',
-        baseURL: SERVER_URL,
-        url: '/workspaces',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        data: { name, description, weeks, sprint, teammates }
-      })
-      navigation.navigate('Workspaces')
-    } catch(err) {
-      setError('Lo sentimos, no pudimos crear tu workspace, vuelve a intentarlo mas tarde')
-    }
+    dispatch(createWorkspace(dataWorkspace))
+    navigation.navigate('Workspaces')
   }
 
-  const onAddTeammate = () => {
-    setTeammates([ ...teammates, teammate]);
-    console.log(teammates)
+  const onAddTeammates = () => {
+    dispatch(onAddTeammate(teammate))
   }
+
+  const handleCancel = () => {
+    dispatch(cleanForm())
+  }
+  
+  useEffect(() => {
+    return dispatch(cleanForm())
+  }, [])
 
   return (
     <ViewContainerWorkspace>
       <CustomInput
           placeholder="Workspace name"
           placeholderTextColor ="#828282"
-          onChangeText={text => setName(text)}
+          onChangeText={text => dispatch(setName(text))}
           value={name}
         />
       <ViewContainerSprint style={styles.borderLine}>
@@ -72,8 +76,8 @@ export function Workspace({ navigation }) {
             itemStyle={styles.onePickerItem}
             selectedValue={sprint}
             mode="dropdowm"
-            onValueChange={(itemValue, itemIndex) => 
-              setSprint(itemValue)
+            onValueChange={(itemValue ) => 
+              dispatch(setSprint(itemValue))
             }
           >
             <Picker.Item label="1 semana" value="1" />
@@ -86,7 +90,7 @@ export function Workspace({ navigation }) {
           multiline
           placeholder="¿Cuál es la descripción del espacio de trabajo?"
           placeholderTextColor ="#828282"
-          onChangeText={text => setDescription(text)}
+          onChangeText={text => dispatch(setDescription(text))}
           value={description}
         />
       </View>
@@ -95,8 +99,8 @@ export function Workspace({ navigation }) {
         <CustomInputWeeks
           placeholder= "12"
           placeholderTextColor ="#828282"
-          onChangeText={text => setWeeks(text)}
-          value={weeks}  
+          onChangeText={text => dispatch(setWeeks(text))}
+          value={weeks.toString()}  
         />
       </View>
       <View style={styles.borderLine}>
@@ -104,14 +108,14 @@ export function Workspace({ navigation }) {
           <CustomInputTeammates
             placeholder="Colaboradores"
             placeholderTextColor ="#828282"
-            onChangeText={text => setTeammate(text)}
+            onChangeText={text => dispatch(setTeammate(text))}
             value={teammate}
           />
           <Icon
               name="adduser"
               type="ant-design"
               color="#525666"
-              onPress={onAddTeammate}
+              onPress={onAddTeammates}
             />
         </ContainerRow>
         <Text>{teammates}</Text>
@@ -136,7 +140,7 @@ export function Workspace({ navigation }) {
         <Button
           title="Cancel"
           color="#bdbdbb"
-          onPress={() => navigation.navigate('Workspaces')}
+          onPress={handleCancel}
         />
       </ContainerRow>
     </ViewContainerWorkspace>
