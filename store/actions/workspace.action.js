@@ -16,6 +16,7 @@ import {
   CANCEL_WEEKS,
   CANCEL_SPRINT,
   CANCEL_TEAMMATES,
+  SET_DESCRIPTION,
 } from '../reducers/workspace.reducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SERVER_URL } from '@env';
@@ -76,6 +77,63 @@ export function getData() {
       })
       dispatch({ type: GET_WORKSPACE, payload: data })
     } catch (err) {
+      dispatch({
+        type: FAILURED_WORKSPACE,
+        payload: 'Lo sentimos, en este momento no podemos conectarnos con el servidor',
+      })
+    } finally {
+      dispatch({ type: FINISHED_LOADING })
+    }
+  }
+};
+
+export function getDataWorkspace(id) {
+  return async function ( dispatch ) {
+    dispatch({ type: LOADING })
+    try {
+      const token = await AsyncStorage.getItem('token');
+      const { data } = await axios({
+        method: 'GET',
+        baseURL: SERVER_URL,
+        url: `/workspaces/${id}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      dispatch({ type: SET_NAME, payload: data.name})
+      dispatch({ type: SET_DESCRIPTION, payload: data.description })
+      dispatch({ type: SET_WEEKS, payload: data.weeks })
+      dispatch({ type: SET_SPRINT, payload: data.sprint })
+      dispatch({ type: SET_TEAMMATES, payload: data.teammates })
+    } catch(err) {
+      dispatch({
+        type: FAILURED_WORKSPACE,
+        payload: 'Lo sentimos, en este momento no podemos conectarnos con el servidor',
+      })
+    } finally {
+      dispatch({ type: FINISHED_LOADING })
+    }
+  }
+};
+
+export function updateWorkspace( data, id, index ) {
+  const { name, description, weeks, sprint, teammates } = data;
+  return async function( dispatch ) {
+    dispatch({ type: LOADING })
+    try {
+      const token = await AsyncStorage.getItem('token');
+      const { data } = await axios({
+        method: 'PUT',
+        baseURL: SERVER_URL,
+        url: `/workspaces/${id}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        data: { name, description, weeks, sprint, teammates }
+      })
+      dispatch({ type: UPDATE_WORKSPACE, index: index, payload: data })
+      navigation.navigate('Workspaces')
+    } catch(err) {
       dispatch({
         type: FAILURED_WORKSPACE,
         payload: 'Lo sentimos, en este momento no podemos conectarnos con el servidor',

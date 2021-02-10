@@ -55,11 +55,11 @@ export function Workspaces({ navigation }) {
         <ViewContainerWorkspaces>
           <FlatList
             data={workspacesList}
-            renderItem={({ item }) => {
+            renderItem={({ item, index }) => {
               return (
                 <ListItem 
                   bottomDivider
-                  onPress={() => navigation.navigate('WorkspaceEdit', { id: item._id })}
+                  onPress={() => navigation.navigate('WorkspaceEdit', { id: item._id, index: index })}
                 >
                   <ListItem.Content>
                     <ListItem.Title>{item.name}</ListItem.Title>

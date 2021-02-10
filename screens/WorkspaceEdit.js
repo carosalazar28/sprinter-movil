@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   ViewContainerWorkspace,
   ViewContainerSprint,
@@ -17,61 +18,31 @@ import {
 import axios from 'axios';
 import { SERVER_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getDataWorkspace, updateWorkspace } from '../store/actions/workspace.action';
 
-export function WorkspaceEdit({ navigation, route }) {
+export function WorkspaceEdit({ navigation, route, index }) {
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [weeks, setWeeks] = useState();
-  const [sprint, setSprint] = useState(1);
-  const [teammate, setTeammate] = useState('');
+  const dispatch = useDispatch();
+
   const [teammates, setTeammates] = useState([]);
-  const [error, setError] = useState('');
 
-  async function getData() {
-    const token = await AsyncStorage.getItem('token');
-    try {
-      const { data } = await axios({
-        method: 'GET',
-        baseURL: SERVER_URL,
-        url: `/workspaces/${route.params.id}`,
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      })
-      setName(data.name)
-      setDescription(data.description)
-      setWeeks(data.weeks)
-      setSprint(data.sprint)
-      setTeammates([ ...teammates, data.teammates])
-    } catch(err) {
-      setError('Lo sentimos, en este momento no pudimos conectarnos, vuelve a intentarlo')
-    }
-  }
+  const dataWorkspace = useSelector((
+    { workspaceReducer: {
+      ...state
+    }}) => {
+      return { ...state }
+  });
+
+  const { name, description, weeks, sprint, teammates } = dataWorkspace;
 
   useEffect(() => {
-    getData();
+    dispatch(getDataWorkspace(route.params.id));
   }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = await AsyncStorage.getItem('token');
-    console.log(token)
-    try {
-      await axios({
-        method: 'PUT',
-        baseURL: SERVER_URL,
-        url: `/workspaces/${route.params.id}`,
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        data: { name, description, weeks, sprint, teammates }
-      })
-      navigation.navigate('Workspaces')
-    } catch(err) {
-      setError('Lo sentimos, no pudimos actualizar tu workspace, vuelve a intentarlo mas tarde')
-    }
+    dispatch(updateWorkspace(dataWorkspace, route.params.id, index))
   }
 
   const handleDelete = async (e) => {
