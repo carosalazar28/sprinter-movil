@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, StyleSheet, View, } from 'react-native';
 import { Text, Input, Icon } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  getDataBacklog,
+  cleanTask,
+} from '../store/actions/backlog.action';
 
 const Title = styled(Text)`
   margin: 10px 0;
@@ -13,7 +18,25 @@ const ScrollContainerBacklog = styled(ScrollView)`
   padding: 16px 26px;
 `;
 
-export function Backlog() {
+const ContainerNoContent = styled(View)`
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+`;
+
+export function Backlog({ route, navigation }) {
+
+  const dispatch = useDispatch();
+
+  const { task, loading, message } = useSelector(({ backlogReducer: { task, loading, message }}) => ({ task, loading, message }))
+
+  useEffect(() => {
+    dispatch(getDataBacklog(route.params.id))
+    
+    return dispatch(cleanTask())
+    console.log(route.params.id)
+  }, [])
+
   return (
     <SafeAreaView style={{ flex: 1 }} >
       <ScrollContainerBacklog>
@@ -35,6 +58,22 @@ export function Backlog() {
             multiline
           />
         </View>
+        <View>
+          { task && task.lenght > 0 ? task.map(item => {
+            return (
+              <View style={styles.containerTask} key={item._id}>
+                <Text 
+                  style={styles.title} 
+                >
+                  {item.name}
+                </Text>
+              </View>
+            )}) : (
+            <ContainerNoContent>
+              <Text>No tienes backlog en esté workspace</Text>
+            </ContainerNoContent>
+          )}
+        </View>
       </ScrollContainerBacklog>
     </SafeAreaView>
   );
@@ -44,4 +83,14 @@ const styles = StyleSheet.create({
   input: {
     padding: 7,
   },
+  title: {
+    fontSize: 18,
+  },
+  containerTask: {
+    borderBottomColor: '#f2f2f2',
+    borderBottomWidth: 1,
+    paddingBottom: 25,
+    paddingLeft: 8,
+    marginTop: 10,
+  }
 })

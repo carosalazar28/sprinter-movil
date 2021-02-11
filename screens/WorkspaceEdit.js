@@ -25,7 +25,8 @@ import {
   setSprint,
   setTeammate,
   setTeammates,
-  deleteWorkspace
+  deleteWorkspace,
+  cleanForm
 } from '../store/actions/workspace.action';
 
 export function WorkspaceEdit({ navigation, route, index }) {
@@ -43,6 +44,8 @@ export function WorkspaceEdit({ navigation, route, index }) {
 
   useEffect(() => {
     dispatch(getDataWorkspace(route.params.id));
+
+    return dispatch(cleanForm())
   }, [])
 
   const handleSubmit = (e) => {
@@ -130,7 +133,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           type="ant-design"
           color="#69c8d4"
           style={{ marginRight: 13 }}
-          onPress={() => navigation.navigate('Backlog')}
+          onPress={() => navigation.navigate('Backlog', { id: route.params.backlog })}
         />
         <Text h3>Agregar backlog</Text>
       </ContainerBacklog>

@@ -65,7 +65,7 @@ export function Workspaces({ navigation }) {
                   return (
                     <ListItem 
                       bottomDivider
-                      onPress={() => navigation.navigate('WorkspaceEdit', { id: item._id, index: index })}
+                      onPress={() => navigation.navigate('WorkspaceEdit', { id: item._id, index: index, backlog: item.backlog })}
                     >
                       <ListItem.Content>
                         <ListItem.Title>{item.name}</ListItem.Title>
