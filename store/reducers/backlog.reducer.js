@@ -5,11 +5,19 @@ export const GET_BACKLOG = 'GET_BACKLOG';
 export const FAILURED_BACKLOG = 'FAILURED_BACKLOG';
 
 export const SET_NAMETASK = 'SET_NAMETASK';
+export const SET_DESCRIPTIONTASK = 'SET_DESCRIPTIONTASK';
+export const SET_STATUS = 'SET_STATUS';
+export const SET_ASIGN = 'SET_ASIGN';
+export const SET_AUTHOR = 'SET_AUTHOR';
 
 export const CREATE_TASK = 'CREATE_TASK';
 
 export const CANCEL_TASK = 'CANCEL_TASK';
 export const CANCEL_NAMEBACKLOG = 'CANCEL_NAMEBACKLOG';
+export const CANCEL_DESCRIPTIONTAKS = 'CANCEL_DESCRIPTIONTASK';
+export const CANCEL_STATUS = 'CANCEL_STATUS';
+export const CANCEL_ASIGN = 'CANCEL_ASIGN';
+export const CANCEL_AUTHOR = 'CANCEL_AUTHOR';
 
 export const initialState = {
   task: [],
@@ -54,10 +62,50 @@ export function backlogReducer( state = initialState, action ) {
         ...state,
         name: action.payload,
       }
+    case SET_DESCRIPTIONTASK: 
+      return {
+        ...state,
+        description: action.payload,
+      }
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.payload,
+      }
+    case SET_ASIGN:
+      return {
+        ...state,
+        asign: action.payload,
+      }
+    case SET_AUTHOR:
+      return {
+        ...state,
+        author: action.payload,
+      }
     case CANCEL_NAMEBACKLOG: 
       return {
         ...state,
         name: '',
+      }
+    case CANCEL_DESCRIPTIONTAKS:
+      return {
+        ...state,
+        description: '',
+      }
+    case CANCEL_STATUS:
+      return {
+        ...state,
+        status: '',
+      }
+    case CANCEL_ASIGN: 
+      return {
+        ...state,
+        asign: '',
+      }
+    case CANCEL_AUTHOR:
+      return {
+        ...state,
+        author: '',
       }
     case CREATE_TASK:
       return {

@@ -10,6 +10,7 @@ import {
   SET_NAMETASK  
 } from '../reducers/backlog.reducer';
 import { SERVER_URL } from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function setName( payload ) {
   return function( dispatch ) {
@@ -61,6 +62,28 @@ export function createTask( dataSend, id ) {
       })
       dispatch({ type: CREATE_TASK, payload: data })
       console.log('here create', data)
+    } catch(err) {
+      dispatch({ type: FAILURED_BACKLOG })
+    } finally {
+      dispatch({ type: FINISHED_LOADING })
+    }
+  }
+};
+
+export function getDataTask() {
+  return async function( dispatch ) {
+    dispatch({ type: LOADING })
+    try {
+      const token = await AsyncStorage.getItem('token')
+      const { data: { data }} = await axios({
+        method: 'GET',
+        baseURL: SERVER_URL,
+        url: '/task/tasks',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      })
+      dispatch({ type: GET_BACKLOG, payload: data })
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG })
     } finally {
