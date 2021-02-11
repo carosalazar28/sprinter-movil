@@ -4,6 +4,7 @@ import { Home } from '../screens/Home';
 import { Workspaces } from '../screens/Workspaces';
 import { Workspace } from '../screens/Workspace';
 import { WorkspaceEdit } from '../screens/WorkspaceEdit';
+import { Backlog } from '../screens/Backlog';
 import { Task } from '../screens/Task';
 import { Profile } from '../screens/Profile';
 
@@ -40,6 +41,7 @@ export const WorkspaceStackNavigator = () => {
       <Stack.Screen name="Workspaces" component={Workspaces} />
       <Stack.Screen name="Workspace" component={Workspace}/>
       <Stack.Screen name="WorkspaceEdit" component={WorkspaceEdit}/>
+      <Stack.Screen name="Backlog" component={Backlog} />
     </Stack.Navigator>
   )
 }
