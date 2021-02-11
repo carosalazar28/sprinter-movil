@@ -126,7 +126,7 @@ export function Workspace({ navigation }) {
           type="ant-design"
           color="#69c8d4"
           style={{ marginRight: 13 }}
-          onPress={() => navigation.navigate('Workspace')}
+          onPress={() => navigation.navigate('Backlog')}
         />
         <Text h3>Agregar backlog</Text>
       </ContainerBacklog>
