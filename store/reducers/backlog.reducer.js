@@ -4,6 +4,10 @@ export const FINISHED_LOADING = 'FINISHED_LOADING';
 export const GET_BACKLOG = 'GET_BACKLOG';
 export const FAILURED_BACKLOG = 'FAILURED_BACKLOG';
 
+export const SET_NAME = 'SET_NAME';
+
+export const CREATE_TASK = 'CREATE_TASK';
+
 export const CANCEL_TASK = 'CANCEL_TASK';
 
 export const initialState = {
@@ -43,6 +47,16 @@ export function backlogReducer( state = initialState, action ) {
       return {
         ...state,
         task: [],
+      }
+    case SET_NAME:
+      return {
+        ...state,
+        name: action.payload,
+      }
+    case CREATE_TASK:
+      return {
+        ...state,
+        task: state.task.concat(action.payload)
       }
     default:
       return state;

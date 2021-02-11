@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   getDataBacklog,
   cleanTask,
+  setName,
+  createTask,
 } from '../store/actions/backlog.action';
 
 const Title = styled(Text)`
@@ -28,7 +30,7 @@ export function Backlog({ route, navigation }) {
 
   const dispatch = useDispatch();
 
-  const { task, loading, message } = useSelector(({ backlogReducer: { task, loading, message }}) => ({ task, loading, message }))
+  const { task, loading, message, name } = useSelector(({ backlogReducer: { task, loading, message, name }}) => ({ task, loading, message, name }))
 
   useEffect(() => {
     dispatch(getDataBacklog(route.params.id))
@@ -36,6 +38,11 @@ export function Backlog({ route, navigation }) {
     return dispatch(cleanTask())
     console.log(route.params.id)
   }, [])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createTask(name, route.params.id))
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }} >
@@ -51,11 +58,14 @@ export function Backlog({ route, navigation }) {
                 type="ant-design"
                 color="#69c8d4"
                 size={15}
+                onPress={handleSubmit}
               />
             }
             placeholder="Agregar una nueva tarea <Enter> para guardar"
             style={styles.input}
             multiline
+            onChangeText={text => dispatch(setName(text))}
+            value={name}
           />
         </View>
         <View>
