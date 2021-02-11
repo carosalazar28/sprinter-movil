@@ -9,6 +9,7 @@ import {
   cleanTask,
   setName,
   createTask,
+  cleanBacklog
 } from '../store/actions/backlog.action';
 
 const Title = styled(Text)`
@@ -42,7 +43,8 @@ export function Backlog({ route, navigation }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createTask(name, route.params.work))
-  }
+    dispatch(cleanBacklog())
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }} >

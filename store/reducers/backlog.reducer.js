@@ -9,6 +9,7 @@ export const SET_NAMETASK = 'SET_NAMETASK';
 export const CREATE_TASK = 'CREATE_TASK';
 
 export const CANCEL_TASK = 'CANCEL_TASK';
+export const CANCEL_NAMEBACKLOG = 'CANCEL_NAMEBACKLOG';
 
 export const initialState = {
   task: [],
@@ -52,6 +53,11 @@ export function backlogReducer( state = initialState, action ) {
       return {
         ...state,
         name: action.payload,
+      }
+    case CANCEL_NAMEBACKLOG: 
+      return {
+        ...state,
+        name: '',
       }
     case CREATE_TASK:
       return {

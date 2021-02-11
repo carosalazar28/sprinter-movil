@@ -5,6 +5,7 @@ import {
   GET_BACKLOG,
   FAILURED_BACKLOG,
   CANCEL_TASK,
+  CANCEL_NAMEBACKLOG,
   CREATE_TASK,
   SET_NAMETASK  
 } from '../reducers/backlog.reducer';
@@ -21,6 +22,12 @@ export function cleanTask() {
     dispatch({ type: CANCEL_TASK })
   }
 };
+
+export function cleanBacklog() {
+  return function( dispatch ) {
+    dispatch({ type: CANCEL_NAMEBACKLOG })
+  }
+}
 
 export function getDataBacklog( id ) {
   return async function( dispatch ) {
@@ -50,7 +57,7 @@ export function createTask( dataSend, id ) {
         method: 'POST',
         baseURL: SERVER_URL,
         url: `/task/${id}`,
-        data: dataSend
+        data: { name: dataSend }
       })
       dispatch({ type: CREATE_TASK, payload: data })
       console.log('here create', data)
