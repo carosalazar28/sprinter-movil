@@ -17,6 +17,10 @@ LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
 ])
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 export function Workspaces({ navigation }) {
 
   const [refreshing, setRefreshing] = useState(false);

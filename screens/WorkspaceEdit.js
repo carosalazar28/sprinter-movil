@@ -133,7 +133,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           type="ant-design"
           color="#69c8d4"
           style={{ marginRight: 13 }}
-          onPress={() => navigation.navigate('Backlog', { id: route.params.backlog })}
+          onPress={() => navigation.navigate('Backlog', { id: route.params.backlog, work: route.params.id })}
         />
         <Text h3>Agregar backlog</Text>
       </ContainerBacklog>

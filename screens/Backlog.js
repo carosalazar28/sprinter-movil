@@ -41,7 +41,7 @@ export function Backlog({ route, navigation }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createTask(name, route.params.id))
+    dispatch(createTask(name, route.params.work))
   }
 
   return (
@@ -69,7 +69,7 @@ export function Backlog({ route, navigation }) {
           />
         </View>
         <View>
-          { task && task.lenght > 0 ? task.map(item => {
+          { task ? task.map(item => {
             return (
               <View style={styles.containerTask} key={item._id}>
                 <Text 

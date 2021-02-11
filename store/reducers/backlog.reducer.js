@@ -4,7 +4,7 @@ export const FINISHED_LOADING = 'FINISHED_LOADING';
 export const GET_BACKLOG = 'GET_BACKLOG';
 export const FAILURED_BACKLOG = 'FAILURED_BACKLOG';
 
-export const SET_NAME = 'SET_NAME';
+export const SET_NAMETASK = 'SET_NAMETASK';
 
 export const CREATE_TASK = 'CREATE_TASK';
 
@@ -48,7 +48,7 @@ export function backlogReducer( state = initialState, action ) {
         ...state,
         task: [],
       }
-    case SET_NAME:
+    case SET_NAMETASK:
       return {
         ...state,
         name: action.payload,

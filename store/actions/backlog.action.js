@@ -6,13 +6,13 @@ import {
   FAILURED_BACKLOG,
   CANCEL_TASK,
   CREATE_TASK,
-  SET_NAME  
+  SET_NAMETASK  
 } from '../reducers/backlog.reducer';
 import { SERVER_URL } from '@env';
 
 export function setName( payload ) {
   return function( dispatch ) {
-    dispatch({ type: SET_NAME, payload })
+    dispatch({ type: SET_NAMETASK, payload })
   }
 };
 
@@ -32,6 +32,7 @@ export function getDataBacklog( id ) {
         url: `/backlog/${id}`
       })
       dispatch({ type: GET_BACKLOG, payload: tasks })
+      console.log('here get action')
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG })
     } finally {
@@ -43,6 +44,7 @@ export function getDataBacklog( id ) {
 export function createTask( dataSend, id ) {
   return async function( dispatch ) {
     dispatch({ type: LOADING })
+    console.log('here action', id, dataSend)
     try {
       const { data } = await axios({
         method: 'POST',
@@ -51,7 +53,7 @@ export function createTask( dataSend, id ) {
         data: dataSend
       })
       dispatch({ type: CREATE_TASK, payload: data })
-      console.log(data)
+      console.log('here create', data)
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG })
     } finally {
