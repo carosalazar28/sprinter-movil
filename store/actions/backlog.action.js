@@ -83,6 +83,7 @@ export function getDataTask() {
           Authorization: `Bearer ${token}`
         },
       })
+      console.log('here action taks', data)
       dispatch({ type: GET_BACKLOG, payload: data })
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG })

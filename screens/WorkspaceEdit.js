@@ -135,7 +135,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           style={{ marginRight: 13 }}
           onPress={() => navigation.navigate('Backlog', { id: route.params.backlog, work: route.params.id })}
         />
-        <Text h3>Agregar backlog</Text>
+        <Text style={styles.textBacklog}>Agregar backlog</Text>
       </ContainerBacklog>
       <Text style={styles.textError}>{error}</Text>
       <ContainerRow>
@@ -180,5 +180,8 @@ const styles = StyleSheet.create({
   textError: {
     color: 'red',
     fontWeight: 'bold'
+  },
+  textBacklog: {
+    fontSize: 18,
   }
 })

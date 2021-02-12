@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';import { useSelector, useDispatch } from 'react-redux';
-import { FlatList, View, StyleSheet, Text, RefreshControl, SafeAreaView, LogBox } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { FlatList, View, StyleSheet, RefreshControl, SafeAreaView, LogBox } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { ListItem, Icon, Avatar } from 'react-native-elements'
+import { ListItem, Icon, Avatar, Text } from 'react-native-elements'
 import {
   ViewContainer,
   Title,
@@ -24,7 +24,7 @@ export function Task() {
 
   const dispatch = useDispatch();
 
-  const { task } = useSelector(({ backlogReducer: { task }}) => ({ task }))
+  const { task, message } = useSelector(({ backlogReducer: { task, message }}) => ({ task, message }))
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -50,7 +50,7 @@ export function Task() {
               <Title h3>Tareas</Title>
               <TextAbout>Las tareas que visualizas en está sección son todas las que has creado en tu backlog.</TextAbout>
             </ContainerAbout>
-            <Text style={styles.textError}>{error}</Text>
+            <Text style={styles.textError}>{message}</Text>
             <ViewContainerWorkspaces>
               <FlatList
                 data={task}
@@ -60,12 +60,13 @@ export function Task() {
                       bottomDivider
                       onPress={() => navigation.navigate('taskEdit')}
                     >
-                      <Avatar source={{uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613085189/sprinter/ui/profile_f894xe.png'}} />
+                      <Avatar source={{uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613088152/sprinter/ui/taskavatar_fiqyv9.png'}} />
                       <ListItem.Content>
                         <ListItem.Title>{item.name}</ListItem.Title>
-                        <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
-                        <ListItem.Subtitle>{item.asign}</ListItem.Subtitle>
-                        <ListItem.Subtitle>{item.status}</ListItem.Subtitle>
+                        <View style={styles.subtitleView}>
+                          <Text style={styles.raitingText}>{item.description}</Text>
+                          <Text style={styles.status}>{item.status}</Text>
+                        </View>
                       </ListItem.Content>
                       <ListItem.Chevron/>
                     </ListItem>
@@ -80,3 +81,18 @@ export function Task() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  textError: {
+    color: 'red',
+    fontWeight: 'bold'
+  },
+  subtitleView: {
+    paddingLeft: 5,
+    paddingTop: 5
+  },
+  ratingText: {
+    fontSize: 18,
+    color: 'yellow'
+  }
+})

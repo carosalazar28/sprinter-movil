@@ -128,7 +128,7 @@ export function Workspace({ navigation }) {
           style={{ marginRight: 13 }}
           onPress={() => navigation.navigate('Backlog')}
         />
-        <Text h3>Agregar backlog</Text>
+        <Text style={styles.textBacklog}>Agregar backlog</Text>
       </ContainerBacklog>
       <Text style={styles.textError}>{error}</Text>
       <ContainerRow>
@@ -174,4 +174,7 @@ const styles = StyleSheet.create({
     color: 'red',
     fontWeight: 'bold'
   },
+  textBacklog: {
+    fontSize: 18,
+  }
 })
