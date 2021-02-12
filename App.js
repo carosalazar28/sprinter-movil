@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { BottomTabNavigator } from './components/TabNavigator';
 import { SignIn } from './screens/SignIn';
 import { SignUp } from './screens/SignUp';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Provider } from 'react-redux';
 import { store } from './store';
 

@@ -1,19 +1,14 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
-import { Text, Icon } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   ViewContainerWorkspace,
   ViewContainerSprint,
   CustomInput,
-  TextSprint,
   TextDescription,
-  TextWeeks,
   CustomInputWeeks,
   ContainerRow,
-  CustomInputTeammates,
-  ContainerBacklog
 } from '../components/styled/WorkspaceStyles.js';
 import {
   setName,

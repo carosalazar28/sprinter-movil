@@ -6,6 +6,7 @@ import { Workspace } from '../screens/Workspace';
 import { WorkspaceEdit } from '../screens/WorkspaceEdit';
 import { Backlog } from '../screens/Backlog';
 import { Task } from '../screens/Task';
+import { TaskEdit } from '../screens/TaskEdit';
 import { Profile } from '../screens/Profile';
 
 const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ const screenOptionStyle = {
   },
   headerTintColor: "#69c8d4",
   headerBackTitle: "Back",
+  headerTitleAlign: "center"
 };
 
 export const HomeStackNavigator = () => {
@@ -31,8 +33,9 @@ export const TaskStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Task" component={Task} />
+      <Stack.Screen name="TaskEdit" component={TaskEdit} />
     </Stack.Navigator>
-  )
+  );
 }
 
 export const WorkspaceStackNavigator = () => {

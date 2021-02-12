@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, View, StyleSheet, RefreshControl, SafeAreaView, LogBox } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { ListItem, Icon, Avatar, Text } from 'react-native-elements'
+import { ListItem, Avatar, Text } from 'react-native-elements'
 import {
   ViewContainer,
   Title,
@@ -20,7 +20,7 @@ const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
-export function Task() {
+export function Task({ navigation }) {
 
   const dispatch = useDispatch();
 
@@ -58,7 +58,7 @@ export function Task() {
                   return (
                     <ListItem 
                       bottomDivider
-                      onPress={() => navigation.navigate('taskEdit')}
+                      onPress={() => navigation.navigate('taskEdit', { id: item._id })}
                     >
                       <Avatar source={{uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613088152/sprinter/ui/taskavatar_fiqyv9.png'}} />
                       <ListItem.Content>
