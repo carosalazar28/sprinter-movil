@@ -5,6 +5,7 @@ import {
   Button,
   StatusBar,
   View,
+  Image
 } from 'react-native';
 import {
   Container,
@@ -70,6 +71,13 @@ export function SignIn({ navigation }) {
       >
         Crear una cuenta
       </SecundaryTitle>
+      <View>
+        <Image
+          source={{
+            uri:'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1611866452/sprinter/ui/patron_tyi6zo.svg'
+          }}
+        />
+      </View>
       <StatusBar style="auto"/>
     </Container>
   );

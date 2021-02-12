@@ -93,6 +93,8 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     fontSize: 18,
-    color: 'yellow'
+    color: 'yellow',
+    borderWidth: 1,
+    borderColor: 'black'
   }
 })
