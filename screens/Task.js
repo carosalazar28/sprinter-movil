@@ -63,9 +63,15 @@ export function Task() {
                       <Avatar source={{uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613088152/sprinter/ui/taskavatar_fiqyv9.png'}} />
                       <ListItem.Content>
                         <ListItem.Title>{item.name}</ListItem.Title>
-                        <View style={styles.subtitleView}>
-                          <Text style={styles.raitingText}>{item.description}</Text>
-                          <Text style={styles.status}>{item.status}</Text>
+                        <View>
+                          <Text>{item.description}</Text>
+                        </View>
+                        <View style={styles.statusText}>
+                          {item.status ? (
+                            <Text>{item.status}</Text>
+                          ) : (
+                            <Text>Backlog</Text>
+                          )}
                         </View>
                       </ListItem.Content>
                       <ListItem.Chevron/>
@@ -87,14 +93,15 @@ const styles = StyleSheet.create({
     color: 'red',
     fontWeight: 'bold'
   },
-  subtitleView: {
-    paddingLeft: 5,
-    paddingTop: 5
-  },
-  ratingText: {
-    fontSize: 18,
-    color: 'yellow',
+  statusText: {
+    flex: 1,
+    marginLeft: 220,
+    padding: 5,
+    backgroundColor: '#fff',
+    width: 80,
+    borderColor: 'black',
     borderWidth: 1,
-    borderColor: 'black'
+    borderRadius: 8,
+    alignItems: 'center',
   }
 })
