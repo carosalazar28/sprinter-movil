@@ -7,7 +7,13 @@ import {
   CANCEL_TASK,
   CANCEL_NAMEBACKLOG,
   CREATE_TASK,
-  SET_NAMETASK  
+  SET_NAMETASK,
+  SET_DESCRIPTIONTASK,
+  SET_ASIGN,
+  SET_STATUS,
+  CANCEL_DESCRIPTIONTAKS,
+  CANCEL_ASIGN,
+  CANCEL_STATUS,  
 } from '../reducers/backlog.reducer';
 import { SERVER_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,6 +21,24 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export function setName( payload ) {
   return function( dispatch ) {
     dispatch({ type: SET_NAMETASK, payload })
+  }
+};
+
+export function setDescription( payload ) {
+  return function( dispatch ) {
+    dispatch({ type: SET_DESCRIPTIONTASK, payload })
+  }
+};
+
+export function setAsign( payload ) {
+  return function( dispatch ) {
+    dispatch({ type: SET_ASIGN, payload })
+  }
+};
+
+export function setStatus( payload ) {
+  return function( dispatch ) {
+    dispatch({ type: SET_STATUS, payload })
   }
 };
 
@@ -28,7 +52,16 @@ export function cleanBacklog() {
   return function( dispatch ) {
     dispatch({ type: CANCEL_NAMEBACKLOG })
   }
-}
+};
+
+export function cleanForm() {
+  return function( dispatch ) {
+    dispatch({ type: CANCEL_NAMEBACKLOG })
+    dispatch({ type: CANCEL_DESCRIPTIONTAKS })
+    dispatch({ type: CANCEL_ASIGN })
+    dispatch({ type: CANCEL_STATUS })
+  }
+};
 
 export function getDataBacklog( id ) {
   return async function( dispatch ) {
