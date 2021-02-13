@@ -42,7 +42,7 @@ export function Task({ navigation }) {
       <SafeAreaView style={{ flex: 1 }}>
         <ViewContainer>
           <ScrollView>
-            <RefreshControl 
+            <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
             />
@@ -56,7 +56,7 @@ export function Task({ navigation }) {
                 data={task}
                 renderItem={({ item, index }) => {
                   return (
-                    <ListItem 
+                    <ListItem
                       bottomDivider
                       onPress={() => navigation.navigate('TaskEdit', { id: item._id })}
                     >

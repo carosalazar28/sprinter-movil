@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { 
+import {
   LOADING,
   FINISHED_LOADING,
   GET_BACKLOG,
@@ -14,13 +14,14 @@ import {
   SET_STATUS,
   CANCEL_DESCRIPTIONTAKS,
   CANCEL_ASIGN,
-  CANCEL_STATUS,  
+  CANCEL_STATUS,
 } from '../reducers/backlog.reducer';
 import { SERVER_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function setName( payload ) {
   return function( dispatch ) {
+    console.log(payload)
     dispatch({ type: SET_NAMETASK, payload });
   };
 }
@@ -39,6 +40,7 @@ export function setAsign( payload ) {
 
 export function setStatus( payload ) {
   return function( dispatch ) {
+    console.log(payload)
     dispatch({ type: SET_STATUS, payload });
   };
 }

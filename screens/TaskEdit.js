@@ -46,7 +46,7 @@ export function TaskEdit({ navigation, route, index }) {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    
+
     navigation.navigate('Task');
   };
 
@@ -55,7 +55,7 @@ export function TaskEdit({ navigation, route, index }) {
       <CustomInput
         placeholder="Titulo de la tarea"
         placeholderTextColor ="#828282"
-        onChangeText={text => dispatch(setName(text))}
+        onChangeText={text => console.log(text)}
         value={name}
       />
       <View style={styles.borderLine}>
@@ -64,7 +64,7 @@ export function TaskEdit({ navigation, route, index }) {
           placeholderTextColor ="#828282"
           keyboardType="numeric"
           onChangeText={text => dispatch(setAsign(text))}
-          value={asign}  
+          value={asign}
         />
       </View>
       <View style={styles.borderLine}>
@@ -82,7 +82,7 @@ export function TaskEdit({ navigation, route, index }) {
           itemStyle={styles.onePickerItem}
           selectedValue={status}
           mode="dropdowm"
-          onValueChange={(itemValue) => 
+          onValueChange={(itemValue) =>
             dispatch(setStatus(itemValue))
           }
         >
@@ -123,16 +123,16 @@ const styles = StyleSheet.create({
     width: 120,
     borderRadius: 10,
     transform: [
-      { scaleX: 0.9 }, 
+      { scaleX: 0.9 },
       { scaleY: 0.9 },
     ],
   },
   borderLine: {
-    borderBottomColor: '#f2f2f2', 
+    borderBottomColor: '#f2f2f2',
     borderBottomWidth: 2,
   },
   containerStatus: {
-    borderBottomColor: '#f2f2f2', 
+    borderBottomColor: '#f2f2f2',
     borderBottomWidth: 2,
     paddingTop: 15,
     height: 200,
