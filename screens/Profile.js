@@ -31,10 +31,10 @@ export function Profile() {
         <FlatList
           data={list}
           renderItem={({ item }) => (
-            <>
+            <View style={styles.viewListItem} >
               <Icon name={item.icon} type={item.type} />
               <Text>{item.title}</Text>
-            </>
+            </View>
           )}
           keyExtractor={(item) => `${item.id}`}
         />
@@ -51,9 +51,13 @@ const styles = StyleSheet.create({
   },
   viewList: {
     padding: 25,
-    backgroundColor: '#f2f2f2',
-    height: 700,
-    flexDirection: 'row'
+    backgroundColor: 'white',
+    height: 700
+  },
+  viewListItem: {
+    flexDirection: 'row',
+    borderRadius: 10,
+    backgroundColor: 'f2f2f2'
   },
   viewName: {
     padding: 18,
