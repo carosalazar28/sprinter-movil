@@ -11,27 +11,27 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export function Home({ navigation }) {
 
   async function getToken() {
-    const token = await AsyncStorage.getItem('token')
+    const token = await AsyncStorage.getItem('token');
     if(!token) {
-      navigation.navigate('SignIn')
+      navigation.navigate('SignIn');
     }
   } 
 
   useEffect(() => {
-    getToken()
-  }, [])
+    getToken();
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
-      <View style={{ alignItems: "center", marginBottom: 37, paddingRight: 28 }}>
+      <View style={{ alignItems: 'center', marginBottom: 37, paddingRight: 28 }}>
         <Image
-          source={{ uri: "https://res.cloudinary.com/dkcbxnhg0/image/upload/v1612275065/sprinter/ui/Contenido_hwcrdd.png" }}
+          source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1612275065/sprinter/ui/Contenido_hwcrdd.png' }}
           style={{ width: 314, height: 248 }}
         />
       </View>
       <ScrollView horizontal={true}>
         <Image
-          source={{ uri: "https://res.cloudinary.com/dkcbxnhg0/image/upload/v1612275050/sprinter/ui/Overlay_Time_kcbtay.png" }}
+          source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1612275050/sprinter/ui/Overlay_Time_kcbtay.png' }}
           style={{ width: 939, height: 467 }}
         />
       </ScrollView>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 28,
   },
-})
+});

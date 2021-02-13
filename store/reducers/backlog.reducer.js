@@ -32,10 +32,10 @@ export const initialState = {
 };
 
 function updateItemSplice(array, index, payload) {
-  let newArray = array.slice()
-  newArray.splice(index, 1, payload)
-  return newArray
-};
+  let newArray = array.slice();
+  newArray.splice(index, 1, payload);
+  return newArray;
+}
 
 export function backlogReducer( state = initialState, action ) {
   switch (action.type) {
@@ -43,88 +43,88 @@ export function backlogReducer( state = initialState, action ) {
       return {
         ...state,
         loading: true,
-      }
+      };
     case FINISHED_LOADING:
       return {
         ...state,
         loading: false,
-      }
+      };
     case GET_BACKLOG: 
       return {
         ...state,
         task: action.payload,
-      }
+      };
     case UPDATED_TASK:
       return {
         ...state,
         task: updateItemSplice(state.task, action.index, action.payload),
-      }
+      };
     case FAILURED_BACKLOG:
       return {
         ...state,
         message: 'lo sentimos, en este momento no podemos conectarnos con el servidor',
-      }
+      };
     case CANCEL_TASK:
       return {
         ...state,
         task: [],
-      }
+      };
     case SET_NAMETASK:
       return {
         ...state,
         name: action.payload,
-      }
+      };
     case SET_DESCRIPTIONTASK: 
       return {
         ...state,
         description: action.payload,
-      }
+      };
     case SET_STATUS:
       return {
         ...state,
         status: action.payload,
-      }
+      };
     case SET_ASIGN:
       return {
         ...state,
         asign: action.payload,
-      }
+      };
     case SET_AUTHOR:
       return {
         ...state,
         author: action.payload,
-      }
+      };
     case CANCEL_NAMEBACKLOG: 
       return {
         ...state,
         name: '',
-      }
+      };
     case CANCEL_DESCRIPTIONTAKS:
       return {
         ...state,
         description: '',
-      }
+      };
     case CANCEL_STATUS:
       return {
         ...state,
         status: '',
-      }
+      };
     case CANCEL_ASIGN: 
       return {
         ...state,
         asign: '',
-      }
+      };
     case CANCEL_AUTHOR:
       return {
         ...state,
         author: '',
-      }
+      };
     case CREATE_TASK:
       return {
         ...state,
         task: state.task.concat(action.payload)
-      }
+      };
     default:
       return state;
   }
-};
+}

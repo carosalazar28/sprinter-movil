@@ -35,37 +35,37 @@ export function Workspace({ navigation }) {
     { workspaceReducer: {
       ...state
     }}) => {
-      return { ...state }
+    return { ...state };
   });
 
-  const { name, description, weeks, sprint, teammates, teammate, error } = dataWorkspace
+  const { name, description, weeks, sprint, teammates, teammate, error } = dataWorkspace;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createWorkspace(dataWorkspace))
-    navigation.navigate('Workspaces')
-  }
+    dispatch(createWorkspace(dataWorkspace));
+    navigation.navigate('Workspaces');
+  };
 
   const onAddTeammates = () => {
-    dispatch(onAddTeammate(teammate))
-  }
+    dispatch(onAddTeammate(teammate));
+  };
 
   const handleCancel = () => {
-    dispatch(cleanForm())
-  }
+    dispatch(cleanForm());
+  };
   
   useEffect(() => {
-    return dispatch(cleanForm())
-  }, [])
+    return dispatch(cleanForm());
+  }, []);
 
   return (
     <ViewContainerWorkspace>
       <CustomInput
-          placeholder="Workspace name"
-          placeholderTextColor ="#828282"
-          onChangeText={text => dispatch(setName(text))}
-          value={name}
-        />
+        placeholder="Workspace name"
+        placeholderTextColor ="#828282"
+        onChangeText={text => dispatch(setName(text))}
+        value={name}
+      />
       <ViewContainerSprint style={styles.borderLine}>
         <TextSprint>
           Escoge la duración del sprint
@@ -112,11 +112,11 @@ export function Workspace({ navigation }) {
             value={teammate}
           />
           <Icon
-              name="adduser"
-              type="ant-design"
-              color="#525666"
-              onPress={onAddTeammates}
-            />
+            name="adduser"
+            type="ant-design"
+            color="#525666"
+            onPress={onAddTeammates}
+          />
         </ContainerRow>
         <Text>{teammates}</Text>
       </View>
@@ -144,7 +144,7 @@ export function Workspace({ navigation }) {
         />
       </ContainerRow>
     </ViewContainerWorkspace>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -177,4 +177,4 @@ const styles = StyleSheet.create({
   textBacklog: {
     fontSize: 18,
   }
-})
+});

@@ -31,19 +31,19 @@ export function Backlog({ route, navigation }) {
 
   const dispatch = useDispatch();
 
-  const { task, loading, message, name } = useSelector(({ backlogReducer: { task, loading, message, name }}) => ({ task, loading, message, name }))
+  const { task, loading, message, name } = useSelector(({ backlogReducer: { task, loading, message, name }}) => ({ task, loading, message, name }));
 
   useEffect(() => {
-    dispatch(getDataBacklog(route.params.id))
+    dispatch(getDataBacklog(route.params.id));
     
-    return dispatch(cleanTask())
-    console.log(route.params.id)
-  }, [])
+    return dispatch(cleanTask());
+    console.log(route.params.id);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createTask(name, route.params.work))
-    dispatch(cleanBacklog())
+    dispatch(createTask(name, route.params.work));
+    dispatch(cleanBacklog());
   };
 
   return (
@@ -80,7 +80,7 @@ export function Backlog({ route, navigation }) {
                   {item.name}
                 </Text>
               </View>
-            )}) : (
+            );}) : (
             <ContainerNoContent>
               <Text>No tienes backlog en esté workspace</Text>
             </ContainerNoContent>
@@ -105,4 +105,4 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     marginTop: 10,
   }
-})
+});

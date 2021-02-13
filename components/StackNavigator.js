@@ -14,11 +14,11 @@ const Stack = createStackNavigator();
 const screenOptionStyle = {
   cardStyle: { backgroundColor: '#2f2a3e'},
   headerStyle: {
-    backgroundColor: "#f2f2f2",
+    backgroundColor: '#f2f2f2',
   },
-  headerTintColor: "#69c8d4",
-  headerBackTitle: "Back",
-  headerTitleAlign: "center"
+  headerTintColor: '#69c8d4',
+  headerBackTitle: 'Back',
+  headerTitleAlign: 'center'
 };
 
 export const HomeStackNavigator = () => {
@@ -27,7 +27,7 @@ export const HomeStackNavigator = () => {
       <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );
-}
+};
 
 export const TaskStackNavigator = () => {
   return (
@@ -36,7 +36,7 @@ export const TaskStackNavigator = () => {
       <Stack.Screen name="TaskEdit" component={TaskEdit} />
     </Stack.Navigator>
   );
-}
+};
 
 export const WorkspaceStackNavigator = () => {
   return (
@@ -46,13 +46,13 @@ export const WorkspaceStackNavigator = () => {
       <Stack.Screen name="WorkspaceEdit" component={WorkspaceEdit}/>
       <Stack.Screen name="Backlog" component={Backlog} />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 export const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
-  )
-}
+  );
+};

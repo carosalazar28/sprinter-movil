@@ -36,16 +36,16 @@ export const initialState = {
 };
 
 function updateItemSplice(array, index, payload) {
-  let newArray = array.slice()
-  newArray.splice(index, 1, payload)
-  return newArray
-};
+  let newArray = array.slice();
+  newArray.splice(index, 1, payload);
+  return newArray;
+}
 
 function removeItemSplice(array, action) {
-  let newArray = array.slice()
-  newArray.splice(action.index, 1)
-  return newArray
-};
+  let newArray = array.slice();
+  newArray.splice(action.index, 1);
+  return newArray;
+}
 
 export function workspaceReducer( state = initialState, action ) {
   switch (action.type) {
@@ -53,104 +53,104 @@ export function workspaceReducer( state = initialState, action ) {
       return {
         ...state,
         loading: true,
-      }
+      };
     case FINISHED_LOADING:
       return {
         ...state,
         loading: false
-      }
+      };
     case CREATE_WORKSPACE:
       return {
         ...state,
         message: 'El workspace se ha creado con exito',
         workspacesList: state.workspacesList.concat(action.payload)
-      }
+      };
     case FAILURED_WORKSPACE: 
       return {
         ...state,
         error: action.payload,
-      }
+      };
     case SET_NAME:
       return {
         ...state,
         name: action.payload,
-      }
+      };
     case SET_DESCRIPTION: 
       return {
         ...state,
         description: action.payload,
-      }
+      };
     case SET_WEEKS: 
       return {
         ...state,
         weeks: action.payload,
-      }
+      };
     case SET_SPRINT: 
       return {
         ...state,
         sprint: action.payload,
-      }
+      };
     case SET_TEAMMATES: 
       return {
         ...state,
         teammates: state.teammates.concat(action.payload),
-      }
+      };
     case SET_TEAMMATE:
       return {
         ...state,
         teammate: action.payload,
-      }
+      };
     case CANCEL_NAME: 
       return {
         ...state,
         name: '',
-      }
+      };
     case CANCEL_DESCRIPTION: 
       return {
         ...state,
         description: '',
-      }
+      };
     case CANCEL_WEEKS:
       return {
         ...state,
         weeks: '',
-      }
+      };
     case CANCEL_SPRINT:
       return {
         ...state,
         sprint: 1,
-      }
+      };
     case CANCEL_TEAMMATES:
       return {
         ...state,
         teammates: [],
-      }
+      };
     case CANCEL_TEAMMATE:
       return {
         ...state,
         teammate: '',
-      }
+      };
     case GET_WORKSPACE:
       return {
         ...state,
         workspacesList: action.payload,
-      }
+      };
     case UPDATE_WORKSPACE:
       return {
         ...state,
         workspacesList: updateItemSplice(state.workspacesList, action.index, action.payload)
-      }
+      };
     case DELETE_WORKSPACE:
       return {
         ...state,
         workspacesList: removeItemSplice(state.workspacesList, action.payload)
-      }
+      };
     case ADD_TEAMMATE:
       return {
         ...state,
         teammates: [ ...state.teammates, action.payload ]
-      }
+      };
     default:
       return state;
   }
-};
+}

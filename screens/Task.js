@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, View, StyleSheet, RefreshControl, SafeAreaView, LogBox } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { ListItem, Avatar, Text } from 'react-native-elements'
+import { ListItem, Avatar, Text } from 'react-native-elements';
 import {
   ViewContainer,
   Title,
@@ -14,17 +14,17 @@ import { getDataTask } from '../store/actions/backlog.action';
 
 LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
-])
+]);
 
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
-}
+};
 
 export function Task({ navigation }) {
 
   const dispatch = useDispatch();
 
-  const { task, message } = useSelector(({ backlogReducer: { task, message }}) => ({ task, message }))
+  const { task, message } = useSelector(({ backlogReducer: { task, message }}) => ({ task, message }));
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -34,8 +34,8 @@ export function Task({ navigation }) {
   }, []);
 
   useEffect(() => {
-    dispatch(getDataTask())
-  }, [])
+    dispatch(getDataTask());
+  }, []);
 
   return (
     <>
@@ -76,7 +76,7 @@ export function Task({ navigation }) {
                       </ListItem.Content>
                       <ListItem.Chevron/>
                     </ListItem>
-                  )
+                  );
                 }}
                 keyExtractor={(item) => `${item._id}`}
               />
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
   }
-})
+});

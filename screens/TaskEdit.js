@@ -27,37 +27,37 @@ export function TaskEdit({ navigation, route, index }) {
     { backlogReducer: {
       ...state
     }}) => {
-      return { ...state }
+    return { ...state };
   });
 
-  const { name, description, status, asign } = dataTask
+  const { name, description, status, asign } = dataTask;
 
   useEffect(() => {
-    dispatch(getDataTaskId(route.params.id))
+    dispatch(getDataTaskId(route.params.id));
 
-    return dispatch(cleanForm())
-  }, [])
+    return dispatch(cleanForm());
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateTask(dataTask, route.params.id, index))
-    navigation.navigate('Task')
-  }
+    dispatch(updateTask(dataTask, route.params.id, index));
+    navigation.navigate('Task');
+  };
 
   const handleDelete = (e) => {
     e.preventDefault();
     
-    navigation.navigate('Task')
-  }
+    navigation.navigate('Task');
+  };
 
   return (
     <ViewContainerWorkspace>
       <CustomInput
-          placeholder="Titulo de la tarea"
-          placeholderTextColor ="#828282"
-          onChangeText={text => dispatch(setName(text))}
-          value={name}
-        />
+        placeholder="Titulo de la tarea"
+        placeholderTextColor ="#828282"
+        onChangeText={text => dispatch(setName(text))}
+        value={name}
+      />
       <View style={styles.borderLine}>
         <CustomInputWeeks
           placeholder= "Asign"
@@ -105,7 +105,7 @@ export function TaskEdit({ navigation, route, index }) {
         />
       </ContainerRow>
     </ViewContainerWorkspace>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -140,4 +140,4 @@ const styles = StyleSheet.create({
   containerBotton: {
     marginTop: 30,
   }
-})
+});

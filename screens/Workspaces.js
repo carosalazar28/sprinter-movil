@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, View, StyleSheet, Text, RefreshControl, SafeAreaView, LogBox } from 'react-native';
-import { ListItem, Icon } from 'react-native-elements'
+import { ListItem, Icon } from 'react-native-elements';
 import {
   ViewContainer,
   Title,
@@ -14,11 +14,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
-])
+]);
 
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
-}
+};
 
 export function Workspaces({ navigation }) {
 
@@ -31,11 +31,11 @@ export function Workspaces({ navigation }) {
 
   const dispatch = useDispatch();
   
-  const { workspacesList, loading, error } = useSelector(({ workspaceReducer: { workspacesList, loading, error }}) => ({ workspacesList, loading, error }))
+  const { workspacesList, loading, error } = useSelector(({ workspaceReducer: { workspacesList, loading, error }}) => ({ workspacesList, loading, error }));
   
   useEffect(() => {
-    dispatch(getData())
-  }, [])
+    dispatch(getData());
+  }, []);
 
   return (
     <>
@@ -75,7 +75,7 @@ export function Workspaces({ navigation }) {
                       </ListItem.Content>
                       <ListItem.Chevron/>
                     </ListItem>
-                  )
+                  );
                 }}
                 keyExtractor={(item) => `${item._id}`}
               />
@@ -84,7 +84,7 @@ export function Workspaces({ navigation }) {
         </ViewContainer>
       </SafeAreaView>
     </>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
     color: 'red',
     fontWeight: 'bold'
   }
-})
+});

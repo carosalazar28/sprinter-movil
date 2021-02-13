@@ -19,9 +19,9 @@ import { SERVER_URL } from '@env';
 
 
 export function SignIn({ navigation }) {
-  const [username, setUserName] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async () => {
     try {
@@ -31,14 +31,14 @@ export function SignIn({ navigation }) {
         url: '/user/sign-in',
         data: { username, password }
       });
-      AsyncStorage.setItem('token', token)
-      navigation.replace('BottomTab', { screen: 'Home' })
+      AsyncStorage.setItem('token', token);
+      navigation.replace('BottomTab', { screen: 'Home' });
     }
     catch(err) {
-      AsyncStorage.removeItem('token')
-      setError('Usuario o contraseña invalidos')
+      AsyncStorage.removeItem('token');
+      setError('Usuario o contraseña invalidos');
     }
-  }
+  };
 
   return (
     <Container style={styles.container}>
@@ -61,7 +61,7 @@ export function SignIn({ navigation }) {
         <Button
           title="Enviar"
           style={styles.button}
-          textStyle={{ color: "#f2f2f2", }}
+          textStyle={{ color: '#f2f2f2', }}
           onPress={handleSubmit}
         />
       </View>
@@ -80,7 +80,7 @@ export function SignIn({ navigation }) {
       <StatusBar style="auto"/>
     </Container>
   );
-};
+}
 
 const styles = StyleSheet.create({
   text : {
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
   containerButton: {
     alignItems: 'center'
   },
-})
+});

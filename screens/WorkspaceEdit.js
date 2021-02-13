@@ -37,41 +37,41 @@ export function WorkspaceEdit({ navigation, route, index }) {
     { workspaceReducer: {
       ...state
     }}) => {
-      return { ...state }
+    return { ...state };
   });
 
-  const { name, description, weeks, sprint, teammates, teammate, error } = dataWorkspace
+  const { name, description, weeks, sprint, teammates, teammate, error } = dataWorkspace;
 
   useEffect(() => {
     dispatch(getDataWorkspace(route.params.id));
 
-    return dispatch(cleanForm())
-  }, [])
+    return dispatch(cleanForm());
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateWorkspace(dataWorkspace, route.params.id, index))
-    navigation.navigate('Workspaces')
-  }
+    dispatch(updateWorkspace(dataWorkspace, route.params.id, index));
+    navigation.navigate('Workspaces');
+  };
 
   const handleDelete = (e) => {
     e.preventDefault();
-    dispatch(deleteWorkspace(route.params.id, index))
-    navigation.navigate('Workspaces')
-  }
+    dispatch(deleteWorkspace(route.params.id, index));
+    navigation.navigate('Workspaces');
+  };
 
   const onAddTeammates = () => {
-    dispatch(onAddTeammate(teammate))
-  }
+    dispatch(onAddTeammate(teammate));
+  };
 
   return (
     <ViewContainerWorkspace>
       <CustomInput
-          placeholder="Workspace name"
-          placeholderTextColor ="#828282"
-          onChangeText={text => dispatch(setName(text))}
-          value={name}
-        />
+        placeholder="Workspace name"
+        placeholderTextColor ="#828282"
+        onChangeText={text => dispatch(setName(text))}
+        value={name}
+      />
       <ViewContainerSprint style={styles.borderLine}>
         <TextSprint>
           Escoge la duración del sprint
@@ -119,11 +119,11 @@ export function WorkspaceEdit({ navigation, route, index }) {
             value={teammate}
           />
           <Icon
-              name="adduser"
-              type="ant-design"
-              color="#525666"
-              onPress={onAddTeammates}
-            />
+            name="adduser"
+            type="ant-design"
+            color="#525666"
+            onPress={onAddTeammates}
+          />
         </ContainerRow>
         <Text>{teammates}</Text>
       </View>
@@ -151,7 +151,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
         />
       </ContainerRow>
     </ViewContainerWorkspace>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -184,4 +184,4 @@ const styles = StyleSheet.create({
   textBacklog: {
     fontSize: 18,
   }
-})
+});

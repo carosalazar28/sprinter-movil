@@ -6,5 +6,5 @@ export function Profile() {
     <View>
       <Text>Profile</Text>
     </View>
-  )
+  );
 }

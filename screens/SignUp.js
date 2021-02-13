@@ -16,11 +16,11 @@ import axios from 'axios';
 import { SERVER_URL } from '@env';
 
 export function SignUp({ navigation }) {
-  const [username, setUserName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [error, setError] = useState('')
+  const [username, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async () => {
     try {
@@ -30,14 +30,14 @@ export function SignUp({ navigation }) {
         url: '/user/sign-up',
         data: { username, email, password }
       });
-      AsyncStorage.setItem('token', token)
-      navigation.navigate('Home')
+      AsyncStorage.setItem('token', token);
+      navigation.navigate('Home');
     }
     catch(err) {
-      AsyncStorage.removeItem('token')
-      setError('Usuario o contraseña invalidos')
+      AsyncStorage.removeItem('token');
+      setError('Usuario o contraseña invalidos');
     }
-  }
+  };
 
   return (
     <Container>
@@ -79,10 +79,10 @@ export function SignUp({ navigation }) {
       </View>
     </Container>
   );
-};
+}
 
 const styles = StyleSheet.create({
   containerButton: {
     alignItems: 'center'
   },
-})
+});
