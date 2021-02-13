@@ -2,12 +2,25 @@
   "env": {
     "es6": true,
     "node": true,
-    "jest": true
+    "jest": true,
+    "browser": true,
+    "react-native/react-native": true
   },
   "extends": [
     "eslint:recommended"
   ],
-  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaFeatures": {
+        "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "prettier",
+    "react",
+    "react-native"
+  ],
   "rules": {
     "no-console": 1,
     "indent": [
