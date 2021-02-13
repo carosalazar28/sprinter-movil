@@ -73,9 +73,8 @@ export function SignIn({ navigation }) {
       </SecundaryTitle>
       <View>
         <Image
-          source={{
-            uri:'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1611866452/sprinter/ui/patron_tyi6zo.svg'
-          }}
+          source={{uri:'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1611866452/sprinter/ui/patron_tyi6zo.svg'}}
+          style={{ width: 314, height: 248 }}
         />
       </View>
       <StatusBar style="auto"/>

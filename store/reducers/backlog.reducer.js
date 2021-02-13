@@ -3,6 +3,7 @@ export const FINISHED_LOADING = 'FINISHED_LOADING';
 
 export const GET_BACKLOG = 'GET_BACKLOG';
 export const FAILURED_BACKLOG = 'FAILURED_BACKLOG';
+export const UPDATED_TASK = 'UPDATED_TASK';
 
 export const SET_NAMETASK = 'SET_NAMETASK';
 export const SET_DESCRIPTIONTASK = 'SET_DESCRIPTIONTASK';
@@ -30,6 +31,12 @@ export const initialState = {
   message: '',
 };
 
+function updateItemSplice(array, index, payload) {
+  let newArray = array.slice()
+  newArray.splice(index, 1, payload)
+  return newArray
+};
+
 export function backlogReducer( state = initialState, action ) {
   switch (action.type) {
     case LOADING: 
@@ -46,6 +53,11 @@ export function backlogReducer( state = initialState, action ) {
       return {
         ...state,
         task: action.payload,
+      }
+    case UPDATED_TASK:
+      return {
+        ...state,
+        task: updateItemSplice(state.task, action.index, action.payload),
       }
     case FAILURED_BACKLOG:
       return {

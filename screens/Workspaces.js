@@ -37,8 +37,6 @@ export function Workspaces({ navigation }) {
     dispatch(getData())
   }, [])
 
-  if(loading) <Text>Loading...</Text>
-
   return (
     <>
       <SafeAreaView style={{ flex: 1 }}>

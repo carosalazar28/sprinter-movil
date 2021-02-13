@@ -44,7 +44,6 @@ export function SignUp({ navigation }) {
       <Title>Bienvenid@!</Title>
       <SecundaryTitle>Registro</SecundaryTitle>
       <ScrollView>
-
         <CustomInput
           placeholder="Nombre de usuario"
           placeholderTextColor = "#f2f2f2"

@@ -4,7 +4,6 @@ import { Picker } from '@react-native-picker/picker';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   ViewContainerWorkspace,
-  ViewContainerSprint,
   CustomInput,
   TextDescription,
   CustomInputWeeks,
@@ -15,7 +14,9 @@ import {
   setDescription,
   setAsign,
   setStatus,
-  cleanForm
+  cleanForm,
+  getDataTaskId,
+  updateTask,
 } from '../store/actions/backlog.action';
 
 export function TaskEdit({ navigation, route, index }) {
@@ -32,14 +33,14 @@ export function TaskEdit({ navigation, route, index }) {
   const { name, description, status, asign } = dataTask
 
   useEffect(() => {
-    
+    dispatch(getDataTaskId(route.params.id))
 
     return dispatch(cleanForm())
   }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    dispatch(updateTask(dataTask, route.params.id, index))
     navigation.navigate('Task')
   }
 
@@ -66,24 +67,6 @@ export function TaskEdit({ navigation, route, index }) {
           value={asign}  
         />
       </View>
-      <ViewContainerSprint style={styles.borderLine}>
-        <View>
-          <Picker
-            style={styles.picker}
-            itemStyle={styles.onePickerItem}
-            selectedValue={status}
-            mode="dropdowm"
-            onValueChange={(itemValue) => 
-              dispatch(setStatus(itemValue))
-            }
-          >
-            <Picker.Item label="Backlog" value="BC" />
-            <Picker.Item label="Por hacer" value="PH" />
-            <Picker.Item label="En progreso" value="EP" />
-            <Picker.Item label="Hecho" value="DO" />
-          </Picker>  
-        </View>
-      </ViewContainerSprint>
       <View style={styles.borderLine}>
         <TextDescription
           multiline
@@ -93,7 +76,23 @@ export function TaskEdit({ navigation, route, index }) {
           value={description}
         />
       </View>
-      <ContainerRow>
+      <View style={styles.containerStatus}>
+        <Picker
+          style={styles.picker}
+          itemStyle={styles.onePickerItem}
+          selectedValue={status}
+          mode="dropdowm"
+          onValueChange={(itemValue) => 
+            dispatch(setStatus(itemValue))
+          }
+        >
+          <Picker.Item label="Backlog" value="BC" />
+          <Picker.Item label="Por hacer" value="PH" />
+          <Picker.Item label="En progreso" value="EP" />
+          <Picker.Item label="Hecho" value="DO" />
+        </Picker>
+      </View>
+      <ContainerRow style={styles.containerBotton}>
         <Button
           title="Guardar"
           color="#f2ea0d"
@@ -111,15 +110,15 @@ export function TaskEdit({ navigation, route, index }) {
 
 const styles = StyleSheet.create({
   picker: {
-    width: 120,
-    height: 80,
-    backgroundColor: '#f2ea0d',
+    width: 150,
+    height: 40,
     borderColor: '#828282',
     borderWidth: 1,
     borderRadius: 10,
+    padding: 15,
   },
   onePickerItem: {
-    height: 80,
+    height: 40,
     fontSize: 14,
     width: 120,
     borderRadius: 10,
@@ -132,4 +131,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f2f2f2', 
     borderBottomWidth: 2,
   },
+  containerStatus: {
+    borderBottomColor: '#f2f2f2', 
+    borderBottomWidth: 2,
+    paddingTop: 15,
+    height: 200,
+  },
+  containerBotton: {
+    marginTop: 30,
+  }
 })

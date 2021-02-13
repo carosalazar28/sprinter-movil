@@ -58,7 +58,7 @@ export function Task({ navigation }) {
                   return (
                     <ListItem 
                       bottomDivider
-                      onPress={() => navigation.navigate('taskEdit', { id: item._id })}
+                      onPress={() => navigation.navigate('TaskEdit', { id: item._id })}
                     >
                       <Avatar source={{uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613088152/sprinter/ui/taskavatar_fiqyv9.png'}} />
                       <ListItem.Content>
