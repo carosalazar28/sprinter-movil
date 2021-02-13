@@ -8,6 +8,7 @@ import { Backlog } from '../screens/Backlog';
 import { Task } from '../screens/Task';
 import { TaskEdit } from '../screens/TaskEdit';
 import { Profile } from '../screens/Profile';
+import { ProfileEdit } from '../screens/ProfileEdit';
 
 const Stack = createStackNavigator();
 
@@ -53,6 +54,7 @@ export const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="ProfileEdit" component={ProfileEdit} />
     </Stack.Navigator>
   );
 };
