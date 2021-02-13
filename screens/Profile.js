@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 const list = [
@@ -17,23 +17,32 @@ const list = [
   },
 ];
 
-export function Profile() {
+export function Profile({ navigation }) {
   return (
     <>
       <View style={styles.viewName}>
+        <TouchableOpacity onPress={() => navigation.navigate("ProfileEdit")} style={styles.viewIconEdit}>
+          <Image
+            source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613085189/sprinter/ui/profile_f894xe.png'}}
+            style={{ width: 40, height: 40 }}
+          />
+        </TouchableOpacity>
         <Image
           source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613234403/sprinter/ui/Logo_SPRINTER_vpejk2.png' }}
           style={{ width: 80, height: 80, marginTop: 30, marginBottom: 15 }}
         />
         <Text style={styles.nameUser}>Carolina</Text>
       </View>
-      <View style={styles.viewList}>
+      <View style={styles.viewList} onPress={() => navigation.navigate("ProfileEdit")}>
         <FlatList
           data={list}
           renderItem={({ item }) => (
             <View style={styles.viewListItem} >
               <Icon name={item.icon} type={item.type} />
-              <Text>{item.title}</Text>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.textFlatlist}>{item.title}</Text>
+              </View>
+              <Icon name="right" type="ant-design" color="#69c8d4" />
             </View>
           )}
           keyExtractor={(item) => `${item.id}`}
@@ -56,12 +65,24 @@ const styles = StyleSheet.create({
   },
   viewListItem: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     borderRadius: 10,
-    backgroundColor: 'f2f2f2'
+    backgroundColor: '#f2f2f2',
+    marginBottom: 15,
+    padding: 25
   },
   viewName: {
     padding: 18,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  textFlatlist: {
+    marginLeft: 18,
+    fontSize: 18
+  },
+  viewIconEdit: {
+    position: 'absolute',
+    right: 18,
+    top: 32
   }
 });
