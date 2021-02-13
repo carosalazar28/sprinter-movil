@@ -45,7 +45,7 @@ export function ProfileEdit() {
 
   return (
     <>
-      <View>
+      <View style={styles.containerImage}>
         <Image
           source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613234403/sprinter/ui/Logo_SPRINTER_vpejk2.png' }}
           style={{ width: 180, height: 180, marginTop: 30, marginBottom: 15 }}
@@ -56,30 +56,33 @@ export function ProfileEdit() {
           onPress={handleClose}
         />
       </View>
-      <View>
-        <Text>Nombre</Text>
+      <View style={styles.containerForm}>
+        <Text style={styles.textLabel}>Nombre</Text>
         <CustomInput
+          style={styles.inputStyle}
           placeholder="Nombre de usuario"
           placeholderTextColor = "black"
           onChangeText={text => setUserName(text)}
           value={username}
         />
-        <Text>Username</Text>
+        <Text style={styles.textLabel}>Username</Text>
         <CustomInput
+          style={styles.inputStyle}
           placeholder="Email"
           placeholderTextColor = "black"
           onChangeText={text => setEmail(text)}
           value={email}
         />
-        <Text>Rol</Text>
+        <Text style={styles.textLabel}>Rol</Text>
         <CustomInput
+          style={styles.inputStyle}
           placeholder="Rol"
           placeholderTextColor = "black"
           onChangeText={text => setRol(text)}
           value={rol}
         />
       </View>
-      <View>
+      <View style={styles.containerRow}>
         <Button
           title="Guardar"
           color="#f2ea0d"
@@ -96,5 +99,28 @@ export function ProfileEdit() {
 }
 
 const styles = StyleSheet.create({
-
+  containerImage: {
+    alignItems: 'center',
+    paddingTop: 10
+  },
+  containerForm: {
+    paddingRight: 40,
+    paddingLeft: 40,
+    paddingTop: 15,
+  },
+  textLabel: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 7,
+  },
+  containerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 40,
+    paddingLeft: 40
+  },
+  inputStyle: {
+    backgroundColor: 'white'
+  }
 });

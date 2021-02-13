@@ -52,6 +52,9 @@ export function getUser() {
         }
       });
       console.log('here data get user', data)
+      dispatch({ type: SET_USERNAME, payload: data.username});
+      dispatch({ type: SET_EMAIL, payload: data.email });
+      dispatch({ type: SET_ROL, payload: data.rol });
       dispatch({ type: GET_USER, payload: data });
     } catch(err) {
       dispatch({ type: FAILURED_USER });
@@ -62,7 +65,7 @@ export function getUser() {
 }
 
 export function updateUser( dataSend ) {
-  const { username, email, rol } = dataSend
+  const { username, email, rol } = dataSend;
   return async function( dispatch ) {
     dispatch({ type: LOADING });
     try {
