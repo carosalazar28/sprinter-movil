@@ -55,7 +55,7 @@ export function TaskEdit({ navigation, route, index }) {
       <CustomInput
         placeholder="Titulo de la tarea"
         placeholderTextColor ="#828282"
-        onChangeText={text => console.log(text)}
+        onChangeText={text => dispatch(setName(text))}
         value={name}
       />
       <View style={styles.borderLine}>
