@@ -6,6 +6,7 @@ import { SignIn } from './screens/SignIn';
 import { SignUp } from './screens/SignUp';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { Splash } from './screens/Splash';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
             headerTintColor: '#69c8d4',
           }}
         >
+          <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
