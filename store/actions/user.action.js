@@ -17,6 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export function setUserName( payload ) {
   return function( dispatch ) {
     dispatch({ type: SET_USERNAME, payload });
+    console.log(payload)
   };
 }
 
@@ -40,6 +41,7 @@ export function setRol( payload ) {
 
 export function getUser() {
   return async function( dispatch ) {
+    console.log('here')
     dispatch({ type: LOADING });
     try {
       const token = await AsyncStorage.getItem('token');
@@ -51,11 +53,10 @@ export function getUser() {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log('here data get user', data)
+      console.log('here data get user', data.username)
       dispatch({ type: SET_USERNAME, payload: data.username});
       dispatch({ type: SET_EMAIL, payload: data.email });
       dispatch({ type: SET_ROL, payload: data.rol });
-      dispatch({ type: GET_USER, payload: data });
     } catch(err) {
       dispatch({ type: FAILURED_USER });
     } finally {

@@ -22,7 +22,7 @@ export const initialState = {
 };
 
 export function userReducer( state = initialState, action ) {
-  switch (action.payload) {
+  switch (action.type) {
     case LOADING:
       return {
         ...state,

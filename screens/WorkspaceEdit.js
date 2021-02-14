@@ -15,9 +15,9 @@ import {
   CustomInputTeammates,
   ContainerBacklog
 } from '../components/styled/WorkspaceStyles.js';
-import { 
-  getDataWorkspace, 
-  updateWorkspace, 
+import {
+  getDataWorkspace,
+  updateWorkspace,
   onAddTeammate,
   setName,
   setDescription,
@@ -51,7 +51,6 @@ export function WorkspaceEdit({ navigation, route, index }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateWorkspace(dataWorkspace, route.params.id, index));
-    navigation.navigate('Workspaces');
   };
 
   const handleDelete = (e) => {
@@ -82,13 +81,13 @@ export function WorkspaceEdit({ navigation, route, index }) {
             itemStyle={styles.onePickerItem}
             selectedValue={sprint}
             mode="dropdowm"
-            onValueChange={(itemValue, itemIndex) => 
+            onValueChange={(itemValue, itemIndex) =>
               dispatch(setSprint(itemValue))
             }
           >
             <Picker.Item label="1 semana" value="1" />
             <Picker.Item label="2 semanas" value="2" />
-          </Picker>  
+          </Picker>
         </View>
       </ViewContainerSprint>
       <View style={styles.borderLine}>
@@ -107,7 +106,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           placeholderTextColor ="#828282"
           keyboardType="numeric"
           onChangeText={text => dispatch(setWeeks(text))}
-          value={weeks.toString()}  
+          value={weeks.toString()}
         />
       </View>
       <View style={styles.borderLine}>
@@ -127,17 +126,6 @@ export function WorkspaceEdit({ navigation, route, index }) {
         </ContainerRow>
         <Text>{teammates}</Text>
       </View>
-      <ContainerBacklog>
-        <Icon
-          name="plus"
-          type="ant-design"
-          color="#69c8d4"
-          style={{ marginRight: 13 }}
-          onPress={() => navigation.navigate('Backlog', { id: route.params.backlog, work: route.params.id })}
-        />
-        <Text style={styles.textBacklog}>Agregar backlog</Text>
-      </ContainerBacklog>
-      <Text style={styles.textError}>{error}</Text>
       <ContainerRow>
         <Button
           title="Guardar"
@@ -150,6 +138,17 @@ export function WorkspaceEdit({ navigation, route, index }) {
           onPress={handleDelete}
         />
       </ContainerRow>
+      <ContainerBacklog>
+        <Icon
+          name="plus"
+          type="ant-design"
+          color="#69c8d4"
+          style={{ marginRight: 13 }}
+          onPress={() => navigation.navigate('Backlog', { id: route.params.backlog, work: route.params.id })}
+        />
+        <Text style={styles.textBacklog}>Agregar backlog</Text>
+      </ContainerBacklog>
+      <Text style={styles.textError}>{error}</Text>
     </ViewContainerWorkspace>
   );
 }
@@ -169,12 +168,12 @@ const styles = StyleSheet.create({
     width: 120,
     borderRadius: 10,
     transform: [
-      { scaleX: 0.9 }, 
+      { scaleX: 0.9 },
       { scaleY: 0.9 },
     ],
   },
   borderLine: {
-    borderBottomColor: '#f2f2f2', 
+    borderBottomColor: '#f2f2f2',
     borderBottomWidth: 2,
   },
   textError: {

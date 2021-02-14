@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { ScrollView, View, Text, Image, StyleSheet, Button, SafeAreaView, StatusBar } from 'react-native';
 import {
   CustomInput,
 } from '../components/styled/FormStyles';
@@ -14,7 +14,7 @@ import {
   destroyUser,
 } from '../store/actions/user.action';
 
-export function ProfileEdit() {
+export function ProfileEdit({ navigation }) {
 
   const dispatch = useDispatch();
 
@@ -33,6 +33,7 @@ export function ProfileEdit() {
 
   const handleClose = async () => {
     await AsyncStorage.removeItem('token');
+    navigation.replace('SignIn');
   };
 
   const handleSubmit = (e) => {
@@ -46,61 +47,67 @@ export function ProfileEdit() {
   };
 
   return (
-    <>
-      <View style={styles.containerImage}>
-        <Image
-          source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613234403/sprinter/ui/Logo_SPRINTER_vpejk2.png' }}
-          style={{ width: 180, height: 180, marginTop: 30, marginBottom: 15 }}
-        />
-        <Button
-          title="Cerrar Sesión"
-          color="#bdbdbb"
-          onPress={handleClose}
-        />
-      </View>
-      <View style={styles.containerForm}>
-        <Text style={styles.textLabel}>Nombre</Text>
-        <CustomInput
-          style={styles.inputStyle}
-          placeholder="Nombre de usuario"
-          placeholderTextColor = "black"
-          onChangeText={text => setUserName(text)}
-          value={username}
-        />
-        <Text style={styles.textLabel}>Username</Text>
-        <CustomInput
-          style={styles.inputStyle}
-          placeholder="Email"
-          placeholderTextColor = "black"
-          onChangeText={text => setEmail(text)}
-          value={email}
-        />
-        <Text style={styles.textLabel}>Rol</Text>
-        <CustomInput
-          style={styles.inputStyle}
-          placeholder="Rol"
-          placeholderTextColor = "black"
-          onChangeText={text => setRol(text)}
-          value={rol}
-        />
-      </View>
-      <View style={styles.containerRow}>
-        <Button
-          title="Guardar"
-          color="#f2ea0d"
-          onPress={handleSubmit}
-        />
-        <Button
-          title="Borrar"
-          color="#bdbdbb"
-          onPress={handleDelete}
-        />
-      </View>
-    </>
+    <SafeAreaView style={styles.container}>
+      <ScrollView >
+        <View style={styles.containerImage}>
+          <Image
+            source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613234403/sprinter/ui/Logo_SPRINTER_vpejk2.png' }}
+            style={{ width: 180, height: 180, marginTop: 30, marginBottom: 15 }}
+          />
+          <Button
+            title="Cerrar Sesión"
+            color="#bdbdbb"
+            onPress={handleClose}
+          />
+        </View>
+        <View style={styles.containerForm}>
+          <Text style={styles.textLabel}>Username</Text>
+          <CustomInput
+            style={styles.inputStyle}
+            placeholder="Nombre de usuario"
+            placeholderTextColor = "black"
+            onChangeText={text => dispatch(setUserName(text))}
+            value={username}
+          />
+          <Text style={styles.textLabel}>Email</Text>
+          <CustomInput
+            style={styles.inputStyle}
+            placeholder="Email"
+            placeholderTextColor = "black"
+            onChangeText={text => dispatch(setEmail(text))}
+            value={email}
+          />
+          <Text style={styles.textLabel}>Rol</Text>
+          <CustomInput
+            style={styles.inputStyle}
+            placeholder="Rol"
+            placeholderTextColor = "black"
+            onChangeText={text => dispatch(setRol(text))}
+            value={rol}
+          />
+        </View>
+        <View style={styles.containerRow}>
+          <Button
+            title="Guardar"
+            color="#f2ea0d"
+            onPress={handleSubmit}
+          />
+          <Button
+            title="Borrar"
+            color="#bdbdbb"
+            onPress={handleDelete}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+  },
   containerImage: {
     alignItems: 'center',
     paddingTop: 10
@@ -123,6 +130,7 @@ const styles = StyleSheet.create({
     paddingLeft: 40
   },
   inputStyle: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    color: 'black'
   }
 });
