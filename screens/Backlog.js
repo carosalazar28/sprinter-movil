@@ -35,9 +35,8 @@ export function Backlog({ route, navigation }) {
 
   useEffect(() => {
     dispatch(getDataBacklog(route.params.id));
-    
+
     return dispatch(cleanTask());
-    console.log(route.params.id);
   }, []);
 
   const handleSubmit = (e) => {
@@ -53,7 +52,7 @@ export function Backlog({ route, navigation }) {
           <Title h3>
             Backlog
           </Title>
-          <Input 
+          <Input
             leftIcon={
               <Icon
                 name="plus"
@@ -74,8 +73,8 @@ export function Backlog({ route, navigation }) {
           { task ? task.map(item => {
             return (
               <View style={styles.containerTask} key={item._id}>
-                <Text 
-                  style={styles.title} 
+                <Text
+                  style={styles.title}
                 >
                   {item.name}
                 </Text>

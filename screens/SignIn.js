@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { 
-  StyleSheet, 
+import {
+  StyleSheet,
   Text,
   Button,
   StatusBar,
@@ -41,44 +41,45 @@ export function SignIn({ navigation }) {
   };
 
   return (
-    <Container style={styles.container}>
-      <Title>Sprinter!</Title>
-      <Text>{error}</Text>
-      <CustomInput
-        placeholder="Nombre de usuario"
-        placeholderTextColor = "#f2f2f2"
-        onChangeText={text => setUserName(text)}
-        value={username}
-      />
-      <CustomInput
-        placeholder="Contraseña"
-        placeholderTextColor = "#f2f2f2"
-        onChangeText={text => setPassword(text)}
-        value={password}
-        secureTextEntry
-      />
-      <View style={styles.containerButton}>
-        <Button
-          title="Enviar"
-          style={styles.button}
-          textStyle={{ color: '#f2f2f2', }}
-          onPress={handleSubmit}
+    <View>
+      <Container style={styles.container}>
+        <Title>Sprinter!</Title>
+        <Text>{error}</Text>
+        <CustomInput
+          placeholder="Nombre de usuario"
+          placeholderTextColor = "#f2f2f2"
+          onChangeText={text => setUserName(text)}
+          value={username}
         />
-      </View>
-      <Text style={styles.text}>Olvidé mi constraseña</Text>
-      <SecundaryTitle     
-        onPress={() => navigation.navigate('SignUp')}
-      >
-        Crear una cuenta
-      </SecundaryTitle>
+        <CustomInput
+          placeholder="Contraseña"
+          placeholderTextColor = "#f2f2f2"
+          onChangeText={text => setPassword(text)}
+          value={password}
+          secureTextEntry
+        />
+        <View style={styles.containerButton}>
+          <Button
+            title="Enviar"
+            style={styles.button}
+            textStyle={{ color: '#f2f2f2', }}
+            onPress={handleSubmit}
+          />
+        </View>
+        <Text style={styles.text}>Olvidé mi constraseña</Text>
+        <SecundaryTitle
+          onPress={() => navigation.navigate('SignUp')}
+        >
+          Crear una cuenta
+        </SecundaryTitle>
+      </Container>
       <View>
         <Image
-          source={{uri:'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1611866452/sprinter/ui/patron_tyi6zo.svg'}}
-          style={{ width: 314, height: 248 }}
+          source={{uri:'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613259321/sprinter/ui/patron_qwxtdz.png'}}
+          style={{ width: 450, height: 280 }}
         />
       </View>
-      <StatusBar style="auto"/>
-    </Container>
+    </View>
   );
 }
 

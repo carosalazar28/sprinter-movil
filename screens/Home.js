@@ -3,7 +3,6 @@ import {
   View,
   ScrollView,
   StyleSheet,
-  Button,
 } from 'react-native';
 import { Image } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,7 +14,7 @@ export function Home({ navigation }) {
     if(!token) {
       navigation.navigate('SignIn');
     }
-  } 
+  }
 
   useEffect(() => {
     getToken();
@@ -23,7 +22,7 @@ export function Home({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={{ alignItems: 'center', marginBottom: 37, paddingRight: 28 }}>
+      <View style={{ alignItems: 'center', marginBottom: 37, paddingRight: 28, marginTop: 15 }}>
         <Image
           source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1612275065/sprinter/ui/Contenido_hwcrdd.png' }}
           style={{ width: 314, height: 248 }}

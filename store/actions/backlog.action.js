@@ -21,7 +21,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function setName( payload ) {
   return function( dispatch ) {
-    console.log(payload)
     dispatch({ type: SET_NAMETASK, payload });
   };
 }
@@ -40,7 +39,6 @@ export function setAsign( payload ) {
 
 export function setStatus( payload ) {
   return function( dispatch ) {
-    console.log(payload)
     dispatch({ type: SET_STATUS, payload });
   };
 }
@@ -76,7 +74,6 @@ export function getDataBacklog( id ) {
         url: `/backlog/${id}`
       });
       dispatch({ type: GET_BACKLOG, payload: data });
-      console.log('here get action');
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });
     } finally {
@@ -128,7 +125,6 @@ export function getDataTask() {
 
 export function getDataTaskId( id ) {
   return async function( dispatch ) {
-    console.log(id);
     dispatch({ type: LOADING });
     try {
       const { data: { data }} = await axios({
@@ -136,7 +132,6 @@ export function getDataTaskId( id ) {
         baseURL: SERVER_URL,
         url: `/task/${id}`,
       });
-      console.log('here action taks', data);
       dispatch({ type: SET_NAMETASK, payload: data.name });
       dispatch({ type: SET_DESCRIPTIONTASK, payload: data.description });
       dispatch({ type: SET_STATUS, payload: data.status });
@@ -151,9 +146,7 @@ export function getDataTaskId( id ) {
 
 export function updateTask( dataSend, id, index ) {
   const { name, description, asign, status } = dataSend;
-  console.log('here update');
   return async function( dispatch ) {
-    console.log(dataSend, id);
     dispatch({ type: LOADING });
     try {
       const { data: { data }} = await axios({
@@ -162,7 +155,6 @@ export function updateTask( dataSend, id, index ) {
         url: `/task/${id}`,
         data: { name, description, asign, status }
       });
-      console.log('here action taks', data);
       dispatch({ type: UPDATED_TASK, index: index, payload: data});
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });

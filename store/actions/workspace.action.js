@@ -83,7 +83,6 @@ export function getData() {
     dispatch({ type: LOADING });
     try {
       const token = await AsyncStorage.getItem('token');
-      console.log(token);
       const { data: {data} } = await axios({
         method: 'GET',
         baseURL: SERVER_URL,

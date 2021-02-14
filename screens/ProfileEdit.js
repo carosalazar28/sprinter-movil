@@ -36,10 +36,12 @@ export function ProfileEdit() {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(updateUser(dataUser));
   };
 
   const handleDelete = (e) => {
+    e.preventDefault();
     dispatch(destroyUser());
   };
 
