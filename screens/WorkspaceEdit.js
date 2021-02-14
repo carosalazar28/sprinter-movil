@@ -24,7 +24,6 @@ import {
   setWeeks,
   setSprint,
   setTeammate,
-  setTeammates,
   deleteWorkspace,
   cleanForm
 } from '../store/actions/workspace.action';
@@ -124,7 +123,11 @@ export function WorkspaceEdit({ navigation, route, index }) {
             onPress={onAddTeammates}
           />
         </ContainerRow>
-        <Text>{teammates}</Text>
+        {teammates && teammates.map((item, index) => {
+          return (
+            <Text style={styles.textTeammate} key={index}>{item}</Text>
+          )}
+        )}
       </View>
       <ContainerRow>
         <Button
@@ -182,5 +185,8 @@ const styles = StyleSheet.create({
   },
   textBacklog: {
     fontSize: 18,
+  },
+  textTeammate: {
+    padding: 8,
   }
 });

@@ -21,6 +21,7 @@ export const CANCEL_WEEKS = 'CANCEL_WEEKS';
 export const CANCEL_SPRINT = 'CANCEL_SPRINT';
 export const CANCEL_TEAMMATES = 'CANCEL_TEAMMATES';
 export const CANCEL_TEAMMATE = 'CANCEL_TEAMMATE';
+export const CANCEL_MESSAGE = 'CANCEL_MESSAGE';
 
 export const initialState = {
   name: '',
@@ -65,7 +66,7 @@ export function workspaceReducer( state = initialState, action ) {
         message: 'El workspace se ha creado con exito',
         workspacesList: state.workspacesList.concat(action.payload)
       };
-    case FAILURED_WORKSPACE: 
+    case FAILURED_WORKSPACE:
       return {
         ...state,
         error: action.payload,
@@ -75,22 +76,22 @@ export function workspaceReducer( state = initialState, action ) {
         ...state,
         name: action.payload,
       };
-    case SET_DESCRIPTION: 
+    case SET_DESCRIPTION:
       return {
         ...state,
         description: action.payload,
       };
-    case SET_WEEKS: 
+    case SET_WEEKS:
       return {
         ...state,
         weeks: action.payload,
       };
-    case SET_SPRINT: 
+    case SET_SPRINT:
       return {
         ...state,
         sprint: action.payload,
       };
-    case SET_TEAMMATES: 
+    case SET_TEAMMATES:
       return {
         ...state,
         teammates: state.teammates.concat(action.payload),
@@ -100,12 +101,12 @@ export function workspaceReducer( state = initialState, action ) {
         ...state,
         teammate: action.payload,
       };
-    case CANCEL_NAME: 
+    case CANCEL_NAME:
       return {
         ...state,
         name: '',
       };
-    case CANCEL_DESCRIPTION: 
+    case CANCEL_DESCRIPTION:
       return {
         ...state,
         description: '',
@@ -129,6 +130,11 @@ export function workspaceReducer( state = initialState, action ) {
       return {
         ...state,
         teammate: '',
+      };
+    case CANCEL_MESSAGE:
+      return {
+        ...state,
+        message: '',
       };
     case GET_WORKSPACE:
       return {

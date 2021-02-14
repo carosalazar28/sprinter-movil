@@ -95,7 +95,8 @@ const styles = StyleSheet.create({
   },
   statusText: {
     flex: 1,
-    marginLeft: 220,
+    marginLeft: 200,
+    marginTop: 15,
     padding: 5,
     backgroundColor: '#fff',
     width: 80,

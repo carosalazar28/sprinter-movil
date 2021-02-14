@@ -79,7 +79,7 @@ export function Backlog({ route, navigation }) {
                   {item.name}
                 </Text>
               </View>
-            );}) : (
+            )}) : (
             <ContainerNoContent>
               <Text>No tienes backlog en esté workspace</Text>
             </ContainerNoContent>

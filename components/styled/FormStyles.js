@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Text, 
-  View, 
+import { Text,
+  View,
   TextInput,
 } from 'react-native';
 
@@ -13,6 +13,7 @@ export const Title = styled(Text)`
   font-size: 48px;
   margin: 0 auto;
   margin-bottom: 30px;
+  font-weight: bold;
 `;
 
 export const CustomInput = styled(TextInput)`

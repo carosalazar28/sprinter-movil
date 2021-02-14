@@ -86,7 +86,7 @@ export function TaskEdit({ navigation, route, index }) {
             dispatch(setStatus(itemValue))
           }
         >
-          <Picker.Item label="Backlog" value="BC" />
+          <Picker.Item label="Backlog" value="Backlog" />
           <Picker.Item label="Por hacer" value="PH" />
           <Picker.Item label="En progreso" value="EP" />
           <Picker.Item label="Hecho" value="DO" />
@@ -115,12 +115,12 @@ const styles = StyleSheet.create({
     borderColor: '#828282',
     borderWidth: 1,
     borderRadius: 10,
-    padding: 15,
+    alignItems: 'center'
   },
   onePickerItem: {
     height: 40,
     fontSize: 14,
-    width: 120,
+    width: 140,
     borderRadius: 10,
     transform: [
       { scaleX: 0.9 },

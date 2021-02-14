@@ -22,9 +22,18 @@ const screenOptionStyle = {
   headerTitleAlign: 'center'
 };
 
+const screenOptionHome = {
+  cardStyle: { backgroundColor: '#2f2a3e'},
+  headerStyle: {
+    backgroundColor: '#f2f2f2',
+  },
+  headerTintColor: '#69c8d4',
+  headerTitleAlign: 'center'
+};
+
 export const HomeStackNavigator = () => {
   return(
-    <Stack.Navigator screenOptions={screenOptionStyle}>
+    <Stack.Navigator screenOptions={screenOptionHome}>
       <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );

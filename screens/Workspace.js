@@ -15,7 +15,7 @@ import {
   CustomInputTeammates,
   ContainerBacklog
 } from '../components/styled/WorkspaceStyles.js';
-import { 
+import {
   createWorkspace,
   onAddTeammate,
   cleanForm,
@@ -24,7 +24,6 @@ import {
   setWeeks,
   setSprint,
   setTeammate,
-  setTeammates,
 } from '../store/actions/workspace.action';
 
 export function Workspace({ navigation }) {
@@ -38,12 +37,11 @@ export function Workspace({ navigation }) {
     return { ...state };
   });
 
-  const { name, description, weeks, sprint, teammates, teammate, error } = dataWorkspace;
+  const { name, description, weeks, sprint, teammates, teammate, error, message } = dataWorkspace;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createWorkspace(dataWorkspace));
-    navigation.navigate('Workspaces');
   };
 
   const onAddTeammates = () => {
@@ -53,7 +51,7 @@ export function Workspace({ navigation }) {
   const handleCancel = () => {
     dispatch(cleanForm());
   };
-  
+
   useEffect(() => {
     return dispatch(cleanForm());
   }, []);
@@ -76,13 +74,13 @@ export function Workspace({ navigation }) {
             itemStyle={styles.onePickerItem}
             selectedValue={sprint}
             mode="dropdowm"
-            onValueChange={(itemValue ) => 
+            onValueChange={(itemValue ) =>
               dispatch(setSprint(itemValue))
             }
           >
             <Picker.Item label="1 semana" value="1" />
             <Picker.Item label="2 semanas" value="2" />
-          </Picker>  
+          </Picker>
         </View>
       </ViewContainerSprint>
       <View style={styles.borderLine}>
@@ -100,7 +98,7 @@ export function Workspace({ navigation }) {
           placeholder= "12"
           placeholderTextColor ="#828282"
           onChangeText={text => dispatch(setWeeks(text))}
-          value={weeks.toString()}  
+          value={weeks.toString()}
         />
       </View>
       <View style={styles.borderLine}>
@@ -118,23 +116,17 @@ export function Workspace({ navigation }) {
             onPress={onAddTeammates}
           />
         </ContainerRow>
-        <Text>{teammates}</Text>
+        { teammates && teammates.map((item, index) => {
+          return (
+            <Text style={{ padding: 8 }} key={index}>{item}</Text>
+          )}
+        )}
       </View>
-      <ContainerBacklog>
-        <Icon
-          name="plus"
-          type="ant-design"
-          color="#69c8d4"
-          style={{ marginRight: 13 }}
-          onPress={() => navigation.navigate('Backlog')}
-        />
-        <Text style={styles.textBacklog}>Agregar backlog</Text>
-      </ContainerBacklog>
-      <Text style={styles.textError}>{error}</Text>
+      <Text style={styles.textSuccesfully}>{message}</Text>
       <ContainerRow>
         <Button
           title="Guardar"
-          color="#f2ea0d"
+          color="#f99d47"
           onPress={handleSubmit}
         />
         <Button
@@ -143,6 +135,17 @@ export function Workspace({ navigation }) {
           onPress={handleCancel}
         />
       </ContainerRow>
+      <ContainerBacklog>
+        <Icon
+          name="plus"
+          type="ant-design"
+          color="#525666"
+          style={{ marginRight: 13 }}
+          onPress={() => navigation.navigate('Backlog')}
+        />
+        <Text style={styles.textBacklog}>Agregar backlog</Text>
+      </ContainerBacklog>
+      <Text style={styles.textError}>{error}</Text>
     </ViewContainerWorkspace>
   );
 }
@@ -162,12 +165,12 @@ const styles = StyleSheet.create({
     width: 120,
     borderRadius: 10,
     transform: [
-      { scaleX: 0.9 }, 
+      { scaleX: 0.9 },
       { scaleY: 0.9 },
     ],
   },
   borderLine: {
-    borderBottomColor: '#f2f2f2', 
+    borderBottomColor: '#f2f2f2',
     borderBottomWidth: 2,
   },
   textError: {
@@ -176,5 +179,10 @@ const styles = StyleSheet.create({
   },
   textBacklog: {
     fontSize: 18,
+  },
+  textSuccesfully: {
+    color: '#fb68d2',
+    fontWeight: 'bold',
+    letterSpacing: 2
   }
 });

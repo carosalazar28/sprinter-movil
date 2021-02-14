@@ -36,15 +36,15 @@ export function SignIn({ navigation }) {
     }
     catch(err) {
       AsyncStorage.removeItem('token');
-      setError('Usuario o contraseña invalidos');
+      setError('Usuario o contraseña inválidos');
     }
   };
 
   return (
     <View>
       <Container style={styles.container}>
-        <Title>Sprinter!</Title>
-        <Text>{error}</Text>
+        <Title>¡Sprinter!</Title>
+        <Text style={styles.textError}>{error}</Text>
         <CustomInput
           placeholder="Nombre de usuario"
           placeholderTextColor = "#f2f2f2"
@@ -66,7 +66,7 @@ export function SignIn({ navigation }) {
             onPress={handleSubmit}
           />
         </View>
-        <Text style={styles.text}>Olvidé mi constraseña</Text>
+        <Text style={styles.text}>Olvidé mi contraseña</Text>
         <SecundaryTitle
           onPress={() => navigation.navigate('SignUp')}
         >
@@ -93,4 +93,9 @@ const styles = StyleSheet.create({
   containerButton: {
     alignItems: 'center'
   },
+  textError: {
+    color: 'red',
+    marginBottom: 10,
+    letterSpacing: 2
+  }
 });

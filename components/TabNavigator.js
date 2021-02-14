@@ -7,7 +7,7 @@ const Tab = createBottomTabNavigator();
 
 export function BottomTabNavigator() {
   return(
-    <Tab.Navigator 
+    <Tab.Navigator
       tabBarOptions={{
         activeTintColor: '#69c8d4'
       }}

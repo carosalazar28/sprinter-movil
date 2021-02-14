@@ -43,7 +43,7 @@ export function SignUp({ navigation }) {
   return (
     <View>
       <Container>
-        <Title>Bienvenid@!</Title>
+        <Title>¡Bienvenid@!</Title>
         <SecundaryTitle>Registro</SecundaryTitle>
         <ScrollView>
           <CustomInput

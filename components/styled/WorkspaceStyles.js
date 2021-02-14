@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Text } from 'react-native-elements';
-import { 
+import {
   View,
   ScrollView ,
   TextInput,
@@ -18,10 +18,10 @@ export const Title = styled(Text)`
 export const TextAbout = styled(Text)`
   color: #fff;
   font-size: 14px;
-`; 
+`;
 
 export const ContainerAbout = styled(View)`
-  padding: 17px 25px; 
+  padding: 17px 25px;
   height: 107px;
   margin-bottom: 17px;
   align-items: flex-start;
@@ -86,6 +86,7 @@ export const ContainerRow = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 40px;
 `;
 
 export const CustomInputTeammates = styled(TextInput)`
@@ -94,6 +95,6 @@ export const CustomInputTeammates = styled(TextInput)`
 `;
 
 export const ContainerBacklog = styled(ContainerRow)`
-  margin: 15px 0 40px 0;
+  margin: 40px 0 15px 0;
   justify-content: flex-start;
 `;

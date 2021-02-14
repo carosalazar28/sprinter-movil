@@ -19,6 +19,7 @@ import {
   CANCEL_TEAMMATES,
   CANCEL_TEAMMATE,
   ADD_TEAMMATE,
+  CANCEL_MESSAGE,
 } from '../reducers/workspace.reducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SERVER_URL } from '@env';
@@ -75,6 +76,7 @@ export function cleanForm() {
     dispatch({ type: CANCEL_SPRINT });
     dispatch({ type: CANCEL_TEAMMATES });
     dispatch({ type: CANCEL_TEAMMATE });
+    dispatch({ type: CANCEL_MESSAGE });
   };
 }
 

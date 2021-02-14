@@ -19,7 +19,6 @@ export default function App() {
             headerShown: false,
             cardStyle: { backgroundColor: '#2f2a3e'},
             headerTintColor: '#69c8d4',
-            headerBackTitle: 'Back',
           }}
         >
           <Stack.Screen name="BottomTab" component={BottomTabNavigator} />
