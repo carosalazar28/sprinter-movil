@@ -39,11 +39,10 @@ export function WorkspaceEdit({ navigation, route, index }) {
     return { ...state };
   });
 
-  const { name, description, weeks, sprint, teammates, teammate, error } = dataWorkspace;
+  const { name, description, weeks, sprint, teammates, teammate, error, message } = dataWorkspace;
 
   useEffect(() => {
     dispatch(getDataWorkspace(route.params.id));
-
     return dispatch(cleanForm());
   }, []);
 
@@ -80,7 +79,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
             itemStyle={styles.onePickerItem}
             selectedValue={sprint}
             mode="dropdowm"
-            onValueChange={(itemValue, itemIndex) =>
+            onValueChange={(itemValue) =>
               dispatch(setSprint(itemValue))
             }
           >
@@ -141,6 +140,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           onPress={handleDelete}
         />
       </ContainerRow>
+      <Text style={styles.textSuccesfully}>{message}</Text>
       <ContainerBacklog>
         <Icon
           name="plus"
@@ -188,5 +188,10 @@ const styles = StyleSheet.create({
   },
   textTeammate: {
     padding: 8,
+  },
+  textSuccesfully: {
+    color: '#fb68d2',
+    fontWeight: 'bold',
+    letterSpacing: 2
   }
 });

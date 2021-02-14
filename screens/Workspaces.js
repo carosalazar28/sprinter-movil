@@ -30,9 +30,9 @@ export function Workspaces({ navigation }) {
   }, []);
 
   const dispatch = useDispatch();
-  
-  const { workspacesList, loading, error } = useSelector(({ workspaceReducer: { workspacesList, loading, error }}) => ({ workspacesList, loading, error }));
-  
+
+  const { workspacesList, error } = useSelector(({ workspaceReducer: { workspacesList, loading, error }}) => ({ workspacesList, loading, error }));
+
   useEffect(() => {
     dispatch(getData());
   }, []);
@@ -42,7 +42,7 @@ export function Workspaces({ navigation }) {
       <SafeAreaView style={{ flex: 1 }}>
         <ViewContainer>
           <ScrollView>
-            <RefreshControl 
+            <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
             />
@@ -60,25 +60,29 @@ export function Workspaces({ navigation }) {
               />
             </View>
             <ViewContainerWorkspaces>
-              <FlatList
-                data={workspacesList}
-                renderItem={({ item, index }) => {
-                  return (
-                    <ListItem 
-                      bottomDivider
-                      onPress={() => navigation.navigate('WorkspaceEdit', { id: item._id, index: index, backlog: item.backlog })}
-                    >
-                      <ListItem.Content>
-                        <ListItem.Title>{item.name}</ListItem.Title>
-                        <ListItem.Subtitle>{item.weeks} weeks</ListItem.Subtitle>
-                        <ListItem.Subtitle>{item.sprints}</ListItem.Subtitle>
-                      </ListItem.Content>
-                      <ListItem.Chevron/>
-                    </ListItem>
-                  );
-                }}
-                keyExtractor={(item) => `${item._id}`}
-              />
+              {workspacesList.length > 0 ? (
+                <FlatList
+                  data={workspacesList}
+                  renderItem={({ item, index }) => {
+                    return (
+                      <ListItem
+                        bottomDivider
+                        onPress={() => navigation.navigate('WorkspaceEdit', { id: item._id, index: index, backlog: item.backlog })}
+                      >
+                        <ListItem.Content>
+                          <ListItem.Title>{item.name}</ListItem.Title>
+                          <ListItem.Subtitle>{item.weeks} weeks</ListItem.Subtitle>
+                          <ListItem.Subtitle>{item.sprints}</ListItem.Subtitle>
+                        </ListItem.Content>
+                        <ListItem.Chevron/>
+                      </ListItem>
+                    );
+                  }}
+                  keyExtractor={(item) => `${item._id}`}
+                />
+              ) : (
+                <Text style={{ padding: 8, textAlign: 'center' }}>Aún no tienes workspaces creados</Text>
+              )}
             </ViewContainerWorkspaces>
           </ScrollView>
         </ViewContainer>

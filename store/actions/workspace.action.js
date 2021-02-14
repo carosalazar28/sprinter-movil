@@ -12,6 +12,7 @@ import {
   SET_SPRINT,
   SET_TEAMMATES,
   SET_TEAMMATE,
+  SET_MESSAGE,
   CANCEL_NAME,
   CANCEL_DESCRIPTION,
   CANCEL_WEEKS,
@@ -149,6 +150,7 @@ export function updateWorkspace( data, id, index ) {
         },
         data: { name, description, weeks, sprint, teammates }
       });
+      dispatch({ type: SET_MESSAGE, payload: 'Tu espacio de trabajo se ha actualizado'})
       dispatch({ type: UPDATE_WORKSPACE, index: index, payload: data });
     } catch(err) {
       dispatch({
@@ -186,13 +188,13 @@ export function deleteWorkspace(id, index) {
   };
 }
 
-export function createWorkspace( data ) {
+export function createWorkspace( dataSend ) {
   return async function( dispatch ) {
-    const { name, description, weeks, sprint, teammates } = data;
+    const { name, description, weeks, sprint, teammates } = dataSend;
     const token = await AsyncStorage.getItem('token');
     dispatch({ type: LOADING });
     try {
-      await axios({
+      const {data: { data } } = await axios({
         method: 'POST',
         baseURL: SERVER_URL,
         url: '/workspaces',
@@ -201,6 +203,7 @@ export function createWorkspace( data ) {
         },
         data: { name, description, weeks, sprint, teammates }
       });
+      console.log(data)
       dispatch({ type: CREATE_WORKSPACE, payload: data});
     } catch(err) {
       dispatch({

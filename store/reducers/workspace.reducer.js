@@ -14,6 +14,7 @@ export const SET_WEEKS = 'SET_WEEKS';
 export const SET_SPRINT = 'SET_SPRINT';
 export const SET_TEAMMATES = 'SET_TEAMMATES';
 export const SET_TEAMMATE = 'SET_TEAMMATE';
+export const SET_MESSAGE = 'SET_MESSAGE';
 
 export const CANCEL_NAME = 'CANCEL_NAME';
 export const CANCEL_DESCRIPTION = 'CANCEL_DESCRIPTION';
@@ -26,8 +27,8 @@ export const CANCEL_MESSAGE = 'CANCEL_MESSAGE';
 export const initialState = {
   name: '',
   description: '',
-  weeks: '',
-  sprint: 1,
+  weeks: null,
+  sprint: null,
   teammate: '',
   teammates: [],
   error: '',
@@ -100,6 +101,11 @@ export function workspaceReducer( state = initialState, action ) {
       return {
         ...state,
         teammate: action.payload,
+      };
+    case SET_MESSAGE:
+      return {
+        ...state,
+        message: action.payload
       };
     case CANCEL_NAME:
       return {

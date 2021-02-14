@@ -56,7 +56,7 @@ export const CustomInput = styled(TextInput)`
 export const TextSprint = styled(Text)`
   font-size: 14px;
   margin-right: 8px;
-  width: 130px;
+  width: 120px;
   line-height: 24px;
 `;
 
