@@ -10,6 +10,7 @@ export const SET_DESCRIPTIONTASK = 'SET_DESCRIPTIONTASK';
 export const SET_STATUS = 'SET_STATUS';
 export const SET_ASIGN = 'SET_ASIGN';
 export const SET_AUTHOR = 'SET_AUTHOR';
+export const SET_BACKLOG = 'SET_BACKLOG';
 
 export const CREATE_TASK = 'CREATE_TASK';
 
@@ -29,6 +30,7 @@ export const initialState = {
   asign: '',
   author: '',
   message: '',
+  backlogId: '',
 };
 
 function updateItemSplice(array, index, payload) {
@@ -39,7 +41,7 @@ function updateItemSplice(array, index, payload) {
 
 export function backlogReducer( state = initialState, action ) {
   switch (action.type) {
-    case LOADING: 
+    case LOADING:
       return {
         ...state,
         loading: true,
@@ -49,7 +51,7 @@ export function backlogReducer( state = initialState, action ) {
         ...state,
         loading: false,
       };
-    case GET_BACKLOG: 
+    case GET_BACKLOG:
       return {
         ...state,
         task: action.payload,
@@ -74,7 +76,7 @@ export function backlogReducer( state = initialState, action ) {
         ...state,
         name: action.payload,
       };
-    case SET_DESCRIPTIONTASK: 
+    case SET_DESCRIPTIONTASK:
       return {
         ...state,
         description: action.payload,
@@ -94,7 +96,12 @@ export function backlogReducer( state = initialState, action ) {
         ...state,
         author: action.payload,
       };
-    case CANCEL_NAMEBACKLOG: 
+    case SET_BACKLOG:
+      return {
+        ...state,
+        backlogId: action.payload,
+      };
+    case CANCEL_NAMEBACKLOG:
       return {
         ...state,
         name: '',
@@ -109,7 +116,7 @@ export function backlogReducer( state = initialState, action ) {
         ...state,
         status: '',
       };
-    case CANCEL_ASIGN: 
+    case CANCEL_ASIGN:
       return {
         ...state,
         asign: '',

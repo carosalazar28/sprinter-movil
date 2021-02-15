@@ -31,7 +31,7 @@ export function Workspaces({ navigation }) {
 
   const dispatch = useDispatch();
 
-  const { workspacesList, error } = useSelector(({ workspaceReducer: { workspacesList, loading, error }}) => ({ workspacesList, loading, error }));
+  const { workspacesList } = useSelector(({ workspaceReducer: { workspacesList, loading, error }}) => ({ workspacesList, loading, error }));
 
   useEffect(() => {
     dispatch(getData());
@@ -50,7 +50,6 @@ export function Workspaces({ navigation }) {
               <Title h3>Workspace</Title>
               <TextAbout>El espacio de trabajo tiene el backlog con las tareas que se han creado, acá podrás interactuar con los sprints.</TextAbout>
             </ContainerAbout>
-            <Text style={styles.textError}>{error}</Text>
             <View style={{ alignItems: 'flex-end', paddingRight: 25 }}>
               <Icon
                 name="plus"

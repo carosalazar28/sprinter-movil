@@ -13,6 +13,8 @@ import {
   SET_TEAMMATES,
   SET_TEAMMATE,
   SET_MESSAGE,
+  SET_WORKSPACEID,
+  SET_BACKLOGID,
   CANCEL_NAME,
   CANCEL_DESCRIPTION,
   CANCEL_WEEKS,
@@ -66,6 +68,12 @@ export function onAddTeammate( payload ) {
   return function( dispatch ) {
     dispatch({ type: ADD_TEAMMATE, payload });
     dispatch({ type: CANCEL_TEAMMATE });
+  };
+}
+
+export function setWorkspaceId( payload ) {
+  return function( dispatch ) {
+    dispatch({ type: SET_WORKSPACEID, payload });
   };
 }
 
@@ -203,7 +211,8 @@ export function createWorkspace( dataSend ) {
         },
         data: { name, description, weeks, sprint, teammates }
       });
-      console.log(data)
+      console.log(data._id)
+      dispatch({ type: SET_WORKSPACEID, payload: data._id});
       dispatch({ type: CREATE_WORKSPACE, payload: data});
     } catch(err) {
       dispatch({

@@ -37,7 +37,7 @@ export function Workspace({ navigation }) {
     return { ...state };
   });
 
-  const { name, description, weeks, sprint, teammates, teammate, error, message, workspacesList } = dataWorkspace;
+  const { name, description, weeks, sprint, teammates, teammate, error, message, workspaceId } = dataWorkspace;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -141,7 +141,7 @@ export function Workspace({ navigation }) {
           type="ant-design"
           color="#525666"
           style={{ marginRight: 13 }}
-          onPress={() => navigation.navigate('Backlog', { work: workspacesList._id })}
+          onPress={() => navigation.navigate('Backlog', { work: workspaceId })}
         />
         <Text style={styles.textBacklog}>Agregar backlog</Text>
       </ContainerBacklog>
@@ -152,7 +152,7 @@ export function Workspace({ navigation }) {
 
 const styles = StyleSheet.create({
   picker: {
-    width: 140,
+    width: 155,
     height: 80,
     borderColor: '#828282',
     borderWidth: 1,

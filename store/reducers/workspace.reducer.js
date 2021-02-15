@@ -15,6 +15,8 @@ export const SET_SPRINT = 'SET_SPRINT';
 export const SET_TEAMMATES = 'SET_TEAMMATES';
 export const SET_TEAMMATE = 'SET_TEAMMATE';
 export const SET_MESSAGE = 'SET_MESSAGE';
+export const SET_WORKSPACEID = 'SET_WORKSPACEID';
+export const SET_BACKLOGID = 'SET_BACKLOGID';
 
 export const CANCEL_NAME = 'CANCEL_NAME';
 export const CANCEL_DESCRIPTION = 'CANCEL_DESCRIPTION';
@@ -28,13 +30,15 @@ export const initialState = {
   name: '',
   description: '',
   weeks: null,
-  sprint: null,
+  sprint: 1,
   teammate: '',
   teammates: [],
   error: '',
   loading: false,
   message: '',
   workspacesList: [],
+  workspaceId: '',
+  backlogId: '',
 };
 
 function updateItemSplice(array, index, payload) {
@@ -106,6 +110,16 @@ export function workspaceReducer( state = initialState, action ) {
       return {
         ...state,
         message: action.payload
+      };
+    case SET_WORKSPACEID:
+      return {
+        ...state,
+        workspaceId: action.payload,
+      };
+    case SET_BACKLOGID:
+      return {
+        ...state,
+        backlogId: action.payload,
       };
     case CANCEL_NAME:
       return {

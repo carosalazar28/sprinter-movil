@@ -46,6 +46,10 @@ export function WorkspaceEdit({ navigation, route, index }) {
     return dispatch(cleanForm());
   }, []);
 
+  useEffect(() => {
+    console.log(sprint)
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateWorkspace(dataWorkspace, route.params.id, index));
@@ -77,7 +81,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           <Picker
             style={styles.picker}
             itemStyle={styles.onePickerItem}
-            selectedValue={sprint}
+            selectedValue={sprint.toString()}
             mode="dropdowm"
             onValueChange={(itemValue) =>
               dispatch(setSprint(itemValue))
@@ -158,9 +162,8 @@ export function WorkspaceEdit({ navigation, route, index }) {
 
 const styles = StyleSheet.create({
   picker: {
-    width: 120,
+    width: 155,
     height: 80,
-    backgroundColor: '#f2ea0d',
     borderColor: '#828282',
     borderWidth: 1,
     borderRadius: 10,
