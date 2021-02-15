@@ -27,7 +27,7 @@ const ContainerNoContent = styled(View)`
   height: 500px;
 `;
 
-export function Backlog({ route, navigation }) {
+export function Backlog({ route }) {
 
   const dispatch = useDispatch();
 
@@ -70,7 +70,7 @@ export function Backlog({ route, navigation }) {
           />
         </View>
         <View>
-          { task ? task.map(item => {
+          { task.lenght > 0 ? task.map(item => {
             return (
               <View style={styles.containerTask} key={item._id}>
                 <Text

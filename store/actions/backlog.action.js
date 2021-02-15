@@ -92,6 +92,7 @@ export function createTask( dataSend, id ) {
         url: `/task/${id}`,
         data: { name: dataSend }
       });
+      console.log('here data task', data)
       dispatch({ type: CREATE_TASK, payload: data });
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });
