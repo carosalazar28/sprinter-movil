@@ -24,7 +24,7 @@ export function Task({ navigation }) {
 
   const dispatch = useDispatch();
 
-  const { task, message } = useSelector(({ backlogReducer: { task, message }}) => ({ task, message }));
+  const { task } = useSelector(({ backlogReducer: { task, message }}) => ({ task, message }));
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -50,7 +50,6 @@ export function Task({ navigation }) {
               <Title h3>Tareas</Title>
               <TextAbout>Las tareas que visualizas en está sección son todas las que has creado en tu backlog.</TextAbout>
             </ContainerAbout>
-            <Text style={styles.textError}>{message}</Text>
             <ViewContainerWorkspaces>
               <FlatList
                 data={task}

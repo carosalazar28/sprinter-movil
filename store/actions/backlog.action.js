@@ -13,6 +13,7 @@ import {
   SET_ASIGN,
   SET_STATUS,
   SET_BACKLOG,
+  SET_TEAM,
   CANCEL_DESCRIPTIONTAKS,
   CANCEL_ASIGN,
   CANCEL_STATUS,
@@ -129,15 +130,17 @@ export function getDataTaskId( id ) {
   return async function( dispatch ) {
     dispatch({ type: LOADING });
     try {
-      const { data: { data }} = await axios({
+      const response = await axios({
         method: 'GET',
         baseURL: SERVER_URL,
         url: `/task/${id}`,
       });
-      dispatch({ type: SET_NAMETASK, payload: data.name });
-      dispatch({ type: SET_DESCRIPTIONTASK, payload: data.description });
-      dispatch({ type: SET_STATUS, payload: data.status });
-      dispatch({ type: SET_ASIGN, payload: data.asign });
+      const { data } = response;
+      dispatch({ type: SET_NAMETASK, payload: data.data.name });
+      dispatch({ type: SET_DESCRIPTIONTASK, payload: data.data.description });
+      dispatch({ type: SET_STATUS, payload: data.data.status });
+      dispatch({ type: SET_ASIGN, payload: data.data.asign });
+      dispatch({ type: SET_TEAM, payload: data.team });
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });
     } finally {

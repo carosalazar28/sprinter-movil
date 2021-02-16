@@ -11,6 +11,7 @@ export const SET_STATUS = 'SET_STATUS';
 export const SET_ASIGN = 'SET_ASIGN';
 export const SET_AUTHOR = 'SET_AUTHOR';
 export const SET_BACKLOG = 'SET_BACKLOG';
+export const SET_TEAM = 'SET_TEAM';
 
 export const CREATE_TASK = 'CREATE_TASK';
 
@@ -31,6 +32,7 @@ export const initialState = {
   author: '',
   message: '',
   backlogId: '',
+  team: [],
 };
 
 function updateItemSplice(array, index, payload) {
@@ -100,6 +102,11 @@ export function backlogReducer( state = initialState, action ) {
       return {
         ...state,
         backlogId: action.payload,
+      };
+    case SET_TEAM:
+      return {
+        ...state,
+        team: action.payload,
       };
     case CANCEL_NAMEBACKLOG:
       return {

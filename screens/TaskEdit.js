@@ -30,7 +30,7 @@ export function TaskEdit({ navigation, route, index }) {
     return { ...state };
   });
 
-  const { name, description, status, asign } = dataTask;
+  const { name, description, status, asign, team, } = dataTask;
 
   useEffect(() => {
     dispatch(getDataTaskId(route.params.id));
@@ -58,13 +58,21 @@ export function TaskEdit({ navigation, route, index }) {
         onChangeText={text => dispatch(setName(text))}
         value={name}
       />
-      <View style={styles.borderLine}>
-        <CustomInputWeeks
-          placeholder= "Asign"
-          placeholderTextColor ="#828282"
-          onChangeText={text => dispatch(setAsign(text))}
-          value={asign}
-        />
+      <View style={styles.containerStatus}>
+        <Picker
+          itemStyle={styles.onePickerItem}
+          selectedValue={asign}
+          mode="dropdowm"
+          onValueChange={(itemValue) =>
+            dispatch(setStatus(itemValue))
+          }
+        >
+          {team.map((item, index) => {
+            return (
+              <Picker.Item key={index} label={item} value={item} />
+            )
+          })}
+        </Picker>
       </View>
       <View style={styles.borderLine}>
         <TextDescription
