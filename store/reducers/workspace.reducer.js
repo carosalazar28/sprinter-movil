@@ -53,6 +53,15 @@ function removeItemSplice(array, action) {
   return newArray;
 }
 
+function weeksString(key, payload) {
+  if(!payload) {
+    key = '';
+  } else {
+    key = payload;
+  }
+  return key;
+}
+
 export function workspaceReducer( state = initialState, action ) {
   switch (action.type) {
     case LOADING:
@@ -89,7 +98,7 @@ export function workspaceReducer( state = initialState, action ) {
     case SET_WEEKS:
       return {
         ...state,
-        weeks: action.payload,
+        weeks: weeksString( state.weeks, action.payload),
       };
     case SET_SPRINT:
       return {
