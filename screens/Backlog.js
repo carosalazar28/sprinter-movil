@@ -34,14 +34,18 @@ export function Backlog({ route }) {
   const { task, loading, message, name, backlogId } = useSelector(({ backlogReducer: { task, loading, message, name }}) => ({ task, loading, message, name }));
 
   useEffect(() => {
-    dispatch(getDataBacklog(backlogId));
+    if(route.params.id) {
+      console.log('here route', route.params.id)
+      dispatch(getDataBacklog(route.params.id));
+    } else {
+      dispatch(getDataBacklog(backlogId));
+    }
 
     return dispatch(cleanTask());
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('task', route.params.work)
     dispatch(createTask(name, route.params.work));
     dispatch(cleanBacklog());
   };

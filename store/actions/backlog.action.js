@@ -66,16 +66,15 @@ export function cleanForm() {
 }
 
 export function getDataBacklog( id ) {
-  console.log('here get', id)
   return async function( dispatch ) {
     dispatch({ type: LOADING });
     try {
-      const { data: { data } } = await axios({
+      const { data: { tasks } } = await axios({
         method: 'GET',
         baseURL: SERVER_URL,
         url: `/backlog/${id}`
       });
-      dispatch({ type: GET_BACKLOG, payload: data });
+      dispatch({ type: GET_BACKLOG, payload: tasks });
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });
     } finally {
@@ -85,7 +84,6 @@ export function getDataBacklog( id ) {
 }
 
 export function createTask( dataSend, id ) {
-  console.log('here', id)
   return async function( dispatch ) {
     dispatch({ type: LOADING });
     try {
@@ -95,7 +93,6 @@ export function createTask( dataSend, id ) {
         url: `/task/${id}`,
         data: { name: dataSend }
       });
-      console.log('here data task', data)
       dispatch({ type: SET_BACKLOG, payload: data.backlog });
       dispatch({ type: CREATE_TASK, payload: data });
     } catch(err) {

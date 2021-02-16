@@ -29,7 +29,7 @@ export const CANCEL_MESSAGE = 'CANCEL_MESSAGE';
 export const initialState = {
   name: '',
   description: '',
-  weeks: null,
+  weeks: '',
   sprint: 1,
   teammate: '',
   teammates: [],
@@ -68,7 +68,7 @@ export function workspaceReducer( state = initialState, action ) {
     case CREATE_WORKSPACE:
       return {
         ...state,
-        message: 'El workspace se ha creado con exito',
+        message: 'El workspace se ha creado con éxito',
         workspacesList: state.workspacesList.concat(action.payload)
       };
     case FAILURED_WORKSPACE:

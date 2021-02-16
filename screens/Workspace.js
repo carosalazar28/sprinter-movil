@@ -98,7 +98,7 @@ export function Workspace({ navigation }) {
           placeholder= "12"
           placeholderTextColor ="#828282"
           onChangeText={text => dispatch(setWeeks(text))}
-          value={weeks}
+          value={weeks.toString()}
         />
       </View>
       <View style={styles.borderLine}>

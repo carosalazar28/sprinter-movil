@@ -184,6 +184,7 @@ export function deleteWorkspace(id, index) {
           Authorization: `Bearer ${token}`
         },
       });
+      console.log('here delete', index)
       dispatch({ type: DELETE_WORKSPACE, payload: index });
     } catch(err) {
       dispatch({

@@ -46,10 +46,6 @@ export function WorkspaceEdit({ navigation, route, index }) {
     return dispatch(cleanForm());
   }, []);
 
-  useEffect(() => {
-    console.log(sprint)
-  }, [])
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateWorkspace(dataWorkspace, route.params.id, index));
@@ -132,6 +128,7 @@ export function WorkspaceEdit({ navigation, route, index }) {
           )}
         )}
       </View>
+      <Text style={styles.textSuccesfully}>{message}</Text>
       <ContainerRow>
         <Button
           title="Guardar"
@@ -144,7 +141,6 @@ export function WorkspaceEdit({ navigation, route, index }) {
           onPress={handleDelete}
         />
       </ContainerRow>
-      <Text style={styles.textSuccesfully}>{message}</Text>
       <ContainerBacklog>
         <Icon
           name="plus"

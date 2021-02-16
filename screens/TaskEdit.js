@@ -62,7 +62,6 @@ export function TaskEdit({ navigation, route, index }) {
         <CustomInputWeeks
           placeholder= "Asign"
           placeholderTextColor ="#828282"
-          keyboardType="numeric"
           onChangeText={text => dispatch(setAsign(text))}
           value={asign}
         />

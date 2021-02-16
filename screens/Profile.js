@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUser } from '../store/actions/user.action';
 
 const list = [
   {
@@ -18,6 +20,14 @@ const list = [
 ];
 
 export function Profile({ navigation }) {
+
+  const dispatch = useDispatch();
+
+  const { username } = useSelector(({ userReducer: { username }}) => ({ username }));
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
   return (
     <>
       <View style={styles.viewName}>
@@ -31,7 +41,7 @@ export function Profile({ navigation }) {
           source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613234403/sprinter/ui/Logo_SPRINTER_vpejk2.png' }}
           style={{ width: 80, height: 80, marginTop: 30, marginBottom: 15 }}
         />
-        <Text style={styles.nameUser}>Carolina</Text>
+        <Text style={styles.nameUser}>{username}</Text>
       </View>
       <View style={styles.viewList} onPress={() => navigation.navigate("ProfileEdit")}>
         <FlatList

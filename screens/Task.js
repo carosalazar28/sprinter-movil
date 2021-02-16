@@ -54,7 +54,7 @@ export function Task({ navigation }) {
             <ViewContainerWorkspaces>
               <FlatList
                 data={task}
-                renderItem={({ item, index }) => {
+                renderItem={({ item }) => {
                   return (
                     <ListItem
                       bottomDivider
