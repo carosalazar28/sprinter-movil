@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   ViewContainerWorkspace,
   CustomInput,
   TextDescription,
-  CustomInputWeeks,
   ContainerRow,
 } from '../components/styled/WorkspaceStyles.js';
 import {
@@ -58,22 +57,6 @@ export function TaskEdit({ navigation, route, index }) {
         onChangeText={text => dispatch(setName(text))}
         value={name}
       />
-      <View style={styles.containerStatus}>
-        <Picker
-          itemStyle={styles.onePickerItem}
-          selectedValue={asign}
-          mode="dropdowm"
-          onValueChange={(itemValue) =>
-            dispatch(setStatus(itemValue))
-          }
-        >
-          {team.map((item, index) => {
-            return (
-              <Picker.Item key={index} label={item} value={item} />
-            )
-          })}
-        </Picker>
-      </View>
       <View style={styles.borderLine}>
         <TextDescription
           multiline
@@ -82,6 +65,23 @@ export function TaskEdit({ navigation, route, index }) {
           onChangeText={text => dispatch(setDescription(text))}
           value={description}
         />
+      </View>
+      <View style={styles.containerStatus}>
+        <Text style={{ marginBottom: 10 }}>Responsable</Text>
+        <Picker
+          itemStyle={styles.onePickerItem}
+          selectedValue={asign}
+          mode="dropdowm"
+          onValueChange={(itemValue) =>
+            dispatch(setAsign(itemValue))
+          }
+        >
+          {team.map((item, index) => {
+            return (
+              <Picker.Item key={index} label={item} value={item} />
+            )
+          })}
+        </Picker>
       </View>
       <View style={styles.containerStatus}>
         <Picker
@@ -119,15 +119,14 @@ const styles = StyleSheet.create({
   picker: {
     width: 150,
     height: 40,
-    borderColor: '#828282',
-    borderWidth: 1,
-    borderRadius: 10,
     alignItems: 'center'
   },
   onePickerItem: {
+    borderColor: 'black',
+    borderWidth: 1,
     height: 40,
     fontSize: 14,
-    width: 140,
+    width: 150,
     borderRadius: 10,
     transform: [
       { scaleX: 0.9 },
@@ -141,8 +140,8 @@ const styles = StyleSheet.create({
   containerStatus: {
     borderBottomColor: '#f2f2f2',
     borderBottomWidth: 2,
-    paddingTop: 15,
-    height: 200,
+    marginTop: 15,
+    paddingBottom: 50
   },
   containerBotton: {
     marginTop: 30,
