@@ -48,7 +48,7 @@ export function ProfileEdit({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView >
+      <ScrollView>
         <View style={styles.containerImage}>
           <Image
             source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613234403/sprinter/ui/Logo_SPRINTER_vpejk2.png' }}
@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingRight: 40,
-    paddingLeft: 40
+    paddingLeft: 40,
+    marginBottom: 15
   },
   inputStyle: {
     backgroundColor: 'white',
