@@ -6,10 +6,10 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getDataBacklog,
-  cleanTask,
   setName,
   createTask,
-  cleanBacklog
+  cleanBacklog,
+  cleanBacklogRender,
 } from '../store/actions/backlog.action';
 
 const Title = styled(Text)`
@@ -41,7 +41,7 @@ export function Backlog({ route }) {
       dispatch(getDataBacklog(backlogId));
     }
 
-    return dispatch(cleanBacklog());
+    return dispatch(cleanBacklogRender());
   }, []);
 
   const handleSubmit = (e) => {

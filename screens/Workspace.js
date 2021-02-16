@@ -145,7 +145,6 @@ export function Workspace({ navigation }) {
         />
         <Text style={styles.textBacklog}>Agregar backlog</Text>
       </ContainerBacklog>
-      <Text style={styles.textError}>{error}</Text>
     </ViewContainerWorkspace>
   );
 }

@@ -57,6 +57,13 @@ export function cleanBacklog() {
   };
 }
 
+export function cleanBacklogRender() {
+  return function( dispatch ) {
+    dispatch({ type: CANCEL_NAMEBACKLOG });
+    dispatch({ type: CANCEL_TASK });
+  };
+}
+
 export function cleanForm() {
   return function( dispatch ) {
     dispatch({ type: CANCEL_NAMEBACKLOG });
@@ -94,6 +101,7 @@ export function createTask( dataSend, id ) {
         url: `/task/${id}`,
         data: { name: dataSend }
       });
+      console.log('here create task', data)
       dispatch({ type: SET_BACKLOG, payload: data.backlog });
       dispatch({ type: CREATE_TASK, payload: data });
     } catch(err) {

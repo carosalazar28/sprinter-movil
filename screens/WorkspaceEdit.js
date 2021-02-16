@@ -28,7 +28,7 @@ import {
   cleanForm
 } from '../store/actions/workspace.action';
 
-export function WorkspaceEdit({ navigation, route, index }) {
+export function WorkspaceEdit({ navigation, route }) {
 
   const dispatch = useDispatch();
 
@@ -48,12 +48,12 @@ export function WorkspaceEdit({ navigation, route, index }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateWorkspace(dataWorkspace, route.params.id, index));
+    dispatch(updateWorkspace(dataWorkspace, route.params.id, route.params.index));
   };
 
   const handleDelete = (e) => {
     e.preventDefault();
-    dispatch(deleteWorkspace(route.params.id, index));
+    dispatch(deleteWorkspace(route.params.id, route.params.index));
     navigation.navigate('Workspaces');
   };
 
@@ -151,7 +151,6 @@ export function WorkspaceEdit({ navigation, route, index }) {
         />
         <Text style={styles.textBacklog}>Agregar backlog</Text>
       </ContainerBacklog>
-      <Text style={styles.textError}>{error}</Text>
     </ViewContainerWorkspace>
   );
 }
