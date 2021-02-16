@@ -83,6 +83,7 @@ export function getDataBacklog( id ) {
         baseURL: SERVER_URL,
         url: `/backlog/${id}`
       });
+      console.log('here action', tasks)
       dispatch({ type: GET_BACKLOG, payload: tasks });
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });

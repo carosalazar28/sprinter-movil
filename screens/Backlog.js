@@ -31,7 +31,7 @@ export function Backlog({ route }) {
 
   const dispatch = useDispatch();
 
-  const { task, loading, name, backlogId } = useSelector(({ backlogReducer: { task, loading, message, name }}) => ({ task, loading, message, name }));
+  const { taskBacklog, loading, name, backlogId } = useSelector(({ backlogReducer: { taskBacklog, loading, message, name }}) => ({ taskBacklog, loading, message, name }));
 
   useEffect(() => {
     if(route.params.id) {
@@ -43,6 +43,10 @@ export function Backlog({ route }) {
 
     return dispatch(cleanBacklogRender());
   }, []);
+
+  useEffect(() => {
+    console.log('here get', taskBacklog)
+  },[])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,7 +79,7 @@ export function Backlog({ route }) {
           />
         </View>
         <View>
-          { task && task.length ? task.map(item => {
+          { taskBacklog && taskBacklog.length ? taskBacklog.map(item => {
             return (
               <View style={styles.containerTask} key={item._id}>
                 <Text

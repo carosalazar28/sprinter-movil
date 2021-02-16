@@ -18,7 +18,7 @@ import {
   updateTask,
 } from '../store/actions/backlog.action';
 
-export function TaskEdit({ navigation, route, index }) {
+export function TaskEdit({ navigation, route }) {
 
   const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ export function TaskEdit({ navigation, route, index }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateTask(dataTask, route.params.id, index));
+    dispatch(updateTask(dataTask, route.params.id, route.params.index));
     navigation.navigate('Task');
   };
 

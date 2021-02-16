@@ -143,7 +143,7 @@ export function backlogReducer( state = initialState, action ) {
     case CREATE_TASK:
       return {
         ...state,
-        taskBacklog: state.task.concat(action.payload)
+        taskBacklog: state.taskBacklog.concat(action.payload)
       };
     default:
       return state;
