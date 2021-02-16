@@ -11,6 +11,7 @@ import {
   cleanBacklog,
   cleanBacklogRender,
 } from '../store/actions/backlog.action';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const Title = styled(Text)`
   margin: 10px 0;
@@ -57,6 +58,11 @@ export function Backlog({ route }) {
   return (
     <SafeAreaView style={{ flex: 1 }} >
       <ScrollContainerBacklog>
+        <Spinner
+          visible={loading}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        />
         <View>
           <Title h3>
             Backlog
@@ -112,5 +118,8 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     paddingLeft: 8,
     marginTop: 10,
-  }
+  },
+  spinnerTextStyle: {
+    color: '#fff'
+  },
 });

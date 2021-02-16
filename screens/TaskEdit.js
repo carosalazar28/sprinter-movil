@@ -17,6 +17,7 @@ import {
   getDataTaskId,
   updateTask,
 } from '../store/actions/backlog.action';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export function TaskEdit({ navigation, route }) {
 
@@ -29,7 +30,7 @@ export function TaskEdit({ navigation, route }) {
     return { ...state };
   });
 
-  const { name, description, status, asign, team, } = dataTask;
+  const { name, description, status, asign, team, loading } = dataTask;
 
   useEffect(() => {
     dispatch(getDataTaskId(route.params.id));
@@ -51,6 +52,11 @@ export function TaskEdit({ navigation, route }) {
 
   return (
     <ViewContainerWorkspace>
+      <Spinner
+        visible={loading}
+        textContent={'Loading...'}
+        textStyle={styles.spinnerTextStyle}
+      />
       <CustomInput
         placeholder="Titulo de la tarea"
         placeholderTextColor ="#828282"
@@ -145,5 +151,8 @@ const styles = StyleSheet.create({
   },
   containerBotton: {
     marginTop: 30,
-  }
+  },
+  spinnerTextStyle: {
+    color: '#fff'
+  },
 });

@@ -27,6 +27,7 @@ import {
   deleteWorkspace,
   cleanForm
 } from '../store/actions/workspace.action';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export function WorkspaceEdit({ navigation, route }) {
 
@@ -39,7 +40,7 @@ export function WorkspaceEdit({ navigation, route }) {
     return { ...state };
   });
 
-  const { name, description, weeks, sprint, teammates, teammate, error, message } = dataWorkspace;
+  const { name, description, weeks, sprint, teammates, teammate, loading, message } = dataWorkspace;
 
   useEffect(() => {
     dispatch(getDataWorkspace(route.params.id));
@@ -63,6 +64,11 @@ export function WorkspaceEdit({ navigation, route }) {
 
   return (
     <ViewContainerWorkspace>
+      <Spinner
+        visible={loading}
+        textContent={'Loading...'}
+        textStyle={styles.spinnerTextStyle}
+      />
       <CustomInput
         placeholder="Workspace name"
         placeholderTextColor ="#828282"
@@ -191,5 +197,8 @@ const styles = StyleSheet.create({
     color: '#fb68d2',
     fontWeight: 'bold',
     letterSpacing: 2
-  }
+  },
+  spinnerTextStyle: {
+    color: '#fff'
+  },
 });

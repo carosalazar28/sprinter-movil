@@ -25,6 +25,7 @@ import {
   setSprint,
   setTeammate,
 } from '../store/actions/workspace.action';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export function Workspace({ navigation }) {
 
@@ -37,7 +38,7 @@ export function Workspace({ navigation }) {
     return { ...state };
   });
 
-  const { name, description, weeks, sprint, teammates, teammate, error, message, workspaceId } = dataWorkspace;
+  const { name, description, weeks, sprint, teammates, teammate, loading, message, workspaceId } = dataWorkspace;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,6 +59,11 @@ export function Workspace({ navigation }) {
 
   return (
     <ViewContainerWorkspace>
+      <Spinner
+        visible={loading}
+        textContent={'Loading...'}
+        textStyle={styles.spinnerTextStyle}
+      />
       <CustomInput
         placeholder="Workspace name"
         placeholderTextColor ="#828282"
@@ -182,5 +188,8 @@ const styles = StyleSheet.create({
     color: '#fb68d2',
     fontWeight: 'bold',
     letterSpacing: 2
-  }
+  },
+  spinnerTextStyle: {
+    color: '#fff'
+  },
 });

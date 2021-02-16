@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react
 import { Icon } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from '../store/actions/user.action';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const list = [
   {
@@ -23,7 +24,7 @@ export function Profile({ navigation }) {
 
   const dispatch = useDispatch();
 
-  const { username } = useSelector(({ userReducer: { username }}) => ({ username }));
+  const { username, loading } = useSelector(({ userReducer: { username, loading }}) => ({ username, loading }));
 
   useEffect(() => {
     dispatch(getUser());
@@ -31,7 +32,12 @@ export function Profile({ navigation }) {
   return (
     <>
       <View style={styles.viewName}>
-        <TouchableOpacity onPress={() => navigation.navigate("ProfileEdit")} style={styles.viewIconEdit}>
+        <Spinner
+          visible={loading}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        />
+        <TouchableOpacity onPress={() => navigation.navigate('ProfileEdit')} style={styles.viewIconEdit}>
           <Image
             source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613085189/sprinter/ui/profile_f894xe.png'}}
             style={{ width: 40, height: 40 }}
@@ -94,5 +100,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 18,
     top: 32
-  }
+  },
+  spinnerTextStyle: {
+    color: '#fff'
+  },
 });

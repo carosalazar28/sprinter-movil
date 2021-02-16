@@ -11,6 +11,7 @@ import {
 } from '../components/styled/WorkspaceStyles';
 import { getData } from '../store/actions/workspace.action';
 import { ScrollView } from 'react-native-gesture-handler';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
@@ -31,7 +32,7 @@ export function Workspaces({ navigation }) {
 
   const dispatch = useDispatch();
 
-  const { workspacesList } = useSelector(({ workspaceReducer: { workspacesList, loading, error }}) => ({ workspacesList, loading, error }));
+  const { workspacesList, loading } = useSelector(({ workspaceReducer: { workspacesList, loading }}) => ({ workspacesList, loading }));
 
   useEffect(() => {
     dispatch(getData());
@@ -41,6 +42,11 @@ export function Workspaces({ navigation }) {
     <>
       <SafeAreaView style={{ flex: 1 }}>
         <ViewContainer>
+          <Spinner
+            visible={loading}
+            textContent={'Loading...'}
+            textStyle={styles.spinnerTextStyle}
+          />
           <ScrollView>
             <RefreshControl
               refreshing={refreshing}
@@ -94,5 +100,8 @@ const styles = StyleSheet.create({
   textError: {
     color: 'red',
     fontWeight: 'bold'
-  }
+  },
+  spinnerTextStyle: {
+    color: '#fff'
+  },
 });

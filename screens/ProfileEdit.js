@@ -13,6 +13,7 @@ import {
   updateUser,
   destroyUser,
 } from '../store/actions/user.action';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export function ProfileEdit({ navigation }) {
 
@@ -25,7 +26,7 @@ export function ProfileEdit({ navigation }) {
     return { ...state };
   });
 
-  const { username, email, rol } = dataUser;
+  const { username, email, rol, loading } = dataUser;
 
   useEffect(() => {
     dispatch(getUser());
@@ -50,6 +51,11 @@ export function ProfileEdit({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        <Spinner
+          visible={loading}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        />
         <View style={styles.containerImage}>
           <Image
             source={{ uri: 'https://res.cloudinary.com/dkcbxnhg0/image/upload/v1613234403/sprinter/ui/Logo_SPRINTER_vpejk2.png' }}
@@ -134,5 +140,8 @@ const styles = StyleSheet.create({
   inputStyle: {
     backgroundColor: 'white',
     color: 'black'
-  }
+  },
+  spinnerTextStyle: {
+    color: '#fff'
+  },
 });

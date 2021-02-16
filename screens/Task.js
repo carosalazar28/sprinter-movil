@@ -11,6 +11,7 @@ import {
   ViewContainerWorkspaces,
 } from '../components/styled/WorkspaceStyles';
 import { getDataTask } from '../store/actions/backlog.action';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
@@ -26,7 +27,7 @@ export function Task({ navigation }) {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
 
-  const { task } = useSelector(({ backlogReducer: { task, message }}) => ({ task, message }));
+  const { task, loading, } = useSelector(({ backlogReducer: { task, loading }}) => ({ task, loading }));
 
 
   const onRefresh = useCallback(() => {
@@ -58,6 +59,11 @@ export function Task({ navigation }) {
       />
       <SafeAreaView style={{ flex: 1 }}>
         <ViewContainer>
+          <Spinner
+            visible={loading}
+            textContent={'Loading...'}
+            textStyle={styles.spinnerTextStyle}
+          />
           <ScrollView>
             <RefreshControl
               refreshing={refreshing}
@@ -120,5 +126,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     alignItems: 'center',
-  }
+  },
+  spinnerTextStyle: {
+    color: '#fff'
+  },
 });
