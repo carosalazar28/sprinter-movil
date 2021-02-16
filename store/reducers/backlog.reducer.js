@@ -2,6 +2,7 @@ export const LOADING = 'LOADING';
 export const FINISHED_LOADING = 'FINISHED_LOADING';
 
 export const GET_BACKLOG = 'GET_BACKLOG';
+export const GET_TASKS = 'GET_TASKS';
 export const FAILURED_BACKLOG = 'FAILURED_BACKLOG';
 export const UPDATED_TASK = 'UPDATED_TASK';
 
@@ -24,6 +25,7 @@ export const CANCEL_AUTHOR = 'CANCEL_AUTHOR';
 
 export const initialState = {
   task: [],
+  taskBacklog: [],
   loadingBacklog: false,
   name: '',
   description: '',
@@ -56,7 +58,12 @@ export function backlogReducer( state = initialState, action ) {
     case GET_BACKLOG:
       return {
         ...state,
-        task: action.payload,
+        taskBacklog: action.payload,
+      };
+    case GET_TASKS:
+      return {
+        ...state,
+        task: action.payload
       };
     case UPDATED_TASK:
       return {
@@ -71,7 +78,7 @@ export function backlogReducer( state = initialState, action ) {
     case CANCEL_TASK:
       return {
         ...state,
-        task: [],
+        taskBacklog: [],
       };
     case SET_NAMETASK:
       return {
@@ -136,7 +143,7 @@ export function backlogReducer( state = initialState, action ) {
     case CREATE_TASK:
       return {
         ...state,
-        task: state.task.concat(action.payload)
+        taskBacklog: state.task.concat(action.payload)
       };
     default:
       return state;

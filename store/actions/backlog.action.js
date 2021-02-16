@@ -3,6 +3,7 @@ import {
   LOADING,
   FINISHED_LOADING,
   GET_BACKLOG,
+  GET_TASKS,
   UPDATED_TASK,
   FAILURED_BACKLOG,
   CANCEL_TASK,
@@ -126,7 +127,7 @@ export function getDataTask() {
         },
       });
       console.log(data)
-      dispatch({ type: GET_BACKLOG, payload: data });
+      dispatch({ type: GET_TASKS, payload: data });
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });
     } finally {
