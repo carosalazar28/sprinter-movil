@@ -54,7 +54,6 @@ export function cleanTask() {
 export function cleanBacklog() {
   return function( dispatch ) {
     dispatch({ type: CANCEL_NAMEBACKLOG });
-    dispatch({ type: CANCEL_TASK });
   };
 }
 
