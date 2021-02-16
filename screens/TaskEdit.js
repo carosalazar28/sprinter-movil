@@ -94,9 +94,9 @@ export function TaskEdit({ navigation, route, index }) {
           }
         >
           <Picker.Item label="Backlog" value="Backlog" />
-          <Picker.Item label="Por hacer" value="PH" />
-          <Picker.Item label="En progreso" value="EP" />
-          <Picker.Item label="Hecho" value="DO" />
+          <Picker.Item label="Por hacer" value="Por hacer" />
+          <Picker.Item label="En progreso" value="En progreso" />
+          <Picker.Item label="Hecho" value="Hecho" />
         </Picker>
       </View>
       <ContainerRow style={styles.containerBotton}>
