@@ -54,6 +54,7 @@ export function cleanTask() {
 export function cleanBacklog() {
   return function( dispatch ) {
     dispatch({ type: CANCEL_NAMEBACKLOG });
+    dispatch({ type: CANCEL_TASK });
   };
 }
 
@@ -117,6 +118,7 @@ export function getDataTask() {
           Authorization: `Bearer ${token}`
         },
       });
+      console.log(data)
       dispatch({ type: GET_BACKLOG, payload: data });
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });

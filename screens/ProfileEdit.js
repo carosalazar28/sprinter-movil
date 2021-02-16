@@ -44,6 +44,7 @@ export function ProfileEdit({ navigation }) {
   const handleDelete = (e) => {
     e.preventDefault();
     dispatch(destroyUser());
+    navigation.replace('SignIn');
   };
 
   return (

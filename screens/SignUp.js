@@ -32,7 +32,7 @@ export function SignUp({ navigation }) {
         data: { username, email, password }
       });
       AsyncStorage.setItem('token', token);
-      navigation.navigate('Home');
+      navigation.replace('BottomTab', { screen: 'Home' });
     }
     catch(err) {
       AsyncStorage.removeItem('token');

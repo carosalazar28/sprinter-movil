@@ -31,7 +31,7 @@ export function Backlog({ route }) {
 
   const dispatch = useDispatch();
 
-  const { task, loading, message, name, backlogId } = useSelector(({ backlogReducer: { task, loading, message, name }}) => ({ task, loading, message, name }));
+  const { task, loading, name, backlogId } = useSelector(({ backlogReducer: { task, loading, message, name }}) => ({ task, loading, message, name }));
 
   useEffect(() => {
     if(route.params.id) {
@@ -41,7 +41,7 @@ export function Backlog({ route }) {
       dispatch(getDataBacklog(backlogId));
     }
 
-    return dispatch(cleanTask());
+    return dispatch(cleanBacklog());
   }, []);
 
   const handleSubmit = (e) => {

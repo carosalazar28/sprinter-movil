@@ -35,7 +35,7 @@ export function Workspaces({ navigation }) {
 
   useEffect(() => {
     dispatch(getData());
-  }, [workspacesList.length]);
+  }, [workspacesList.length, refreshing]);
 
   return (
     <>

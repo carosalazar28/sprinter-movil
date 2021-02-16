@@ -35,7 +35,7 @@ export function Task({ navigation }) {
 
   useEffect(() => {
     dispatch(getDataTask());
-  }, []);
+  }, [refreshing]);
 
   return (
     <>
