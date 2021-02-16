@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, View, StyleSheet, RefreshControl, SafeAreaView, LogBox } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { ListItem, Avatar, Text } from 'react-native-elements';
+import { ListItem, Avatar, Text, SearchBar, } from 'react-native-elements';
 import {
   ViewContainer,
   Title,
@@ -22,11 +22,12 @@ const wait = (timeout) => {
 
 export function Task({ navigation }) {
 
+  const [refreshing, setRefreshing] = useState(false);
+  const [search, setSearch] = useState('');
   const dispatch = useDispatch();
 
   const { task } = useSelector(({ backlogReducer: { task, message }}) => ({ task, message }));
 
-  const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -37,8 +38,24 @@ export function Task({ navigation }) {
     dispatch(getDataTask());
   }, [refreshing]);
 
+  const updateSearch = (task) => {
+    setSearch(task);
+  };
+
+  const filteredTask = useMemo(() =>
+    task.filter((tasks) => {
+      return tasks.name.toLowerCase().includes(search.toLowerCase());
+    }), [task, search]);
+
   return (
     <>
+      <SearchBar
+        lightTheme
+        round
+        placeholder="Busca tu tarea"
+        onChangeText={updateSearch}
+        value={search}
+      />
       <SafeAreaView style={{ flex: 1 }}>
         <ViewContainer>
           <ScrollView>
@@ -48,11 +65,11 @@ export function Task({ navigation }) {
             />
             <ContainerAbout>
               <Title h3>Tareas</Title>
-              <TextAbout>Las tareas que visualizas en está sección son todas las que has creado en tu backlog.</TextAbout>
+              <TextAbout>Las tareas que visualizas en está sección son todas las que has creado en tus workspaces.</TextAbout>
             </ContainerAbout>
             <ViewContainerWorkspaces>
               <FlatList
-                data={task}
+                data={filteredTask}
                 renderItem={({ item, index }) => {
                   return (
                     <ListItem

@@ -6,7 +6,7 @@ import { getUser } from '../store/actions/user.action';
 
 const list = [
   {
-    title: 'Backlog',
+    title: 'Requerimientos',
     icon: 'list-alt',
     type: 'font-awesome',
     id: '1'
