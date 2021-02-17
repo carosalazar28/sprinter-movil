@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, KeyboardAvoidingView, Platform } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import { useSelector, useDispatch } from 'react-redux';
@@ -64,99 +64,103 @@ export function WorkspaceEdit({ navigation, route }) {
 
   return (
     <ViewContainerWorkspace>
-      <Spinner
-        visible={loading}
-        textContent={'Loading...'}
-        textStyle={styles.spinnerTextStyle}
-      />
-      <CustomInput
-        placeholder="Workspace name"
-        placeholderTextColor ="#828282"
-        onChangeText={text => dispatch(setName(text))}
-        value={name}
-      />
-      <ViewContainerSprint style={styles.borderLine}>
-        <TextSprint>
-          Escoge la duración del sprint
-        </TextSprint>
-        <View>
-          <Picker
-            style={styles.picker}
-            itemStyle={styles.onePickerItem}
-            selectedValue={sprint.toString()}
-            mode="dropdowm"
-            onValueChange={(itemValue) =>
-              dispatch(setSprint(itemValue))
-            }
-          >
-            <Picker.Item label="1 semana" value="1" />
-            <Picker.Item label="2 semanas" value="2" />
-          </Picker>
-        </View>
-      </ViewContainerSprint>
-      <View style={styles.borderLine}>
-        <TextDescription
-          multiline
-          placeholder="¿Cuál es la descripción del espacio de trabajo?"
-          placeholderTextColor ="#828282"
-          onChangeText={text => dispatch(setDescription(text))}
-          value={description}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios'? 'padding' : 'height'}
+      >
+        <Spinner
+          visible={loading}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
         />
-      </View>
-      <View style={styles.borderLine}>
-        <TextWeeks>¿Cuántas semanas dura el proyecto?</TextWeeks>
-        <CustomInputWeeks
-          placeholder= "12"
+        <CustomInput
+          placeholder="Workspace name"
           placeholderTextColor ="#828282"
-          keyboardType="numeric"
-          onChangeText={text => dispatch(setWeeks(text))}
-          value={weeks.toString()}
+          onChangeText={text => dispatch(setName(text))}
+          value={name}
         />
-      </View>
-      <View style={styles.borderLine}>
-        <ContainerRow>
-          <CustomInputTeammates
-            placeholder="Colaboradores"
+        <ViewContainerSprint style={styles.borderLine}>
+          <TextSprint>
+            Escoge la duración del sprint
+          </TextSprint>
+          <View>
+            <Picker
+              style={styles.picker}
+              itemStyle={styles.onePickerItem}
+              selectedValue={sprint.toString()}
+              mode="dropdowm"
+              onValueChange={(itemValue) =>
+                dispatch(setSprint(itemValue))
+              }
+            >
+              <Picker.Item label="1 semana" value="1" />
+              <Picker.Item label="2 semanas" value="2" />
+            </Picker>
+          </View>
+        </ViewContainerSprint>
+        <View style={styles.borderLine}>
+          <TextDescription
+            multiline
+            placeholder="¿Cuál es la descripción del espacio de trabajo?"
             placeholderTextColor ="#828282"
-            onChangeText={text => dispatch(setTeammate(text))}
-            value={teammate}
+            onChangeText={text => dispatch(setDescription(text))}
+            value={description}
           />
-          <Icon
-            name="adduser"
-            type="ant-design"
-            color="#525666"
-            onPress={onAddTeammates}
+        </View>
+        <View style={styles.borderLine}>
+          <TextWeeks>¿Cuántas semanas dura el proyecto?</TextWeeks>
+          <CustomInputWeeks
+            placeholder= "12"
+            placeholderTextColor ="#828282"
+            keyboardType="numeric"
+            onChangeText={text => dispatch(setWeeks(text))}
+            value={weeks.toString()}
+          />
+        </View>
+        <View style={styles.borderLine}>
+          <ContainerRow>
+            <CustomInputTeammates
+              placeholder="Colaboradores"
+              placeholderTextColor ="#828282"
+              onChangeText={text => dispatch(setTeammate(text))}
+              value={teammate}
+            />
+            <Icon
+              name="adduser"
+              type="ant-design"
+              color="#525666"
+              onPress={onAddTeammates}
+            />
+          </ContainerRow>
+          {teammates && teammates.map((item, index) => {
+            return (
+              <Text style={styles.textTeammate} key={index}>{item}</Text>
+            )}
+          )}
+        </View>
+        <Text style={styles.textSuccesfully}>{message}</Text>
+        <ContainerRow>
+          <Button
+            title="Guardar"
+            color="#f2ea0d"
+            onPress={handleSubmit}
+          />
+          <Button
+            title="Borrar"
+            color="#bdbdbb"
+            onPress={handleDelete}
           />
         </ContainerRow>
-        {teammates && teammates.map((item, index) => {
-          return (
-            <Text style={styles.textTeammate} key={index}>{item}</Text>
-          )}
-        )}
-      </View>
-      <Text style={styles.textSuccesfully}>{message}</Text>
-      <ContainerRow>
-        <Button
-          title="Guardar"
-          color="#f2ea0d"
-          onPress={handleSubmit}
-        />
-        <Button
-          title="Borrar"
-          color="#bdbdbb"
-          onPress={handleDelete}
-        />
-      </ContainerRow>
-      <ContainerBacklog>
-        <Icon
-          name="plus"
-          type="ant-design"
-          color="#69c8d4"
-          style={{ marginRight: 13 }}
-          onPress={() => navigation.navigate('Backlog', { id: route.params.backlog, work: route.params.id })}
-        />
-        <Text style={styles.textBacklog}>Agregar backlog</Text>
-      </ContainerBacklog>
+        <ContainerBacklog>
+          <Icon
+            name="plus"
+            type="ant-design"
+            color="#69c8d4"
+            style={{ marginRight: 13 }}
+            onPress={() => navigation.navigate('Backlog', { id: route.params.backlog, work: route.params.id })}
+          />
+          <Text style={styles.textBacklog}>Agregar backlog</Text>
+        </ContainerBacklog>
+      </KeyboardAvoidingView>
     </ViewContainerWorkspace>
   );
 }
