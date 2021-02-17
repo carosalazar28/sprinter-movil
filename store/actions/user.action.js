@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {
-  LOADING,
   FINISHED_LOADING_USER,
   SET_USERNAME,
   SET_EMAIL,
@@ -9,6 +8,7 @@ import {
   FAILURED_USER,
   UPDATE_USER,
   DESTROY_USER,
+  LOADING_USER,
 } from '../reducers/user.reducer';
 import { SERVER_URL } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -39,7 +39,7 @@ export function setRol( payload ) {
 
 export function getUser() {
   return async function( dispatch ) {
-    dispatch({ type: LOADING });
+    dispatch({ type: LOADING_USER });
     try {
       const token = await AsyncStorage.getItem('token');
       const { data: { data }} = await axios({
@@ -64,7 +64,7 @@ export function getUser() {
 export function updateUser( dataSend ) {
   const { username, email, rol } = dataSend;
   return async function( dispatch ) {
-    dispatch({ type: LOADING });
+    dispatch({ type: LOADING_USER });
     try {
       const token = await AsyncStorage.getItem('token');
       const { data: { data }} = await axios({
@@ -87,7 +87,7 @@ export function updateUser( dataSend ) {
 
 export function destroyUser() {
   return async function( dispatch ) {
-    dispatch({ type: LOADING });
+    dispatch({ type: LOADING_USER });
     try {
       const token = await AsyncStorage.getItem('token');
       await axios({

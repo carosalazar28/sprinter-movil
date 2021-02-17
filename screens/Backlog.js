@@ -36,7 +36,6 @@ export function Backlog({ route }) {
 
   useEffect(() => {
     if(route.params.id) {
-      console.log('here route', route.params.id)
       dispatch(getDataBacklog(route.params.id));
     } else {
       dispatch(getDataBacklog(backlogId));
@@ -44,10 +43,6 @@ export function Backlog({ route }) {
 
     return dispatch(cleanBacklogRender());
   }, []);
-
-  useEffect(() => {
-    console.log('here get', taskBacklog)
-  },[])
 
   const handleSubmit = (e) => {
     e.preventDefault();

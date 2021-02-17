@@ -83,7 +83,6 @@ export function getDataBacklog( id ) {
         baseURL: SERVER_URL,
         url: `/backlog/${id}`
       });
-      console.log('here action', tasks)
       dispatch({ type: GET_BACKLOG, payload: tasks });
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });
@@ -103,7 +102,6 @@ export function createTask( dataSend, id ) {
         url: `/task/${id}`,
         data: { name: dataSend }
       });
-      console.log('here create task', data)
       dispatch({ type: SET_BACKLOG, payload: data.backlog });
       dispatch({ type: CREATE_TASK, payload: data });
     } catch(err) {
@@ -127,7 +125,6 @@ export function getDataTask() {
           Authorization: `Bearer ${token}`
         },
       });
-      console.log(data)
       dispatch({ type: GET_TASKS, payload: data });
     } catch(err) {
       dispatch({ type: FAILURED_BACKLOG });

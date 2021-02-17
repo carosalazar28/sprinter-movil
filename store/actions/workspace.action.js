@@ -157,7 +157,7 @@ export function updateWorkspace( data, id, index ) {
         },
         data: { name, description, weeks, sprint, teammates }
       });
-      dispatch({ type: SET_MESSAGE, payload: 'Tu espacio de trabajo se ha actualizado'})
+      dispatch({ type: SET_MESSAGE, payload: 'Tu espacio de trabajo se ha actualizado'});
       dispatch({ type: UPDATE_WORKSPACE, index: index, payload: data });
     } catch(err) {
       dispatch({
@@ -183,7 +183,6 @@ export function deleteWorkspace(id, index) {
           Authorization: `Bearer ${token}`
         },
       });
-      console.log('here delete', index)
       dispatch({ type: DELETE_WORKSPACE, payload: index });
     } catch(err) {
       dispatch({
@@ -211,7 +210,6 @@ export function createWorkspace( dataSend ) {
         },
         data: { name, description, weeks, sprint, teammates }
       });
-      console.log(data._id)
       dispatch({ type: SET_WORKSPACEID, payload: data._id});
       dispatch({ type: CREATE_WORKSPACE, payload: data});
     } catch(err) {

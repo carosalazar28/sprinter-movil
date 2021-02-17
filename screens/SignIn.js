@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   Button,
-  StatusBar,
   View,
   Image
 } from 'react-native';

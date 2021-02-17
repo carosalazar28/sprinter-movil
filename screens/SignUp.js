@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   Image,
+  Text,
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {
@@ -44,6 +45,7 @@ export function SignUp({ navigation }) {
     <View>
       <Container>
         <Title>¡Bienvenid@!</Title>
+        <Text style={styles.textError}>{error}</Text>
         <SecundaryTitle>Registro</SecundaryTitle>
         <ScrollView>
           <CustomInput
@@ -94,4 +96,7 @@ const styles = StyleSheet.create({
   containerButton: {
     alignItems: 'center'
   },
+  textError: {
+    color: 'red'
+  }
 });

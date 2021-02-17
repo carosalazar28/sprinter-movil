@@ -29,6 +29,7 @@ export function Profile({ navigation }) {
   useEffect(() => {
     dispatch(getUser());
   }, []);
+
   return (
     <>
       <View style={styles.viewName}>
@@ -49,7 +50,7 @@ export function Profile({ navigation }) {
         />
         <Text style={styles.nameUser}>{username}</Text>
       </View>
-      <View style={styles.viewList} onPress={() => navigation.navigate("ProfileEdit")}>
+      <View style={styles.viewList} onPress={() => navigation.navigate('ProfileEdit')}>
         <FlatList
           data={list}
           renderItem={({ item }) => (

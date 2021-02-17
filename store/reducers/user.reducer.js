@@ -1,4 +1,4 @@
-export const LOADING = 'LOADING';
+export const LOADING_USER = 'LOADING_USER';
 export const FINISHED_LOADING_USER = 'FINISHED_LOADING_USER';
 
 export const SET_USERNAME = 'SET_USERNAME';
@@ -23,7 +23,7 @@ export const initialState = {
 
 export function userReducer( state = initialState, action ) {
   switch (action.type) {
-    case LOADING:
+    case LOADING_USER:
       return {
         ...state,
         loading: true,
