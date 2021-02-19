@@ -47,3 +47,9 @@ _Las herramientas para el desarrollo de la APP fueron_
 ## Autores  ✒️
 
 -   **Carolina Salazar**  -  _Full Stack Developer_  -  [carosalazar28](https://github.com/carosalazar28)
+
+## Documentación 🧾
+
+_En el siguiente link podrás acceder a la documentación del desarrollo del proyecto_
+
+https://www.notion.so/Sprinter-b94053fcec734e1da09d7c3d52a2a490
